@@ -13,7 +13,7 @@ public class Client implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	private int id;
+	private int idClient;
 	private String nom;
 	private String prenom;
 	private String email;
@@ -27,11 +27,11 @@ public class Client implements Serializable {
 		this.email = email;
 		this.adresse=adresse;
 	}
-	public int getId() {
-		return id;
+	public int getIdClient() {
+		return idClient;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdClient(int id) {
+		this.idClient = id;
 	}
 	public String getNom() {
 		return nom;

@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import fr.opendevup.dao.ClientRepository;
+import fr.opendevup.entities.Client;
+
 @SpringBootApplication
 public class TpSpringMcvApplication {
 
@@ -14,7 +17,7 @@ public class TpSpringMcvApplication {
 //	 clietRepo.save(new Client("thomas", "gossart", "Thomas@Gossart.com ","wasqual"));
 //	 clietRepo.findAll().forEach(cl->System.out.println(cl.getNom()));
 //	 for (Client cl : clietRepo.findAll()) {
-//		System.out.println(cl.getId());
+//		System.out.println(cl.getNom());
 //	}
 	}
 
