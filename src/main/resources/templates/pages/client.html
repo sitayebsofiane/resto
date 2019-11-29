@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>client</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<link rel="stylesheet" href="../../static/css/style.css" th:href="@{css/style.css}"/>
+</head>
+<body>
+<div  class="container"  >
+	<h1 th:text="${name}"></h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID</th><th>nom</th><th>prenom</th><th>email</th><th>adresse</th>
+			<tr>
+		</thead>
+		<tbody>
+			<tr th:each="c:${listeClient}">
+			<td th:text="${c.id}"></td>
+			<td th:text="${c.nom}"></td>
+			<td th:text="${c.prenom}"></td>
+			<td th:text="${c.email}"></td>
+			<td th:text="${c.adresse}"></td>
+			</tr>
+		</tbody>
+	
+	</table>
+</div>
+</body>
+</html>
