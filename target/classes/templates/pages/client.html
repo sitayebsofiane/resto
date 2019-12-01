@@ -5,11 +5,18 @@
 <title>client</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-<link rel="stylesheet" href="../../static/css/style.css" th:href="@{css/style.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{../css/style.css}"/>
+
 </head>
 <body>
+<div class="container">
+	<form th:action="@{client}" method ="get">
+		<label>Mot Clé:</label>
+		<input type="text" name="mc" th:value ="${mc}"/>
+		<button class="btn btn-primary">chercher</button>
+	</form>
+</div>
 <div  class="container"  >
-	<h1 th:text="${name}"></h1>
 	<table class="table">
 		<thead>
 			<tr>
@@ -18,15 +25,24 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 		</thead>
 		<tbody>
 			<tr th:each="c:${listeClient}">
-			<td th:text="${c.idClient}"></td>
-			<td th:text="${c.nom}"></td>
-			<td th:text="${c.prenom}"></td>
-			<td th:text="${c.email}"></td>
-			<td th:text="${c.adresse}"></td>
+			<td th:text="${c.idClient}">idClient</td>
+			<td th:text="${c.nom}">nom</td>
+			<td th:text="${c.prenom}">prenom</td>
+			<td th:text="${c.email}">email</td>
+			<td th:text="${c.adresse}">adresse</td>
 			</tr>
 		</tbody>
-	
 	</table>
+</div>
+
+<div class="container">
+	<ul class="nav nav-pills">
+		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="pa,status:${pages}">
+		<a th:href="@{client(page=${status.index},size=${size},mc=${mc})}"  th:text="${status.index}">
+		</a>
+		</li>
+		
+	</ul>
 </div>
 </body>
 </html>
