@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import fr.opendevup.dao.ClientRepository;
-import fr.opendevup.entities.Client;
 
 @SpringBootApplication
 public class TpSpringMcvApplication {

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MenuController {
 	
 	@RequestMapping(value="pages/menu",method = RequestMethod.GET)
-	public String  accueil(Model model,@RequestParam(required = false, defaultValue = "----------") String nom)
+	public String  menu()
 	{
-		model.addAttribute("nom",nom);
+		
 		return "pages/menu";
 	}
 	
