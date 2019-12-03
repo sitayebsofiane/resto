@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>page d'accueil</title>
+<title>page menu</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}"/>
@@ -13,9 +13,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
       <div class="container">
         <a href="#" class="logo">Fast food chic</a>
         <nav class="menu">
-          <a href="#">Consulter nos produits</a>
-          <a href="#">Consulter nos menus</a>
-          <a href="#">se conecter</a>
+        
         </nav>
         
       </div>
@@ -60,32 +58,10 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
         </div>
       </div>
       </section>
-      <section  class="container pied">
-       <div class="row">
-          <form role="form" class="col-md-9 go-right">
-            <h2>Contacter nous</h2>
-            <div class="form-group">
-            <input id="name" name="name" type="text" class="form-control" required>
-            <label for="name">Votre nom et prenom</label>
-          </div>
-          <div class="form-group">
-            <input id="phone" name="phone" type="tel" class="form-control" required>
-            <label for="phone">telephone</label>
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="phone" class="form-control" required></textarea>
-            <label for="message">Message</label>
-          </div>
-          </form>
-        </div>
-      
-      </section>
       <!--end a propos-->
       <!--pied-->
-      <footer>
-        <div>
-        	<p> le pied de la page</p>
-        </div>
+      <footer class="container-fluid pied">
+         
       </footer>
 <!-- end pied-->
 </body>
