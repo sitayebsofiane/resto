@@ -18,10 +18,12 @@ public class Client implements Serializable {
 	private String prenom;
 	private String email;
 	private String adresse;
+	private String telephone;
 	public Client() {
 		super();
 	}
-	public Client(String nom, String prenom, String email,String adresse) {
+	public Client(String nom, String prenom, String email,String adresse,String telephone) {
+		this.telephone=telephone;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -56,6 +58,12 @@ public class Client implements Serializable {
 	}
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 		
 }

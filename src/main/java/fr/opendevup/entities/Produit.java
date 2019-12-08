@@ -5,18 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 @Entity
 public class Produit implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private int idProduit;
 	private String nom;
 	private String description;
 	private double tarif;
+	@JoinColumn
 	private int IdCommande;
 	
 	
