@@ -21,7 +21,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 		<thead>
 			<tr>
 				<th>ID</th><th>nom</th><th>prenom</th><th>email</th><th>adresse</th>
-			<tr>
+			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="c:${listeClient}">
@@ -37,8 +37,9 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 
 <div class="container">
 	<ul class="nav nav-pills">
-		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="pa,status:${pages}">
+		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="page,status:${pages}">
 		<a th:href="@{client(page=${status.index},size=${size},mc=${mc})}"  th:text="${status.index}">
+	
 		</a>
 		</li>
 		

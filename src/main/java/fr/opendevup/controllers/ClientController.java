@@ -32,5 +32,10 @@ public class ClientController
 						model.addAttribute("mc",mc);
 						return "pages/client";
 				}
+	@RequestMapping(value="/delete")
+	public String delete() {
+		return  "redirect:/";
+		
+	}
 	
 }

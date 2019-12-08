@@ -2,20 +2,18 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>page d'accueil</title>
+<title>page produit</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
-<link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}"/>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
     <!--header-->
      <header class="container-fluid header">
       <div class="container">
-        <a href="#" class="logo">Fast food chic</a>
+        <a th:href="@{/}" class="logo">Fast food chic</a>
         <nav class="menu">
-          <a th:href="@{pages/produits}">Consulter nos produits</a>
-          <a th:href="@{pages/menus}">Consulter nos menus</a>
-          <a href="#">se conecter</a>
+        
         </nav>
         
       </div>
@@ -24,10 +22,11 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     <!-- banniere -->
     <section class="container-fluid banniere">
       <div class="ban">
-         <img  th:src="@{images/resto.jpg}"  alt="banniere du site"/>
+        <img src="../static/css/resto.jpg" alt="banniere du site"/>
       </div>
       <div class="inner_banner">
         <h1>Bienvenue a Fast food chic  </h1>
+        <a th:href="@{/#contact}"> Contacter Fast food chic </a>
       </div>
     </section>
     <!--end banniere-->
@@ -59,49 +58,11 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
         </div>
       </div>
       </section>
-      <section  class="container pied" id ="contact">
-       <div class="row">
-          <form role="form" class="col-md-9 go-right">
-            <h2>Contacter nous</h2>
-            <div class="form-group">
-            <input id="name" name="name" type="text" class="form-control" required>
-            <label for="name">Votre nom et prenom</label>
-          </div>
-          <div class="form-group">
-            <input id="phone" name="phone" type="tel" class="form-control" required>
-            <label for="phone">telephone</label>
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="phone" class="form-control" required></textarea>
-            <label for="message">Message</label>
-          </div>
-          </form>
-        </div>
-      
-      </section>
       <!--end a propos-->
       <!--pied-->
-      <footer class="footer p-t-1">
-      
-        <div class="container">
-            <div class="pull-right">
-                <nav class="navbar" style="background:transparent; color: black;">
-                    <nav class="nav navbar-nav pull-xs-left">
-                        <a class="nav-item nav-link" href="#">Accueil</a>
-                        <a class="nav-item nav-link" href="#">9 rue de la liberté à Lille</a>
-                        <a class="nav-item nav-link" href="">Téléphone 03 2O 10 20 30</a>
-                    </nav>
-                </nav>
-            </div>
-
-            <a href="#"><i class="fa fa-facebook-official fa-2x"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p fa-2x"></i></a>
-            <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-            <a href="#"><i class="fa fa-flickr fa-2x"></i></a>
-            <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-        </div>
-    </footer>
-      
+      <footer>
+         
+      </footer>
 <!-- end pied-->
 </body>
 </html>

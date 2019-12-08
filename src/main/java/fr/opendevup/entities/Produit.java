@@ -15,7 +15,7 @@ public class Produit implements Serializable{
 	private int idProduit;
 	private String nom;
 	private String description;
-	private double tarif;
+	private Tarif tarif;
 	@JoinColumn
 	private int IdCommande;
 	
@@ -24,7 +24,7 @@ public class Produit implements Serializable{
 		super();
 	}
 	
-	public Produit(String nom, String description, double tarif, int idCommande) {
+	public Produit(String nom, String description, Tarif tarif, int idCommande) {
 		this.nom = nom;
 		this.description = description;
 		this.tarif = tarif;
@@ -49,10 +49,10 @@ public class Produit implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getTarif() {
+	public Tarif getTarif() {
 		return tarif;
 	}
-	public void setTarif(double tarif) {
+	public void setTarif(Tarif tarif) {
 		this.tarif = tarif;
 	}
 	public static long getSerialversionuid() {
