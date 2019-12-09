@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 @Entity
 public class Tarif implements Serializable {
@@ -14,8 +13,6 @@ public class Tarif implements Serializable {
 	@Id @GeneratedValue
 	private int idTarif;
 	private double prix;
-	@JoinColumn(name = " idProduit")
-	private int idProduit;
 	
 	
 

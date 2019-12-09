@@ -1,11 +1,12 @@
 package fr.opendevup.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 @Entity
 public class Produit implements Serializable{
 
@@ -15,20 +16,19 @@ public class Produit implements Serializable{
 	private int idProduit;
 	private String nom;
 	private String description;
-	private Tarif tarif;
-	@JoinColumn
-	private int IdCommande;
+	@OneToMany
+	private Collection<Commande> commande;
+	@OneToMany
+	private Collection<Tarif> tarif;
 	
 	
 	public Produit() {
 		super();
 	}
 	
-	public Produit(String nom, String description, Tarif tarif, int idCommande) {
+	public Produit(String nom, String description) {
 		this.nom = nom;
 		this.description = description;
-		this.tarif = tarif;
-		IdCommande = idCommande;
 	}
 
 	public int getIdProduit() {
@@ -49,21 +49,11 @@ public class Produit implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Tarif getTarif() {
-		return tarif;
-	}
-	public void setTarif(Tarif tarif) {
-		this.tarif = tarif;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public int getIdCommande() {
-		return IdCommande;
-	}
-	public void setIdCommande(int idCommande) {
-		IdCommande = idCommande;
-	}
+
 	
 	
 	
