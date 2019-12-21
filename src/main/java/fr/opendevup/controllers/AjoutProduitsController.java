@@ -1,13 +1,18 @@
 package fr.opendevup.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.opendevup.dao.ProduitRepository;
+
 @Controller
 public class AjoutProduitsController {
+	@Autowired
+	private ProduitRepository produitRepo;
 		 
 	@RequestMapping(value = "admin/adminer",method = RequestMethod.GET)
 	public String ajoutProduits(Model model,@RequestParam(name="login", defaultValue="")String login,

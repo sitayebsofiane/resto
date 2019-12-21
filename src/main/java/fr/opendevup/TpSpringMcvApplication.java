@@ -11,9 +11,9 @@ public class TpSpringMcvApplication {
 
 	public static void main(String[] args) {
 	 ApplicationContext ctx=SpringApplication.run(TpSpringMcvApplication.class, args);
-	@SuppressWarnings("unused")
+	 @SuppressWarnings("unused")
 	ClientRepository clietRepo=ctx.getBean(ClientRepository.class);
-//	 clietRepo.save(new Client("kivine", "je saispas", "mayh.tunis@yahoo.fr","roubaix"));
+//	clietRepo.save(new Client("kivine", "je saispas", "mayh.tunis@yahoo.fr","roubaix", "123"));
 //	 clietRepo.save(new Client("farid", "box", "farid@box.com ","roubaix"));
 //	 clietRepo.save(new Client("kivine", "je saispas", "mayh.tunis@yahoo.fr","roubaix"));
 //	 clietRepo.save(new Client("farid", "box", "farid@box.com ","roubaix"));

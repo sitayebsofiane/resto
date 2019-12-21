@@ -19,14 +19,17 @@ public class Commande implements Serializable {
 	private Date date;
 	private double prix;
 	private int idClient;
+	
 	public Commande() {
 		super();
 	}
+	
 	public Commande(Date date, double prix, int idClient) {
 		this.date = date;
 		this.prix = prix;
 		this.idClient = idClient;
 	}
+	
 	public int getIdCommande() {
 		return idCommande;
 	}
@@ -55,5 +58,4 @@ public class Commande implements Serializable {
 		return serialVersionUID;
 	}
 	
-
 }
