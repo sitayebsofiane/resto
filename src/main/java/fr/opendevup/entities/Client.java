@@ -63,5 +63,10 @@ public class Client implements Serializable {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	@Override
+	public String toString() {
+		return "Client [idClient=" + idClient + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email
+				+ ", adresse=" + adresse + ", telephone=" + telephone + "]";
+	}
 		
 }

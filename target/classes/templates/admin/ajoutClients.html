@@ -3,14 +3,18 @@
 <head>
 <meta charset="UTF-8"/>
 <title>client</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{../css/style.css}"/>
 
 </head>
 <body>
+		<nav class="menu">
+          <a th:href="@{adminer}">se deconecter</a>
+        </nav>
 <div class="container">
-	<form th:action="@{client}" method ="get">
+	<form th:action="@{ajoutClients}" method ="get">
 		<label>Mot Clé:</label>
 		<input type="text" name="mc" th:value ="${mc}"/>
 		<button class="btn btn-primary">chercher</button>
@@ -37,14 +41,15 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 </div>
 
 <div class="container">
-	<ul class="nav nav-pills">
-		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="page,status:${pages}">
-		<a th:href="@{client(page=${status.index},size=${size},mc=${mc})}"  th:text="${status.index}">
-	
+		<ul class="nav nav-pills">
+		<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
+		<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
+		<span th:text="a" style="visibility: hidden"></span> 
+		<a th:href="@{ajoutClients(page=${status.index},size=${size})}" th:text="${status.index}">
 		</a>
-		</li>
+		 </li>
 		
-	</ul>
-</div>
+		</ul>
+	</div>
 </body>
 </html>

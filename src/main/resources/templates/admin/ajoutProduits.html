@@ -3,12 +3,51 @@
 <head>
 <meta charset="UTF-8"/>
 <title>page d'ajout de produits</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
-<h1>welcome to add produits</h1>
-	
+		<nav class="menu">
+          <a th:href="@{../adminer}">se deconecter</a>
+        </nav>
+<h1>welcome to add produits <span th:text="${login}" style="color:red"></span></h1>
+<div class="container">
+	<form>
+		<label>Mot Clé:</label>
+		<input type="text" name="mc" th:value ="${mc}"/>
+		<button class="btn btn-primary">chercher</button>
+	</form>
+</div>
+	<div  class="container"  >
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID</th><th>NOM</th><th>DESCRIPTION</th><th>PRIX</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p:${listeProduit}">
+			<td th:text="${p.idProduit}">idClient</td>
+			<td th:text="${p.nom}">nom</td>
+			<td th:text="${p.description}">description</td>
+			<td th:text="${p.prix}">prix</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<div class="container">
+		<ul class="nav nav-pills">
+		<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
+		<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
+		<span th:text="a" style="visibility: hidden"></span> 
+		<a th:href="@{ajoutProduits(page=${status.index},size=${size},login=${login},password=${password})}" th:text="${status.index}">
+		</a>
+		 </li>
+		
+		</ul>
+	</div>
+</div>
 </body>
 </html>

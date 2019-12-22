@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>page d'administration</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="static/css/style.css" th:href="@{css/style.css}"/>
+</head>
+<body>
+	<h1> pages privés</h1>
+	<h1> Veulliez vous conecter:</h1>
+	<div class="container">
+		<div class="login-box" >
+				<div class="login-body">
+					<form class="form-group" th:action="@{ajoutProduits}" method ="get">
+					<label>NOM:</label>
+					<input type="text" class="form-control" name="nom">
+					<label>PRENOM:</label>
+					<input type="texte" class="form-control" name="prenom">
+					<label>IDENTIFIANT:</label>
+					<input type="text" class="form-control" name="login">
+					<label>MOT DE PASSE:</label>
+					<input type="password" class="form-control" name="password">
+					<input type="submit" value="SE CONECTER" class="form-control btn btn-success ">
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

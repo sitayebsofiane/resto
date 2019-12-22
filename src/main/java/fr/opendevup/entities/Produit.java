@@ -57,6 +57,12 @@ public class Produit implements Serializable{
 		this.prix = prix;
 	}
 
+	@Override
+	public String toString() {
+		return "Produit [idProduit=" + idProduit + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+				+ "]";
+	}
+
 	
 	
 	

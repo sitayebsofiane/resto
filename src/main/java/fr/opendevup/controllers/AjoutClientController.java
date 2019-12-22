@@ -12,11 +12,11 @@ import fr.opendevup.dao.ClientRepository;
 import fr.opendevup.entities.Client;
 
 @Controller
-public class ClientController 
+public class AjoutClientController 
 {
 	@Autowired
 	private ClientRepository clientrepo;
-	@RequestMapping(value="pages/client")
+	@RequestMapping(value="admin/ajoutClients")
 	public String client(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 							@RequestParam(name="size",defaultValue = "10")int size,
 							@RequestParam(name="mc",defaultValue = "")String mc)
@@ -30,7 +30,7 @@ public class ClientController
 						model.addAttribute("size",size);
 						model.addAttribute("pageCourante",page);
 						model.addAttribute("mc",mc);
-						return "pages/client";
+						return "admin/ajoutClients";
 				}
 	@RequestMapping(value="/delete")
 	public String delete() {
