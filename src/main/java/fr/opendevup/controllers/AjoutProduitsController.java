@@ -17,7 +17,7 @@ public class AjoutProduitsController {
 	@Autowired
 	private ProduitRepository produitRepo;
 		 
-	@RequestMapping(value = "ajoutProduits",method = RequestMethod.GET)
+	@RequestMapping(value = "admin/ajoutProduits",method = RequestMethod.GET)
 	public String ajoutProduits(Model model,@RequestParam(name="login", defaultValue="")String login,
 			@RequestParam(name="password", defaultValue="")String password ,@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="4")int size) {
@@ -34,13 +34,9 @@ public class AjoutProduitsController {
 				
 				return "admin/ajoutProduits";
 			}else {
-				return "adminer";
+				return "redirect:../adminer";
 			}
 		
 	}
-	@RequestMapping(value = "adminer")
-	public String adminer() {
-		return "adminer";	
-	}
+		}
 	
-}

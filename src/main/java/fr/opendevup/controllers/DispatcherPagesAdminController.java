@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DispatcherPagesAdminController {
 	
-	@RequestMapping(value = "dispatcherAdmin",method = RequestMethod.GET)
+	@RequestMapping(value = "admin/dispatcherAdmin",method = RequestMethod.GET)
 	public String dispatcherAdmin(Model model,@RequestParam(name="login", defaultValue="")String login,
 			@RequestParam(name="password", defaultValue="")String password ) {
 			if(login.equals("assia") && password.equals("as122014")) {
@@ -19,9 +19,16 @@ public class DispatcherPagesAdminController {
 				
 				return "admin/dispatcherAdmin";
 			}else {
-				return "adminer";
+				return "redirect:../adminer";
 			}
 		
 	}
+	@RequestMapping(value = "adminer")
+	public String adminer() {
+		return "adminer";	
 	}
+}
+
+	
+	
 	

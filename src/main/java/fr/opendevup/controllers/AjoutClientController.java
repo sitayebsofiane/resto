@@ -17,12 +17,12 @@ public class AjoutClientController
 	@Autowired
 	private ClientRepository clientrepo;
 	@RequestMapping(value="admin/ajoutClients")
-	public String client(Model model,@RequestParam(name="page",defaultValue = "0")int page,
+	public String client(Model model,@RequestParam(name="login", defaultValue="")String login,
+			@RequestParam(name="password", defaultValue="")String password,@RequestParam(name="page",defaultValue = "0")int page,
 							@RequestParam(name="size",defaultValue = "10")int size,
 							@RequestParam(name="mc",defaultValue = "")String mc)
 					{
-						
-						//Page<Client> pageClients= cleintrepo.findAll(PageRequest.of(page,size));
+			if(login.equals("assia") && password.equals("as122014")) {	
 						Page<Client> pageClients= clientrepo.chercher("%"+mc+"%", PageRequest.of(page,size));
 						model.addAttribute("listeClient",pageClients.getContent());
 						int[] pages= new int[pageClients.getTotalPages()];
@@ -31,6 +31,9 @@ public class AjoutClientController
 						model.addAttribute("pageCourante",page);
 						model.addAttribute("mc",mc);
 						return "admin/ajoutClients";
+			}else {
+				return "redirect:../adminer";
+			}
 				}
 	@RequestMapping(value="/delete")
 	public String delete() {
