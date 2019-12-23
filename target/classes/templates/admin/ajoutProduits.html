@@ -13,14 +13,15 @@
           <a th:href="@{../adminer}">se deconecter</a>
         </nav>
 <h1>welcome to add produits <span th:text="${login}" style="color:red"></span></h1>
-<div class="container">
-	<form>
-		<label>Mot Clé:</label>
-		<input type="text" name="mc" th:value ="${mc}"/>
-		<button class="btn btn-primary">chercher</button>
-	</form>
-</div>
-	<div  class="container"  >
+
+<div  class="container"  >
+	<div>
+		<form th:action="@{ajoutProduits}" method=get>
+			<label>Mot Clé:</label>
+			<input type="text" name="mc" th:value ="${mc}"/>
+			<button class="btn btn-primary">Chercher</button>
+		</form>
+	</div>
 	<table class="table">
 		<thead>
 			<tr>
@@ -33,21 +34,25 @@
 			<td th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
+			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
+			 th:href="@{deleteProduit(id=${p.idProduit},page=${pageCourante},size=${size},mc=${mc})}">
+			 Suprimer</a></td>
 			</tr>
 			
 		</tbody>
 	</table>
-	<div class="container">
+	<div>
 		<ul class="nav nav-pills">
 		<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
 		<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
 		<span th:text="a" style="visibility: hidden"></span> 
-		<a th:href="@{ajoutProduits(page=${status.index},size=${size},login=${login},password=${password})}" th:text="${status.index}">
+		<a th:href="@{ajoutProduits(page=${status.index},size=${size},mc=${mc})}" th:text="${status.index}">
 		</a>
 		 </li>
 		
 		</ul>
-	</div>
+	</div>	
 </div>
+
 </body>
 </html>

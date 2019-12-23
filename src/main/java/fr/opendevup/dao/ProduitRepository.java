@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import fr.opendevup.entities.Produit;
 
 public interface ProduitRepository extends JpaRepository<Produit, Integer>{
-	@Query("select c from Produit c where c.nom like :x ")
+	@Query("select p from Produit p where p.nom like :x ")
 	public Page<Produit> chercher(@Param("x")String mc,Pageable pageable);
 }

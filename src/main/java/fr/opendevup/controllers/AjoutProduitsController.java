@@ -18,25 +18,29 @@ public class AjoutProduitsController {
 	private ProduitRepository produitRepo;
 		 
 	@RequestMapping(value = "admin/ajoutProduits",method = RequestMethod.GET)
-	public String ajoutProduits(Model model,@RequestParam(name="login", defaultValue="")String login,
-			@RequestParam(name="password", defaultValue="")String password ,@RequestParam(name="page", defaultValue="0")int page,
-			@RequestParam(name="size", defaultValue="4")int size) {
-			if(login.equals("assia") && password.equals("as122014")) {
-				model.addAttribute("login",login);
-				model.addAttribute("password",password);
-				Page<Produit> produits= produitRepo.findAll(PageRequest.of(page,size));
+	public String ajoutProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
+			@RequestParam(name="size", defaultValue="4")int size,
+			@RequestParam(name="mc",defaultValue = "")String mc) {
+			
+				Page<Produit> produits=  produitRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
+			
 				model.addAttribute("listeProduit",produits.getContent());
 				//creation d'un tableu de page
 				int [] pages= new int [produits.getTotalPages()];
 				model.addAttribute("pages",pages);
 				model.addAttribute("size",size);
 				model.addAttribute("pageCourante",page);
-				
+				model.addAttribute("mc",mc);
 				return "admin/ajoutProduits";
-			}else {
-				return "redirect:../adminer";
+			
 			}
+	@RequestMapping(value = "admin/deleteProduits",method = RequestMethod.GET)
+	public String delete(int id,String mc,int page,int size) {
+		produitRepo.deleteById(id);
+		return "redirect:/admin/ajoutProduits?page="+page+"&size="+size+"&mc="+mc;
+	
+	}
 		
 	}
-		}
+		
 	
