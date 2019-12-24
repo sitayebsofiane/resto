@@ -12,7 +12,7 @@
 		<nav class="menu">
           <a th:href="@{../adminer}">se deconecter</a>
         </nav>
-<h1>welcome to add produits <span th:text="${login}" style="color:red"></span></h1>
+<h1>Bienvenue <span th:text="${login}" style="color:red"></span> pour consulter et /ou surprimer les produits</h1>
 
 <div  class="container"  >
 	<div>
@@ -25,7 +25,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th><th>NOM</th><th>DESCRIPTION</th><th>PRIX</th>
+				<th>ID</th><th>NOM</th><th>DESCRIPTION</th><th>PRIX</th><th>QUANTITE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,8 +34,9 @@
 			<td th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
+			<td th:text="${p.quantite}">quantité</td>
 			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
-			 th:href="@{deleteProduit(id=${p.idProduit},page=${pageCourante},size=${size},mc=${mc})}">
+			 th:href="@{deleteProduits(id=${p.idProduit},page=${pageCourante},size=${size},mc=${mc})}">
 			 Suprimer</a></td>
 			</tr>
 			

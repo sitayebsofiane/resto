@@ -17,7 +17,7 @@ public class AjoutClientController
 {
 	@Autowired
 	private ClientRepository clientRepo;
-	@RequestMapping(value="admin/ajoutClients")
+	@RequestMapping(value="admin/clients")
 	public String client(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 							@RequestParam(name="size",defaultValue = "4")int size,
 							@RequestParam(name="mc",defaultValue = "")String mc)
@@ -30,14 +30,14 @@ public class AjoutClientController
 						model.addAttribute("size",size);
 						model.addAttribute("pageCourante",page);
 						model.addAttribute("mc",mc);
-					return "admin/ajoutClients";
+					return "admin/clients";
 			
 			}
 				
 	@RequestMapping(value="admin/deleteClients",method=RequestMethod.GET)
 	public String delete(int id,String mc,int page,int size) {
 		clientRepo.deleteById(id);
-		return "redirect:/admin/ajoutClients?page="+page+"&size="+size+"&mc="+mc;
+		return "redirect:/admin/clients?page="+page+"&size="+size+"&mc="+mc;
 	
 	}
 		
