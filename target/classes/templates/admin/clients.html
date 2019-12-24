@@ -14,7 +14,7 @@
           <a th:href="@{../adminer}">se deconecter</a>
         </nav>
 <div class="container">
-	<form th:action="@{ajoutClients}" method ="get">
+	<form th:action="@{clients}" method ="get">
 		<label>Mot Clé:</label>
 		<input type="text" name="mc" th:value ="${mc}"/>
 		<button class="btn btn-primary">chercher</button>
@@ -47,7 +47,7 @@
 		<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
 		<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
 		<span th:text="a" style="visibility: hidden"></span> 
-		<a th:href="@{ajoutClients(page=${status.index},size=${size},mc=${mc})}" th:text="${status.index}">
+		<a th:href="@{clients(page=${status.index},size=${size},mc=${mc})}" th:text="${status.index}">
 		</a>
 		 </li>
 		

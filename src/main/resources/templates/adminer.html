@@ -7,24 +7,34 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="static/css/style.css" th:href="@{css/style.css}"/>
+<script type="text/javascript" th:src="@{javaScript/verifAdmin.js}"></script>
 </head>
 <body>
-	<h1> pages privés</h1>
 	<h1> Veulliez vous conecter:</h1>
 	<div class="container">
-		<div class="login-box" >
-				<div class="login-body">
-					<form class="form-group" th:action="@{admin/dispatcherAdmin}" method ="get">
+		<div class="login-box nav" >
+				<div class="login-body col-md-6">
+					<form class="form-group" th:action="@{admin/dispatcherAdmin}" method ="get" id ="se conecter">
 					<label>NOM:</label>
-					<input type="text" class="form-control" name="nom">
+					<input type="text" class="form-control" name="nom" id="nom"/>
 					<label>PRENOM:</label>
-					<input type="text" class="form-control" name="prenom">
+					<input type="text" class="form-control" name="prenom" id="prenom"/>
 					<label>IDENTIFIANT:</label>
-					<input type="text" class="form-control" name="login">
+					<input type="text" class="form-control" name="login" id="login"/>
 					<label>MOT DE PASSE:</label>
-					<input type="password" class="form-control" name="password">
-					<input type="submit" value="SE CONECTER" class="form-control btn btn-success ">
+					<input type="password" class="form-control" name="password" id="password"/>
+					<input type="button" value="SE CONECTER" class="form-control btn btn-success" onclick="verif()"/>
 				</form>
+			</div>
+			<div class="login-body col-md-6">
+				 <article >
+            <h2> page privée</h2>
+            <p>
+             	page destiné aux administrateurs de ce site, pour se conecter a la gestion du site il faut imperativement
+             	 les identifiants et
+             	les mots de passe ,si vous n'etes pas autoriser merci de quité cette page 
+            </p>
+          </article>
 			</div>
 		</div>
 	</div>
