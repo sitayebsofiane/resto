@@ -13,13 +13,13 @@ import fr.opendevup.dao.ClientRepository;
 import fr.opendevup.entities.Client;
 
 @Controller
-public class AjoutClientController 
+public class ClientController 
 {
 	@Autowired
 	private ClientRepository clientRepo;
 	@RequestMapping(value="admin/clients")
 	public String client(Model model,@RequestParam(name="page",defaultValue = "0")int page,
-							@RequestParam(name="size",defaultValue = "4")int size,
+							@RequestParam(name="size",defaultValue = "10")int size,
 							@RequestParam(name="mc",defaultValue = "")String mc)
 					{
 			

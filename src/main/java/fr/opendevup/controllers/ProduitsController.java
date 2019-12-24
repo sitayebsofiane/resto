@@ -16,13 +16,13 @@ import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Produit;
 
 @Controller
-public class AjoutProduitsController {
+public class ProduitsController {
 	@Autowired
 	private ProduitRepository produitRepo;
 		 
-	@RequestMapping(value = "admin/ajoutProduits",method = RequestMethod.GET)
+	@RequestMapping(value = "admin/consulterProduits",method = RequestMethod.GET)
 	public String ajoutProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
-			@RequestParam(name="size", defaultValue="4")int size,
+			@RequestParam(name="size", defaultValue="10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc,String login) {
 			
 				Page<Produit> produits=  produitRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
@@ -35,26 +35,32 @@ public class AjoutProduitsController {
 				model.addAttribute("pageCourante",page);
 				model.addAttribute("login", login);
 				model.addAttribute("mc",mc);
-				return "admin/ajoutProduits";
+				return "admin/consulterProduits";
 			
 			}
 	@RequestMapping(value = "/admin/deleteProduits",method = RequestMethod.GET)
 	public String delete(int id,String mc,int page,int size) {
 		produitRepo.deleteById(id);
-		return "redirect:/admin/ajoutProduits?page="+page+"&size="+size+"&mc="+mc;
+		return "redirect:/admin/consulterProduits?page="+page+"&size="+size+"&mc="+mc;
 	
 	}
-	@RequestMapping(value = "/admin/formProduit",method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/ajouterProduits",method = RequestMethod.GET)
 	public String ajoutProduit(Model model) {
 		model.addAttribute("produit",new Produit());
-		return "admin/formProduits";
+		return "admin/ajouterProduits";	
+	}
+	@RequestMapping(value = "/admin/modifierProduit",method = RequestMethod.GET)
+	public String modifierProduit(Model model,int idProduit) {
+		Produit p= produitRepo.getOne(idProduit);
+		model.addAttribute("produit",p);
+		return "admin/modifierProduit";
 		
 	}
 	@RequestMapping(value = "/admin/enregistrerProduit",method = RequestMethod.POST)
 	public String enregistrer(Model model, @Valid Produit produit,BindingResult erreur) {
 		if (erreur.hasErrors()) 
-			return "admin/formProduits";
-		
+			return "admin/ajouterProduits";
+		else
 		 produitRepo.save(produit);
 		return "admin/confirmationAjoutProduit" ;
 		
