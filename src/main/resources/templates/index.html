@@ -10,22 +10,24 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="../static/css/style.css"
 	th:href="@{css/style.css}" />
 </head>
 <body>
 	<!--header-->
-	<header class="container-fluid header">
-		<div class="container">
-			<a  th:href="@{/}" class="logo">Fast food chic</a>
-			<nav class="menu">
-				<a th:href="@{/pages/produits}">Consulter nos produits</a> <a
-					th:href="@{/pages/menus}">Consulter nos menus</a> <a href="#">se
-					conecter</a>
-			</nav>
-
+	<nav>
+		<div class="toggle">
+			<i class="fas fa-bars menu"></i>
 		</div>
-	</header>
+		<ul>
+			<li><a th:href="@{/}" class="logo">Fast food chic</a></li>
+			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
+			<li class="menu"><a href="#">se conecter</a></li>
+		</ul>
+	</nav>
+	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
 	<!-- banniere -->
 	<section class="container-fluid banniere">

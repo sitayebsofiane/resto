@@ -3,15 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>page de layout gestion du site</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css" />
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../static/css/style.css"
-	th:href="@{../css/style.css}" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
 	<!--header-->
@@ -19,10 +15,10 @@
 		<div class="container">
 			<a th:href="@{../}" class="logo">Fast food chic</a>
 			<nav class="menu">
-				<a th:href="@{clients(login=${login},password=${password})}">Consulterles
+				<a th:href="@{clients(login=${login},password=${password})}">Consulter les
 					clients</a> <a
-					th:href="@{consulterProduits(login=${login},password=${password})}">Consulterles
-					produits</a> <a th:href="@{../adminer}">se deconecter</a>
+					th:href="@{consulterProduits(login=${login},password=${password})}">Consulter les
+					produits</a>
 			</nav>
 		</div>
 	</header>
