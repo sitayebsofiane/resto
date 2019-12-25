@@ -2,22 +2,26 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>page menu</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<title>page menus</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
-    <!--header-->
-     <header class="container-fluid header">
-      <div class="container">
-        <a th:href="@{/}" class="logo">Fast food chic</a>
-        <nav class="menu">
-        
-        </nav>
-        
-      </div>
-     </header>
+   <!--header-->
+	<header class="container-fluid header">
+		<div class="container">
+			<a href="/" class="logo">Fast food chic</a>
+			<nav class="menu">
+				<a th:href="@{/pages/produits}">Consulter nos produits</a> <a
+					th:href="@{/pages/menus}">Consulter nos menus</a> <a href="#">se
+					conecter</a>
+			</nav>
+
+		</div>
+	</header>
+	<!--end header-->
     <!--end header-->
     <!-- banniere -->
     <section class="container-fluid banniere">
@@ -58,11 +62,56 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
         </div>
       </div>
       </section>
+       <section class="container-fluid apropos">
+      <div class="container">
+        <div class="row">
+          <article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
+            <h2> titre 1</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam necessitatibus, doloremque suscipit praesentium cumque mollitia, voluptatibus enim iusto repellendus, 
+              nostrum facere quia quas repudiandae officiis architecto voluptatem numquam quasi sed.
+            </p>
+          </article>
+            <article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
+            <h2> titre 2</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam necessitatibus, doloremque suscipit praesentium cumque mollitia, voluptatibus enim iusto repellendus, 
+                nostrum facere quia quas repudiandae officiis architecto voluptatem numquam quasi sed.
+            </p>
+          </article>
+          <article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
+              <h2> titre 3</h2>
+              <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam necessitatibus, doloremque suscipit praesentium cumque mollitia, voluptatibus enim iusto repellendus, 
+                  nostrum facere quia quas repudiandae officiis architecto voluptatem numquam quasi sed.
+              </p>
+            </article>
+        </div>
+      </div>
+      </section>
       <!--end a propos-->
       <!--pied-->
-      <footer>
-         
-      </footer>
+     	<footer class="footer p-t-1">
+
+		<div class="container">
+			<div class="pull-right">
+				<nav class="navbar" style="background: transparent; color: black;">
+					<nav class="nav navbar-nav pull-xs-left">
+						<a class="nav-item nav-link" href="#">Accueil</a> <a
+							class="nav-item nav-link" href="#">9 rue de la liberté à
+							Lille</a> <a class="nav-item nav-link" href="">Téléphone 03 2O 10
+							20 30</a>
+					</nav>
+				</nav>
+			</div>
+
+			<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
+			<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
+				href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
+				class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
+				class="fa fa-linkedin fa-2x">linkedin</i></a>
+		</div>
+	</footer>
 <!-- end pied-->
 </body>
 </html>

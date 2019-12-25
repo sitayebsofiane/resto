@@ -54,6 +54,7 @@ a{
   /* pied*/
 footer {
             background-color: black;
+           position: static; bottom: 0; left: 0; right: 0
         }
 .error{
 	color:#ff0080;
