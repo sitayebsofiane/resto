@@ -18,4 +18,5 @@ public class AccueilControllerProduits {
 		return "pages/menus";
 	
 	}
+	
 }
