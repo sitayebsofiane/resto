@@ -23,7 +23,7 @@ public class ProduitsController {
 	@RequestMapping(value = "/admin/consulterProduits",method = RequestMethod.GET)
 	public String ajoutProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="10")int size,
-			@RequestParam(name="mc",defaultValue = "")String mc,String login) {
+			@RequestParam(name="mc",defaultValue = "")String mc) {
 			
 				Page<Produit> produits=  produitRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
 			
@@ -33,7 +33,6 @@ public class ProduitsController {
 				model.addAttribute("pages",pages);
 				model.addAttribute("size",size);
 				model.addAttribute("pageCourante",page);
-				model.addAttribute("login", login);
 				model.addAttribute("mc",mc);
 				return "admin/consulterProduits";
 			
