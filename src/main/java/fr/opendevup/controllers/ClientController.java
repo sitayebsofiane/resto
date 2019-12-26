@@ -1,10 +1,13 @@
 package fr.opendevup.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,13 +36,27 @@ public class ClientController
 					return "admin/clients";
 			
 			}
-				
+	@RequestMapping(value = "/admin/modifierClient",method = RequestMethod.GET)
+	public String modifierClient(Model model,int idClient) {
+		Client p= clientRepo.getOne(idClient);
+		model.addAttribute("client",p);
+		return "admin/modifierClient";		
+	}
+	@RequestMapping(value = "/admin/enregistrerClient",method = RequestMethod.POST)
+	public String enregistrer(Model model, @Valid Client client,BindingResult erreur) {
+		if (erreur.hasErrors()) 
+			return "admin/ajouterClients";
+		else
+		 clientRepo.save(client);
+		return "admin/confirmationAjoutClient";
+	}
 	@RequestMapping(value="admin/deleteClients",method=RequestMethod.GET)
 	public String delete(int id,String mc,int page,int size) {
 		clientRepo.deleteById(id);
 		return "redirect:/admin/clients?page="+page+"&size="+size+"&mc="+mc;
 	
 	}
+	
 		
 	}
 	

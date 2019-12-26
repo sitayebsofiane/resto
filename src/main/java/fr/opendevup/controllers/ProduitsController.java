@@ -52,8 +52,7 @@ public class ProduitsController {
 	public String modifierProduit(Model model,int idProduit) {
 		Produit p= produitRepo.getOne(idProduit);
 		model.addAttribute("produit",p);
-		return "admin/modifierProduit";
-		
+		return "admin/modifierProduit";		
 	}
 	@RequestMapping(value = "/admin/enregistrerProduit",method = RequestMethod.POST)
 	public String enregistrer(Model model, @Valid Produit produit,BindingResult erreur) {

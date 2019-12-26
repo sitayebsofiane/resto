@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>page d'ajout de client</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+</head>
+<body>
+
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">Confirmation</div>
+				<div class="panel-body">
+				<div class="form-group">
+					<label>ID:</label>
+					<label th:text="${client.idClient}"></label>
+				</div>
+				<div class="form-group">
+					<label>NOM:</label>
+					<label th:text="${client.nom}"></label>
+				</div>
+				<div class="form-group">
+					<label>PRENOM:</label>
+					<label th:text="${client.prenom}"></label>
+				</div>
+				<div class="form-group">
+					<label>EMAIL:</label>
+					<label th:text="${client.email}"></label>
+				</div>
+					<div class="form-group">
+					<label>ADRESSE:</label>
+					<label th:text="${client.adresse}"></label>
+				</div>
+					</div>
+					<div class="form-group">
+					<label>TELEPHONE:</label>
+					<label th:text="${client.telephone}"></label>
+				</div>
+				</div>
+			</div>
+		</div>
+
+</body>
+</html>

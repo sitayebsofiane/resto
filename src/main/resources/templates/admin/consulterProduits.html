@@ -22,6 +22,10 @@
 			<li><a
 				th:href="@{consulterProduits}">Consulter
 					les produits</a></li>
+			
+					<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span>
+					<a th:href="@{/login?logout}">se deconecter</a>
+			</li>
 		</ul>
 	</nav>
 	<script th:src="@{css/script.js}"></script>
@@ -67,29 +71,6 @@
 		</ul>
 	</div>	
 </div>
-<!--pied-->
-	<footer class="footer p-t-1">
 
-		<div class="container">
-			<div class="pull-right">
-				<nav class="navbar" style="background: transparent; color: black;">
-					<nav class="nav navbar-nav pull-xs-left">
-						<a class="nav-item nav-link" href="#">Accueil</a> <a
-							class="nav-item nav-link" href="#">9 rue de la liberté à
-							Lille</a> <a class="nav-item nav-link" href="">Téléphone 03 2O 10
-							20 30</a>
-					</nav>
-				</nav>
-			</div>
-
-			<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
-			<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
-				href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
-				class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
-				class="fa fa-linkedin fa-2x">linkedin</i></a>
-		</div>
-	</footer>
-
-	<!-- end pied-->
 </body>
 </html>
