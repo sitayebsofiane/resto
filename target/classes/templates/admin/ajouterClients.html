@@ -9,9 +9,35 @@
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
+ <!--header-->
+	<nav>
+		<div class="toggle">
+			<i class="fas fa-bars menu"></i>
+		</div>
+		<ul>
+			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
+			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
+			<li class="menu"><a href="#">se conecter</a></li>
+		</ul>
+	</nav>
+	<script th:src="@{css/script.js}"></script>
+	<!--end header-->
+    <!-- banniere -->
+    <section class="container-fluid banniere">
+      <div class="ban">
+        <img src="../static/css/resto.jpg" alt="banniere du site"/>
+      </div>
+      <div class="inner_banner">
+        <h1>Bienvenue a Fast Food Chic  </h1>
+        <a th:href="@{/#contact}"> Contacter Fast food chic </a>
+      </div>
+    </section>
+    <!--end banniere-->
+     <!-- a propos -->
 		<div class="container">
 			<div class="panel panel-default">
-				<div class="panel-heading"> Saisie d'un client</div>
+				<div class="panel-heading"> remplisser le formulaire</div>
 				<div class="panel-body">
 					<form th:action="@{enregistrerClient}" method="post">
 					<div class="form-group">
@@ -42,6 +68,29 @@
 				</div>
 			</div>
 		</div>
-
+  <!--end a propos-->
+   <!--pied-->
+	
+	<footer >
+		<div class="container-fluid noire">
+			<div class="pull-right">
+				<nav class="navbar" style="background: transparent; color: black;">
+					<nav class="nav navbar-nav pull-xs-left">
+						<a class="nav-item nav-link" href="#">Accueil</a> <a
+							class="nav-item nav-link" href="#">9 rue de la liberté à
+							Lille</a> <a class="nav-item nav-link" href="">Téléphone 03 2O 10
+							20 30</a>
+					</nav>
+				</nav>
+			</div>
+				<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
+				<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
+					href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
+					class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
+					class="fa fa-linkedin fa-2x">linkedin</i></a>
+		
+		</div>
+	</footer>
+	<!-- end pied-->
 </body>
 </html>

@@ -36,12 +36,18 @@ public class ClientController
 					return "admin/clients";
 			
 			}
+	@RequestMapping(value = "/admin/ajouterClients",method = RequestMethod.GET)
+	public String ajoutProduit(Model model) {
+		model.addAttribute("client",new Client());
+		return "admin/ajouterClients";	
+	}
 	@RequestMapping(value = "/admin/modifierClient",method = RequestMethod.GET)
-	public String modifierClient(Model model,int idClient) {
+	public String ajoutClient(Model model,int idClient) {
 		Client p= clientRepo.getOne(idClient);
 		model.addAttribute("client",p);
 		return "admin/modifierClient";		
 	}
+	
 	@RequestMapping(value = "/admin/enregistrerClient",method = RequestMethod.POST)
 	public String enregistrer(Model model, @Valid Client client,BindingResult erreur) {
 		if (erreur.hasErrors()) 
