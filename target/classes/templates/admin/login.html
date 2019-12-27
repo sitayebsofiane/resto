@@ -19,7 +19,7 @@
 		<div class="panel panel-primary row ">
 			<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
 			<div> <span class="error" th:if="${param.error}">Identifiant ou Mot de passe incorect</span></div>
-			<div> <span class="error" th:if="${param.logout}">Vous etes deconecter</span></div>
+			<div> <span class="error" th:if="${param.logout}">Vous etes deconecté</span></div>
 				<form th:action="@{/login}" method="post">
 					<div class="form-group">
 						<label class="control-label"> Identifiant:</label> <input

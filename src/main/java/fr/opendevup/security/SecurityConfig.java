@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.authorizeRequests().antMatchers("/admin/consulterProduits","/admin/clients","/admin/commandes").hasRole("USER");
     	http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN");
     	http.exceptionHandling().accessDeniedPage("/403");
-    	http.csrf().disable();
+    	
     }
     @Bean
     PasswordEncoder passwordEncoder() {
