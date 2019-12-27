@@ -11,6 +11,12 @@ public class AccueilController {
 		
 		return "/index";
 	}
+	@RequestMapping(value="/login")
+	public String login() {
+		
+		return "/admin/login";
+	
+	}
 	
 	@RequestMapping(value="/403")
 	public String aceesRefuser() {

@@ -11,18 +11,26 @@
 </head>
 <body>
 	<!--header-->
-	<header class="container-fluid header">
-		<div class="container">
-			<a th:href="@{../}" class="logo">Fast food chic</a>
-			<nav class="menu">
-				<a th:href="@{clients(login=${login},password=${password})}">Consulter les
-					clients</a> <a
-					th:href="@{consulterProduits(login=${login},password=${password})}">Consulter les
-					produits</a>
-			</nav>
+	<nav>
+		<div class="toggle">
+			<i class="fas fa-bars menu"></i>
 		</div>
-	</header>
+		<ul>
+			<li><a th:href="@{/}" class="logo">Fast food chic</a></li>
+			<li><a th:href="@{clients}">Consulter
+					les clients</a></li>
+			<li><a
+				th:href="@{consulterProduits}">Consulter
+					les produits</a></li>
+			
+					<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span>
+					<a th:href="@{/login?logout}">se deconecter</a>
+			</li>
+		</ul>
+	</nav>
+	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
+	
 	<!-- banniere -->
 	<section class="container-fluid banniere">
 		<div class="ban">
