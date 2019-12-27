@@ -39,11 +39,11 @@
         <div class="row" >
 
           <article class="col-xs-4 col-sm-3 col-md-2 produit" th:each="p:${listeProduit}"> 
-          	<ol>
+          	<ul>
 				<li><h3> <a th:href="@{/}" class="panier"><span th:text="${p.nom}">nom</span></a></h3></li>
 				<li><p th:text="${p.description}">description</p></li>
 				<li><p th:text="${p.prix}">prix</p></li>
-			</ol>
+			</ul>
         </article>
       </div>
       </section>

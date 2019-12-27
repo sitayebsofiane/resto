@@ -98,10 +98,6 @@ ul li {
 	padding: 20px;
 }
 
-ul li:hover {
-	background: #8000ff;
-}
-
 ul li a {
 	color: #fff;
 	text-decoration: none;
@@ -110,7 +106,7 @@ ul li a {
 	background: black;
 }
 .produit{
-	border-style:inset;
+	
 }
 .toggle {
 	width: 100%;
