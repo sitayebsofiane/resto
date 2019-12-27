@@ -3,16 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <title>client</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css" />
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<link rel="stylesheet" type="text/css" href="../static/css/style.css"
-	th:href="@{../css/style.css}" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{../css/style.css}" />
 
 </head>
 <body>
@@ -22,16 +16,11 @@
 			<i class="fas fa-bars menu"></i>
 		</div>
 		<ul>
-			<li><a th:href="@{/}" class="logo">Fast food chic</a></li>
-			<li><a th:href="@{clients}">Consulter
-					les clients</a></li>
-			<li><a
-				th:href="@{consulterProduits}">Consulter
-					les produits</a></li>
-			
-					<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span>
-					<a th:href="@{/login?logout}">se deconecter</a>
-			</li>
+			<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" class="logo">Fast food chic :</a></li>
+			<li><a th:href="@{clients}">Consulter les clients</a></li>
+			<li><a th:href="@{consulterProduits}">Consulter les produits</a></li>	
+			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>		
+			<li><a th:href="@{/login?logout}">se deconecter</a></li>
 		</ul>
 	</nav>
 	<script th:src="@{css/script.js}"></script>
@@ -73,11 +62,8 @@
 	<div class="container">
 		<ul class="nav nav-pills">
 			<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
-			<li th:each="p,status:${pages}"
-				th:class="${pageCourante}==${status.index}?'nav-link active':''">
-				<span th:text="a" style="visibility: hidden"></span> <a
-				th:href="@{clients(page=${status.index},size=${size},mc=${mc})}"
-				th:text="${status.index}"> </a>
+			<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
+				<a th:href="@{clients(page=${status.index},size=${size},mc=${mc})}" th:text="${status.index}"> </a>
 			</li>
 
 		</ul>

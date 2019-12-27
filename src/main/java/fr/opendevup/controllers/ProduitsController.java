@@ -21,7 +21,7 @@ public class ProduitsController {
 	private ProduitRepository produitRepo;
 		 
 	@RequestMapping(value = "/admin/consulterProduits",method = RequestMethod.GET)
-	public String ajoutProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
+	public String consultProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc) {
 			
