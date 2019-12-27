@@ -1,71 +1,124 @@
-body,html {
-    padding: 0;
-    margin: 0;
-    color:black;
-    background-color: #c0c0c0;
-   /* background-image:url(../images/resto.jpg);
-    background-attachment:fixed;*/
-    }
-a,a:hover{
-    text-decoration: none;
+body, html {
+	padding: 0;
+	margin: 0;
+	color: black;
+	background-color: #c0c0c0;
+	font-family:tahoma, geneva, sans-serif;
+ 
 }
-a{
-    color: white;
+
+a, a:hover {
+	text-decoration: none;
+}
+
+a {
+	color: white;
 }
 /* header*/
-.header{
-  background-color: rgb(117, 60, 7); 
-  height: 70px;
-  line-height: 70px;
-  
+.header {
+	background-color: rgb(117, 60, 7);
+	height: 70px;
+	line-height: 70px;
 }
-.logo{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    font-weight: blod;
-    letter-spacing: 1px;
-    float: left;
+
+.logo {
+	color: rgb(255, 255, 255);
+	text-transform: uppercase;
+	font-weight: blod;
+	letter-spacing: 1px;
+	float: left;
 }
-.menu{
-    color: rgb(255, 255, 255);
-    margin-right: 20px;
-    float: right;
+
+.menu {
+	color: rgb(255, 255, 255);
+	margin-right: 20px;
+	float: right;
 }
-.menu a:hover{
-    color: rgb(54, 241, 30);
+
+.menu a:hover {
+	color: rgb(54, 241, 30);
 }
 /* banniere*/
-.banniere{
-    width: 100%;
-    max-width: 100%;
+.banniere {
+	width: 100%;
+	max-width: 100%;
 }
-.ban{
-    width: 100%;
-    max-width: 100%;
+
+.ban {
+	width: 100%;
+	max-width: 100%;
 }
-.ban img{
-    width: 100%;
-    max-width: 100%;
+
+.ban img {
+	width: 100%;
+	max-width: 100%;
 }
 /* a propos*/
 .apropos {
-   
-  }
-  /* pied*/
-footer {
-            background-color: black;
-           position: static; bottom: 0; left: 0; right: 0
-        }
-.error{
-	color:#ff0080;
+	
 }
-* {margin: 0;padding: 0;}    
-nav {background: #804040;width: 100%;}
-ul {padding: 0;margin: 0 auto;width: 80%;}
-ul li {list-style: none;display: inline-block;padding:20px;}
-ul li:hover {background: #8000ff;}
-ul li a {color: #fff;text-decoration: none;}
-.toggle {width: 100%;padding: 10px 20px;background: #804040;
-text-align: right;box-sizing:border-box;color: #fff;font-size: 30px;display:none;}
+/* pied*/
+.footer {
+	background: black;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding-top: 50px;
+	height: 50px;
+}
 
+}
+.error {
+	color: #ff0080;
+}
 
+.panier {
+	color: #804040;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	background: #804040;
+	width: 100%;
+}
+
+ul {
+	padding: 0;
+	margin: 0 auto;
+	width: 80%;
+}
+
+ul li {
+	list-style: none;
+	display: inline-block;
+	padding: 20px;
+}
+
+ul li:hover {
+	background: #8000ff;
+}
+
+ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+.noire{
+	background: black;
+}
+.produit{
+	border-style:inset;
+}
+.toggle {
+	width: 100%;
+	padding: 10px 20px;
+	background: #804040;
+	text-align: right;
+	box-sizing: border-box;
+	color: #fff;
+	font-size: 30px;
+	display: none;
+}

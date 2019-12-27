@@ -3,16 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>page d'accueil</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css" />
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<link rel="stylesheet" href="../static/css/style.css"
-	th:href="@{css/style.css}" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}" />
 </head>
 <body>
 	<!--header-->
@@ -30,46 +24,34 @@
 	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
 	<!-- banniere -->
-	<section class="container-fluid banniere">
+	<section class="row">
+	  <div class="col-lg-12 container" >
+	  <div class="inner_banner">
+			<h1>Bienvenue a Fast Food Chic</h1>
+		</div>
+		<p>
+		  Je suis passionné par les <strong>tigres</strong> depuis très longtemps. Ce site a été construit en <em>hommage à ces merveilleux félins...</em><br>
+		  Je fais partie de la <abbr title="Société des Amoureux des Tigres">SAT</abbr> qui a pour but de faire connaître ces splendides animaux. 
+		</p>
+		<p>Voici ce qu'en dit le wikipedia :</p>
+		<blockquote>
+		  Le Tigre (Panthera tigris) est un mammifère carnivore de la famille des félidés (Felidae) du genre Panthera. 
+		Aisément reconnaissable à sa fourrure rousse rayée de noir, il est le plus grand félin sauvage et l'un des plus grands carnivores du monde. 
+		L'espèce est divisée en neuf sous-espèces possédant des différences mineures en termes de taille ou de comportement. Superprédateur, 
+		il chasse principalement les cerfs et les sangliers, bien qu'il puisse s'attaquer à des proies de taille plus importante comme les buffles. 
+		Jusqu'au XIXe siècle, le Tigre était réputé mangeur d'homme. La structure sociale des tigres en fait un animal solitaire ; le mâle possède 
+		un territoire qui englobe les domaines de plusieurs femelles et ne participe pas à l'éducation des petits.<br>
+		  <small class="pull-right">Wikipedia</small><br>
+		</blockquote>
+	  </div>
+	</section>
+	<section class="container banniere">
 		<div class="ban">
 			<img th:src="@{images/resto.jpg}" alt="banniere du site" />
-		</div>
-		<div class="inner_banner">
-			<h1>Bienvenue a Fast Food Chic</h1>
 		</div>
 	</section>
 	<!--end banniere-->
 	<!-- a propos -->
-	<section class="container-fluid apropos">
-		<div class="container">
-			<div class="row">
-				<article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
-					<h2>titre 1</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Laboriosam necessitatibus, doloremque suscipit praesentium cumque
-						mollitia, voluptatibus enim iusto repellendus, nostrum facere quia
-						quas repudiandae officiis architecto voluptatem numquam quasi sed.
-					</p>
-				</article>
-				<article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
-					<h2>titre 2</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Laboriosam necessitatibus, doloremque suscipit praesentium cumque
-						mollitia, voluptatibus enim iusto repellendus, nostrum facere quia
-						quas repudiandae officiis architecto voluptatem numquam quasi sed.
-					</p>
-				</article>
-				<article class=" col-md-4 col-log-4 col-xs-12 col-sm-12">
-					<h2>titre 3</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Laboriosam necessitatibus, doloremque suscipit praesentium cumque
-						mollitia, voluptatibus enim iusto repellendus, nostrum facere quia
-						quas repudiandae officiis architecto voluptatem numquam quasi sed.
-					</p>
-				</article>
-			</div>
-		</div>
-	</section>
 	<section class="container pied" id="contact">
 		<div class="row">
 			<form role="form" class="col-md-9 go-right">
@@ -92,9 +74,10 @@
 	</section>
 	<!--end a propos-->
 	<!--pied-->
-	<footer class="footer p-t-1">
+	
+<footer >
 
-		<div class="container">
+		<div class="container-fluid noire">
 			<div class="pull-right">
 				<nav class="navbar" style="background: transparent; color: black;">
 					<nav class="nav navbar-nav pull-xs-left">
@@ -105,15 +88,14 @@
 					</nav>
 				</nav>
 			</div>
-
-			<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
-			<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
-				href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
-				class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
-				class="fa fa-linkedin fa-2x">linkedin</i></a>
+				<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
+				<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
+					href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
+					class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
+					class="fa fa-linkedin fa-2x">linkedin</i></a>
+		
 		</div>
 	</footer>
-
 	<!-- end pied-->
 </body>
 </html>

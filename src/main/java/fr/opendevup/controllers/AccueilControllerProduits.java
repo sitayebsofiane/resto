@@ -18,17 +18,14 @@ public class AccueilControllerProduits {
 	private ProduitRepository produitRepo;
 	@RequestMapping(value = "pages/produits",method = RequestMethod.GET)
 	public String AccueilProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
-			@RequestParam(name="size", defaultValue="10")int size,
-			@RequestParam(name="mc",defaultValue = "")String mc) {
-		Page<Produit> produits=  produitRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
-		
+			@RequestParam(name="size", defaultValue="6")int size) {
+		Page<Produit> produits= produitRepo.findAll( PageRequest.of(page,size));
 		model.addAttribute("listeProduit",produits.getContent());
 		//creation d'un tableu de page
 		int [] pages= new int [produits.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size",size);
 		model.addAttribute("pageCourante",page);
-		model.addAttribute("mc",mc);
 		
 		return "pages/produits";
 	
