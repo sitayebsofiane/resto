@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>page d'athentifications</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}" />
+</head>
+<body>
+	 <!--header-->
+	<nav>
+		<div class="toggle">
+			<i class="fas fa-bars menu"></i>
+		</div>
+		<ul>
+			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
+			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
+			
+		</ul>
+	</nav>
+	<script th:src="@{css/script.js}"></script>
+	<!--end header-->
+	<div class="container">
+		<h1 class="panel-heading ">Authentification</h1>
+		<div class="panel panel-primary row ">
+			<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
+				<form th:action="@{authClient}" method="post">
+					<div class="form-group">
+						<label class="control-label"> Identifiant(votre email):</label> 
+						<input class="form-control" type="email" name="email"  />
+					</div>
+					<div class="form-group">
+						<label class="control-label">Mot de passe:</label> 
+						<input class="form-control" type="password" name="motDePasse"/>
+					</div>
+					<div>
+						<input type="hidden" name="idProduit" th:value="${produit.idProduit}" />
+						<input type="hidden" name="nom" th:value="${produit.nom}" />
+						<input type="hidden" name="description"  th:value="${produit.description}"  />
+						<input type="hidden" name="prix"  th:value="${produit.prix}" />
+						<input type="hidden" name="quantite"  th:value="${produit.quantite}" />
+						
+					</div>
+					<script type="text/javascript">
+							function creerCompte(){
+								document.write("<h1>Assez de l'ancien contenu, passons au nouveau !</h1>");
+								}
+					</script>
+					<button type="submit" class="btn btn-primary" onclick="creerCompte();">se conecter</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<h1 id="creerCompte" class="hidden"> probablement vous n'avez de compte clic <a href="#">ici pour en creer un </a></h1>
+	<!--pied-->
+	<footer >
+		<div class="container-fluid noire">
+			<div class="pull-right">
+				<nav class="navbar" style="background: transparent; color: black;">
+					<nav class="nav navbar-nav pull-xs-left">
+						<a class="nav-item nav-link" href="#">Accueil</a> <a
+							class="nav-item nav-link" href="#">9 rue de la liberté à
+							Lille</a> <a class="nav-item nav-link" href="">Téléphone 03 2O 10
+							20 30</a>
+					</nav>
+				</nav>
+			</div>
+				<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
+				<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
+					href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
+					class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
+					class="fa fa-linkedin fa-2x">linkedin</i></a>
+		
+		</div>
+	</footer>
+	<!-- end pied-->
+</body>
+</html>

@@ -4,33 +4,40 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-@Entity
-public class Produit implements Serializable{
 
-	
+@Entity
+public class Produit implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idProduit;
-	@NotNull @Size(min = 2,max = 30)
+	
+	@NotNull
+	@Size(min = 2, max = 30)
 	private String nom;
-	@NotNull @Size(min = 2)
+	
+	@NotNull
+	@Size(min = 2)
 	private String description;
-	@DecimalMin(value = "1")
+	
 	private double prix;
-	
+
 	private int quantite;
-	
+
 	public Produit() {
 		super();
 	}
-	
-	public Produit(String nom, String description,double prix,int quantite) {
-		this.setNom(nom);;
-		this.setDescription(description);;
+
+	public Produit(String nom, String description, double prix, int quantite) {
+		this.setNom(nom);
+		;
+		this.setDescription(description);
+		;
 		this.setPrix(prix);
 		this.setQuantite(quantite);
 	}
@@ -38,22 +45,27 @@ public class Produit implements Serializable{
 	public int getIdProduit() {
 		return idProduit;
 	}
+
 	public void setIdProduit(int id) {
 		this.idProduit = id;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -76,9 +88,8 @@ public class Produit implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Produit [idProduit=" + idProduit + ", nom=" + nom + ", description=" + description + ", prix=" + prix +"€"
-				+ ", quantité=" + quantite + "]";
+		return "Produit [idProduit=" + idProduit + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+				+ "€" + ", quantité=" + quantite + "]";
 	}
 
-	
 }

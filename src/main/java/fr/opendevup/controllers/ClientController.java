@@ -37,12 +37,12 @@ public class ClientController
 			
 			}
 	@RequestMapping(value = "/admin/ajouterClients",method = RequestMethod.GET)
-	public String ajoutProduit(Model model) {
+	public String ajoutClient(Model model) {
 		model.addAttribute("client",new Client());
 		return "admin/ajouterClients";	
 	}
 	@RequestMapping(value = "/admin/modifierClient",method = RequestMethod.GET)
-	public String ajoutClient(Model model,int idClient) {
+	public String modifierClient(Model model,int idClient) {
 		Client p= clientRepo.getOne(idClient);
 		model.addAttribute("client",p);
 		return "admin/modifierClient";		
@@ -63,7 +63,6 @@ public class ClientController
 	
 	}
 	
-		
 	}
 	
 

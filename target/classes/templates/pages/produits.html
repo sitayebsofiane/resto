@@ -18,7 +18,6 @@
 			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
 			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
 			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
-			<li class="menu"><a href="#">se conecter</a></li>
 		</ul>
 	</nav>
 	<script th:src="@{css/script.js}"></script>
@@ -30,7 +29,7 @@
       </div>
       <div class="inner_banner">
         <h1>Bienvenue a Fast Food Chic  </h1>
-        <a th:href="@{/#contact}"> Contacter Fast food chic </a>
+       
       </div>
     </section>
     <!--end banniere-->
@@ -40,9 +39,10 @@
 
           <article class="col-xs-4 col-sm-3 col-md-2 produit" th:each="p:${listeProduit}"> 
           	<ul>
-				<li><h3> <a th:href="@{/}" class="panier"><span th:text="${p.nom}">nom</span></a></h3></li>
+				<li> <h3 th:text="${p.nom}">nom</h3></li>
 				<li><p th:text="${p.description}">description</p></li>
 				<li><p th:text="${p.prix}">prix</p></li>
+				<li><h3> <a th:href="@{/pages/seConnecter(idProduit=${p.idProduit})}" class="panier">ajouter au panier</a></h3></li>
 			</ul>
         </article>
       </div>

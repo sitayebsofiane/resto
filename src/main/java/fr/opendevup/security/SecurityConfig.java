@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,26 +15,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
-	@Autowired
-    protected void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	    }
+	@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     	//utilisateur depuis le code java
         auth.inMemoryAuthentication()
                 .withUser("kamel").password(passwordEncoder().encode("123")).roles("USER")
                 .and()
                 .withUser("bigboss").password(passwordEncoder().encode("1234" )).roles("ADMIN","USER");
         //utilisateur depuis la base de donnee
-
-        auth.jdbcAuthentication().dataSource(dataSource)
-        .usersByUsernameQuery(
-         "select username as principal ,password as credentials, enabled from users where username=?")
-        .authoritiesByUsernameQuery(
-         "select username as principal, role as role from user_roles where username=?")
-    	.passwordEncoder(new BCryptPasswordEncoder())
-    	.rolePrefix("_ROLE");
+//
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//        .usersByUsernameQuery(
+//         "select login as principal ,pass as credentials, active from users where login=?")
+//        .authoritiesByUsernameQuery(
+//       "select login as principal,role as role from users_roles where login=?")
+//    	.passwordEncoder(new BCryptPasswordEncoder())
+//    	.rolePrefix("ROLE_");
     }
 	
     @Override
@@ -47,10 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.exceptionHandling().accessDeniedPage("/403");
     	
     }
-    @Bean
-    PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-    	
-    }
+  
 	
 }

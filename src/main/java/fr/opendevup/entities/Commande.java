@@ -14,7 +14,8 @@ public class Commande implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue
 	private int idCommande;
 	private Date date;
 	private double prix;

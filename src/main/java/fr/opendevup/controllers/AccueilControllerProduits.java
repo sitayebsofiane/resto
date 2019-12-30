@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.opendevup.dao.ProduitRepository;
+import fr.opendevup.entities.Client;
 import fr.opendevup.entities.Produit;
 
 @Controller
@@ -17,7 +18,7 @@ public class AccueilControllerProduits {
 	@Autowired
 	private ProduitRepository produitRepo;
 	@RequestMapping(value = "pages/produits",method = RequestMethod.GET)
-	public String AccueilProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
+	public String accueilProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="6")int size) {
 		Page<Produit> produits= produitRepo.findAll( PageRequest.of(page,size));
 		model.addAttribute("listeProduit",produits.getContent());
@@ -30,11 +31,31 @@ public class AccueilControllerProduits {
 		return "pages/produits";
 	
 	}
+	@RequestMapping(value = "pages/clientConnecterAproduits",method = RequestMethod.GET)
+	public String conectionProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
+			@RequestParam(name="size", defaultValue="6")int size) {
+		Page<Produit> produits= produitRepo.findAll( PageRequest.of(page,size));
+		model.addAttribute("listeProduit",produits.getContent());
+		//creation d'un tableu de page
+		int [] pages= new int [produits.getTotalPages()];
+		model.addAttribute("pages",pages);
+		model.addAttribute("size",size);
+		model.addAttribute("pageCourante",page);
+		model.addAttribute("client",new Client());
+		return "pages/clientConnecterAproduits";
+	}
 	@RequestMapping(value = "pages/menus",method = RequestMethod.GET)
-	public String AccueilMenus() {
+	public String accueilMenus() {
 		
 		return "pages/menus";
 	
 	}
+
 	
+	@RequestMapping(value = "pages/clientConnecterAmenus",method = RequestMethod.GET)
+	public String conectionMenus() {
+		
+		return "pages/clientConnecterAmenus";
+	
+	}
 }

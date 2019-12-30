@@ -18,7 +18,6 @@
 			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
 			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
 			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
-			<li class="menu"><a href="#">se conecter</a></li>
 		</ul>
 	</nav>
 	<script th:src="@{css/script.js}"></script>
@@ -56,12 +55,19 @@
 						<span class="error" th:errors="${client.email}"></span>
 					</div>
 					<div class="form-group">
+						<label class="control-label">mot de passe:</label>
+						<input class="form-control" type="password" name="motDePasse"  th:value="${client.motDePasse}" />
+						<span class="error" th:errors="${client.motDePasse}"></span>
+					</div>
+					<div class="form-group">
 						<label class="control-label">adresse:</label>
 						<input class="form-control" type="text" name="adresse"  th:value="${client.adresse}" />	
+						<span class="error" th:errors="${client.adresse}"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">telephone:</label>
-						<input class="form-control" type="text" name="telephone"  th:value="${client.telephone}" />	
+						<input class="form-control" type="text" name="telephone"  th:value="${client.telephone}" />
+						<span class="error" th:errors="${client.telephone}"></span>	
 					</div>
 					<button type="submit" class="btn btn-primary">enregistrer</button>
 					</form>
