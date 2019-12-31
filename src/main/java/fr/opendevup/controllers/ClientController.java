@@ -1,5 +1,7 @@
 package fr.opendevup.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ public class ClientController
 						model.addAttribute("size",size);
 						model.addAttribute("pageCourante",page);
 						model.addAttribute("mc",mc);
+						
 					return "admin/clients";
 			
 			}
@@ -50,6 +53,11 @@ public class ClientController
 	
 	@RequestMapping(value = "/admin/enregistrerClient",method = RequestMethod.POST)
 	public String enregistrer(Model model, @Valid Client client,BindingResult erreur) {
+		//verification si le compte existe déja
+		List<Client> clients=clientRepo.findAll();
+		for(Client cl:clients) 
+			if(cl.getEmail().equals(client.getEmail()))
+				return "pages/compteExisteDeja";
 		if (erreur.hasErrors()) 
 			return "admin/ajouterClients";
 		else

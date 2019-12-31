@@ -16,12 +16,11 @@
 		</div>
 		<ul>
 			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
-			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
-			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
+			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
 			
 		</ul>
 	</nav>
-	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
 	<div class="container">
 		<h1 class="panel-heading ">Authentification</h1>
@@ -36,20 +35,7 @@
 						<label class="control-label">Mot de passe:</label> 
 						<input class="form-control" type="password" name="motDePasse"/>
 					</div>
-					<div>
-						<input type="hidden" name="idProduit" th:value="${produit.idProduit}" />
-						<input type="hidden" name="nom" th:value="${produit.nom}" />
-						<input type="hidden" name="description"  th:value="${produit.description}"  />
-						<input type="hidden" name="prix"  th:value="${produit.prix}" />
-						<input type="hidden" name="quantite"  th:value="${produit.quantite}" />
-						
-					</div>
-					<script type="text/javascript">
-							function creerCompte(){
-								document.write("<h1>Assez de l'ancien contenu, passons au nouveau !</h1>");
-								}
-					</script>
-					<button type="submit" class="btn btn-primary" onclick="creerCompte();">se conecter</button>
+					<button type="submit" class="btn btn-primary">se conecter</button>
 				</form>
 			</div>
 		</div>

@@ -16,7 +16,7 @@ import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Produit;
 
 @Controller
-public class ProduitsController {
+public class AdminProduitsController {
 	@Autowired
 	private ProduitRepository produitRepo;
 		 
@@ -63,6 +63,7 @@ public class ProduitsController {
 		return "admin/confirmationAjoutProduit" ;
 		
 	}
+	
 	}
 		
 	

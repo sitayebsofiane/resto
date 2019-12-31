@@ -15,12 +15,15 @@
 			<i class="fas fa-bars menu"></i>
 		</div>
 		<ul>
-			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
-			<li><a th:href="@{/pages/produits}">Consulter nos produits</a></li>
-			<li><a th:href="@{/pages/menus}">Consulter nos menus</a></li>
+			<li><a th:href="@{/}" class="logo blanc">Fast Food Chic</a></li>
+			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
+			<li class="menu"><a th:href="@{/admin/ajouterClients}"class="blanc" >creer un compte</a></li>
+			<li class="menu"><a th:href="@{/pages/seConnecter}" class="blanc">se conecter</a></li>
+			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
+			<li class="menu"><a th:href="@{/pages/panier}" class="blanc">consulter mon panier</a></li>
 		</ul>
 	</nav>
-	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
     <!-- banniere -->
     <section class="container-fluid banniere">
@@ -28,8 +31,7 @@
         <img src="../static/css/resto.jpg" alt="banniere du site"/>
       </div>
       <div class="inner_banner">
-        <h1>Bienvenue a Fast Food Chic  </h1>
-       
+        <h1>Bienvenue <span th:text="${client.nom}"></span> a Fast Food Chic </h1>
       </div>
     </section>
     <!--end banniere-->
@@ -42,7 +44,7 @@
 				<li> <h3 th:text="${p.nom}">nom</h3></li>
 				<li><p th:text="${p.description}">description</p></li>
 				<li><p th:text="${p.prix}">prix</p></li>
-				<li><h3> <a th:href="@{/pages/seConnecter(idProduit=${p.idProduit})}" class="panier">ajouter au panier</a></h3></li>
+				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit})}" style="font-size: small">ajouter au panier</a></h3></li>
 			</ul>
         </article>
       </div>
@@ -51,11 +53,8 @@
 		<div>
 			<ul class="nav nav-pills">
 				<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
-				<li th:each="p,status:${pages}"
-					th:class="${pageCourante}==${status.index}?'nav-link active':''">
-					<a
-					th:href="@{produits(page=${status.index},size=${size})}"
-					th:text="${status.index}"> </a>
+				<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
+					<a th:href="@{produits(page=${status.index},size=${size})}" th:text="${status.index}"> </a>
 				</li>
 
 			</ul>
@@ -63,16 +62,14 @@
 	</section>
       <!--end a propos-->
    <!--pied-->
-	
 	<footer >
 		<div class="container-fluid noire">
 			<div class="pull-right">
-				<nav class="navbar" style="background: transparent; color: black;">
+				<nav class="navbar" >
 					<nav class="nav navbar-nav pull-xs-left">
-						<a class="nav-item nav-link" href="#">Accueil</a> <a
-							class="nav-item nav-link" href="#">9 rue de la liberté à
-							Lille</a> <a class="nav-item nav-link" href="">Téléphone 03 2O 10
-							20 30</a>
+						<span class="nav-item nav-link" >Accueil</span> 
+						<span class="nav-item nav-link" >9 rue de la liberté à Lille</span> 
+						<span class="nav-item nav-link">Téléphone 03 2O 10 20 30</span>
 					</nav>
 				</nav>
 			</div>

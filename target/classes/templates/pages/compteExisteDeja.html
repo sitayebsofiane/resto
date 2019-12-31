@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>page accés refuser</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+</head>
+<body>
+
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">	Bonjour  </div>
+				<div class="panel-body">
+				<h3 class="error"> ce compte existe deja</h3>
+				<h2> vous pouvez creer un autre compte en utilisant un autre e mail et mot de passe veuillez cliquer ici
+				<a th:href="@{/admin/ajouterClients}">creer un compte</a></h2>
+				</div>
+			</div>
+		</div>
+
+</body>
+</html>

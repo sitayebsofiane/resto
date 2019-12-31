@@ -9,33 +9,25 @@
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
 </head>
 <body>
-	<!-- header -->
+	<!--header-->
 	<nav>
 		<div class="toggle">
 			<i class="fas fa-bars menu"></i>
 		</div>
 		<ul>
-			<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" class="logo">Fast food chic :</a></li>
-			
-			<li><a th:href="@{clients}">Consulter les clients</a></li>
-			<li><a th:href="@{consulterProduits}">Consulter les produits</a></li>
-			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>		
-			<li><a th:href="@{/login?logout}">se deconecter</a></li>
+			<li><a th:href="@{/}" class="logo blanc">Fast Food Chic</a></li>
+			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
+			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
+			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
+			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">commander</a></li>
 		</ul>
 	</nav>
 	<!--end header-->
 <div  class="container"  >
-	<div>
-		<form th:action="@{consulterProduits}" method=get>
-			<label>Mot Clé:</label>
-			<input type="text" name="mc" th:value ="${mc}"/>
-			<button class="btn btn-primary">Chercher</button>
-		</form>
-	</div>
 	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th><th>NOM</th><th>DESCRIPTION</th><th>PRIX</th><th>QUANTITE</th>
+				<th>NOM</th><th>DESCRIPTION</th><th>PRIX</th><th>QUANTITE</th>
 			</tr>
 		</thead>
 		<tbody>

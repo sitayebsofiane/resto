@@ -1,7 +1,5 @@
 
 body, html {
-	padding: 0;
-	margin: 0;
 	color: black;
 	background-color: #c0c0c0;
 	font-family:tahoma, geneva, sans-serif;
@@ -12,8 +10,8 @@ a, a:hover {
 	text-decoration: none;
 }
 
-a {
-	color: white;
+.blanc {
+	color: #ffffff;
 }
 /* header*/
 .header {
@@ -71,13 +69,12 @@ a {
 }
 
 .panier {
+	
 	color: #804040;
+	font-size: 1px;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-}
+
 
 nav {
 	background: #804040;
@@ -96,8 +93,8 @@ ul li {
 	padding: 20px;
 }
 
-ul li a {
-	color: #fff;
+ul li  {
+	color: #804040;
 	text-decoration: none;
 }
 .noire{

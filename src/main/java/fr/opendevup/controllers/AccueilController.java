@@ -3,39 +3,47 @@ package fr.opendevup.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.ClientRepository;
-import fr.opendevup.dao.PanierRepository;
+import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
-import fr.opendevup.entities.Panier;
-import fr.opendevup.entities.Produit;
+import fr.opendevup.entities.PanierProduit;
 @Controller
+@SessionAttributes({"client"})
 public class AccueilController {
 	@Autowired
 	private ClientRepository clientRepo;
 	@Autowired
 	private ProduitRepository produitRepo;
 	@Autowired
-	private PanierRepository panierRepo;
-	@RequestMapping(value="/")
+	private PanierProduitRepository panierProduitRepo;
+	
+	
+	@GetMapping(value="/")
 	public String  accueil()
 	{
 		
 		return "/index";
 	}
-	@RequestMapping(value="/login")
+	@GetMapping(value="/login")
 	public String login() {
 		
 		return "/admin/login";
 	
+	}
+	
+	@ModelAttribute("client")
+	public Client client() {
+		return new Client();
+		
 	}
 	
 	@RequestMapping(value="/403")
@@ -45,35 +53,44 @@ public class AccueilController {
 	
 	}
 
-	@RequestMapping(value = "/pages/seConnecter",method = RequestMethod.GET)
-	public String seConnecter(Model model,int idProduit) {
-		Produit p= produitRepo.getOne(idProduit);
-		model.addAttribute("produit",p);
+	@GetMapping(value = "/pages/seConnecter")
+	public String seConnecter(Model model) {
+		
 		return "/pages/seConnecter";
 		
 	}
+	
 	@RequestMapping(value = "pages/authClient",method = RequestMethod.POST)
-	public String connection(Model model,@RequestParam(name = "email" ,defaultValue="")String email
-			,@RequestParam(name = "motDePasse",defaultValue = "")String motDePasse
-			,@RequestParam(name="page", defaultValue="0")int page,
-			@RequestParam(name="size", defaultValue="6")int size,Produit produit) {
+	public String connection(Model model,String email,String motDePasse) {
+		//si le client existe dans la base je l'enrigitsre dans la session si non je redirige ver la conexion
 		List<Client> clients=clientRepo.findAll();
 		for(Client client:clients) {
 			if(client.getEmail().equals(email) && client.getMotDePasse().equals(motDePasse)) {
-				Panier panier=new Panier(client,produit);
-				panierRepo.save(panier);
-				Page<Produit> produits= produitRepo.findAll(PageRequest.of(page,size));
-				model.addAttribute("listeProduit",produits.getContent());
-				//creation d'un tableu de page que j'affiche au client
-				int [] pages= new int [produits.getTotalPages()];
-				model.addAttribute("pages",pages);
-				model.addAttribute("size",size);
-				model.addAttribute("pageCourante",page);
-				return "pages/produits";
+				model.addAttribute("client",client);
+				
+				return "redirect:/";
 				
 				}
 		}
-		return"/pages/seConnecter";
+		return"redirect:/pages/seConnecter";
+	}
+	@GetMapping(value = "/pages/seDeconnecter")
+	public String deconnection(Model model) {
+		model.addAttribute("client",new Client());
+		
+		return "redirect:/";
+		
+	}
+	@RequestMapping(value = "/pages/panierProduit")
+	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ) {
+		int idProduit=Integer.parseInt(idproduit);
+		if (produitRepo.existsById(idProduit) & client.getEmail()!=null) {
+			PanierProduit panier= new PanierProduit();
+			panier.setIdClient(client.getIdClient());
+			panier.setIdProduit(idProduit);
+			panierProduitRepo.save(panier);
+		}
+		return"redirect:/pages/produits?page="+page+"&size="+size;
 	}
 	
 }
