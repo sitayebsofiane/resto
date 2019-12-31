@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>page pour editer et consulter les produits</title>
+<title>panier</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,7 +19,7 @@
 			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
 			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
 			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
-			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">commander</a></li>
+			<li class="menu"><a th:href="@{/pages/commander}" class="blanc">commander</a></li>
 		</ul>
 	</nav>
 	<!--end header-->
@@ -27,19 +27,16 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>NOM</th><th>DESCRIPTION</th><th>PRIX</th><th>QUANTITE</th>
+				<th>NOM</th><th>DESCRIPTION</th><th>PRIX</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="p:${listeProduit}">
-			<td th:text="${p.idProduit}">idProduit</td>
 			<td th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
-			<td th:text="${p.quantite}">quantité</td>
-			<td><a th:href="@{modifierProduit(idProduit=${p.idProduit})}"> Modifier</a></td>
 			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
-			 th:href="@{deleteProduits(id=${p.idProduit},page=${pageCourante},size=${size},mc=${mc})}">
+			 th:href="@{deleteProduitDuPanier(id=${p.idProduit})}">
 			 Suprimer</a></td>
 			</tr>
 			
