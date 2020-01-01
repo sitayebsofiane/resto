@@ -25,18 +25,18 @@ public class Commande implements Serializable {
 	private String nomClient;
 	private String adresseClient;
 	private String telephoneClient;
-	private String Produits;
+	private String produit;
 	
 	public Commande() {
 		super();
 	}
 	
-	public Commande(Date date, double prixTotal, int idClient,String nomClient,String Produits,String adresseClient,String telephoneClient) {
+	public Commande(Date date, double prixTotal, int idClient,String nomClient,String produit,String adresseClient,String telephoneClient) {
 		this.date = date;
 		this.setPrixTotal(prixTotal);
 		this.idClient = idClient;
 		this.nomClient=nomClient;
-		this.Produits=Produits;
+		this.produit=produit;
 		this.setAdresseClient(adresseClient);
 		this.setTelephoneClient(telephoneClient);
 	}
@@ -72,12 +72,6 @@ public class Commande implements Serializable {
 		this.prixTotal = prixTotal;
 	}
 
-	@Override
-	public String toString() {
-		return "Commande [idCommande=" + idCommande + ", date=" + date + ", prixTotal=" + prixTotal + ", idClient="
-				+ idClient + "]";
-	}
-
 	public String getNomClient() {
 		return nomClient;
 	}
@@ -87,11 +81,11 @@ public class Commande implements Serializable {
 	}
 
 	public String getNomProduit() {
-		return Produits;
+		return produit;
 	}
 
-	public void setNomProduit(String Produits) {
-		this.Produits = Produits;
+	public void setNomProduit(String produit) {
+		this.produit = produit;
 	}
 
 	public String getAdresseClient() {
@@ -108,6 +102,13 @@ public class Commande implements Serializable {
 
 	public void setTelephoneClient(String telephoneClient) {
 		this.telephoneClient = telephoneClient;
+	}
+
+	@Override
+	public String toString() {
+		return "Commande [idCommande=" + idCommande + ", date=" + date + ", prixTotal=" + prixTotal + ", idClient="
+				+ idClient + ", nomClient=" + nomClient + ", adresseClient=" + adresseClient + ", telephoneClient="
+				+ telephoneClient + ", produits=" + produit + "]";
 	}
 	
 }

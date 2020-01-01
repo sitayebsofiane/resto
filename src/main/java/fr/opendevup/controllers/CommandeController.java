@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.CommandeRepository;
@@ -30,8 +33,19 @@ public class CommandeController {
 	private CommandeRepository commandeRepo;
 	
 	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
-	public String  commande()
+	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
+			@RequestParam(name="size",defaultValue = "10")int size,
+			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
+
+		Page<Commande> pageCommandes= commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
+		model.addAttribute("listeCommande",pageCommandes.getContent());
+		int[] pages= new int[pageCommandes.getTotalPages()];
+		model.addAttribute("pages",pages);
+		model.addAttribute("size",size);
+		model.addAttribute("pageCourante",page);
+		model.addAttribute("mc",mc);
+	
 		
 		return "/admin/commandes";
 	}
@@ -79,6 +93,12 @@ public class CommandeController {
 		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(),
 				produits, client.getAdresse(), client.getTelephone()));
 		return "redirect:/";
+	}
+	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
+	public String deleteCommande(int idCommande,String mc,int page,int size) {
+		commandeRepo.deleteById(idCommande);
+		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
+	
 	}
 }
 
