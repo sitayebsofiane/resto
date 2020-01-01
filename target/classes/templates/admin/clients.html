@@ -13,9 +13,6 @@
 	<!-- header -->
 	<span th:text="${nomproduit}"></span>
 	<nav>
-		<div class="toggle">
-			<i class="fas fa-bars menu"></i>
-		</div>
 		<ul>
 			<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" class="logo">Fast food chic </a></li>
 			<li><a th:href="@{clients}">Consulter les clients</a></li>

@@ -58,7 +58,7 @@ public class CommandeController {
 	}
 	@RequestMapping(value = "/pages/commander",method = RequestMethod.GET)
 	public String commander(Client client) {
-		//enrigistrer le panier qui corespend au client dans une table pour l'afficher a l'admin user
+		//enrigistrer le panier qui corespend au client dans une table commande pour l'afficher a l'admin user
 		return "redirect:/";
 	}
 }

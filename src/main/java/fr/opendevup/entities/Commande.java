@@ -1,11 +1,13 @@
 package fr.opendevup.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Commande implements Serializable {
@@ -17,18 +19,29 @@ public class Commande implements Serializable {
 	@Id 
 	@GeneratedValue
 	private int idCommande;
+	
+	@Temporal(TemporalType.DATE)
 	private Date date;
-	private double prix;
+	private double prixTotal;
+	
 	private int idClient;
+	private String nomClient;
+	private String adresseClient;
+	private String telephoneClient;
+	private String Produits;
 	
 	public Commande() {
 		super();
 	}
 	
-	public Commande(Date date, double prix, int idClient) {
+	public Commande(Date date, double prixTotal, int idClient,String nomClient,String Produits,String adresseClient,String telephoneClient) {
 		this.date = date;
-		this.prix = prix;
+		this.setPrixTotal(prixTotal);
 		this.idClient = idClient;
+		this.nomClient=nomClient;
+		this.Produits=Produits;
+		this.setAdresseClient(adresseClient);
+		this.setTelephoneClient(telephoneClient);
 	}
 	
 	public int getIdCommande() {
@@ -43,12 +56,7 @@ public class Commande implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public double getPrix() {
-		return prix;
-	}
-	public void setPrix(double prix) {
-		this.prix = prix;
-	}
+	
 	public int getIdClient() {
 		return idClient;
 	}
@@ -57,6 +65,52 @@ public class Commande implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public double getPrixTotal() {
+		return prixTotal;
+	}
+
+	public void setPrixTotal(double prixTotal) {
+		this.prixTotal = prixTotal;
+	}
+
+	@Override
+	public String toString() {
+		return "Commande [idCommande=" + idCommande + ", date=" + date + ", prixTotal=" + prixTotal + ", idClient="
+				+ idClient + "]";
+	}
+
+	public String getNomClient() {
+		return nomClient;
+	}
+
+	public void setNomClient(String nomClient) {
+		this.nomClient = nomClient;
+	}
+
+	public String getNomProduit() {
+		return Produits;
+	}
+
+	public void setNomProduit(String Produits) {
+		this.Produits = Produits;
+	}
+
+	public String getAdresseClient() {
+		return adresseClient;
+	}
+
+	public void setAdresseClient(String adresseClient) {
+		this.adresseClient = adresseClient;
+	}
+
+	public String getTelephoneClient() {
+		return telephoneClient;
+	}
+
+	public void setTelephoneClient(String telephoneClient) {
+		this.telephoneClient = telephoneClient;
 	}
 	
 }

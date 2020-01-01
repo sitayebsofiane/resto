@@ -7,13 +7,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}" />
+<script  th:src="@{../javaScript/toggle.js}"></script>
 </head>
 <body>
 	 <!--header-->
 	<nav>
-		<div class="toggle">
-			<i class="fas fa-bars menu"></i>
-		</div>
 		<ul>
 			<li><a th:href="@{/}" class="logo">Fast Food Chic</a></li>
 			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
@@ -28,19 +26,19 @@
 			<div class="spacer col-md-6 col-md-offset-3 col-xs-12">
 				<form th:action="@{authClient}" method="post">
 					<div class="form-group">
-						<label class="control-label"> Identifiant(votre email):</label> 
-						<input class="form-control" type="email" name="email"  />
+						<label class="control-label" > Identifiant(votre email):</label> 
+						<input id="email" class="form-control" type="email" name="email"  />
 					</div>
 					<div class="form-group">
 						<label class="control-label">Mot de passe:</label> 
 						<input class="form-control" type="password" name="motDePasse"/>
 					</div>
-					<button type="submit" class="btn btn-primary">se conecter</button>
+					<button type="submit" class="btn btn-primary">se connecter</button>
 				</form>
 			</div>
 		</div>
 	</div>
-	<h1 id="creerCompte" class="hidden"> probablement vous n'avez de compte clic <a href="#">ici pour en creer un </a></h1>
+	<h1 id="creerCompte"> si vous n'avez de compte clic <a th:href="@{/admin/ajouterClients}">ici pour en creer un </a></h1>
 	<!--pied-->
 	<footer >
 		<div class="container-fluid noire">

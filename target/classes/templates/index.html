@@ -7,21 +7,19 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}" />
+<script  th:src="@{javaScript/toggle.js}"></script>
 </head>
 <body>
 	<!--header-->
 	<nav>
-		<div class="toggle">
-			<i class="fas fa-bars menu"></i>
-		</div>
 		<ul>
 			<li><a th:href="@{/}" class="logo blanc">Fast Food Chic</a></li>
 			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
 			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
-			<li class="menu"><a th:href="@{/admin/ajouterClients}"class="blanc" >creer un compte</a></li>
-			<li class="menu"><a th:href="@{/pages/seConnecter}" class="blanc">se conecter</a></li>
-			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
-			<li class="menu"><a th:href="@{/pages/panier}" class="blanc">consulter mon panier</a></li>
+			<li class="menu"  id="toggle1"><a th:href="@{/admin/ajouterClients}"class="blanc" >creer un compte</a></li>
+			<li class="menu"  id="toggle2"><a th:href="@{/pages/seConnecter}" class="blanc">se connecter</a></li>
+			<li class="menu"  id="toggle3"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
+			<li class="menu"  id="toggle4"><a th:href="@{/pages/panier}" class="blanc">consulter mon panier</a></li>
 		</ul>
 	</nav>
 	<!--end header-->
@@ -29,7 +27,7 @@
 	<section class="row" style="color:brown">
 	  <div class="col-lg-12 container" >
 	  <div class="inner_banner">
-			<h1>Bienvenue chez nous <span th:text="${client.nom}"></span> </h1>
+			<h1>Bienvenue chez nous <span id="nom" th:text="${client.nom}">nom</span> </h1>
 		</div>
 		 <h2>Notice:</h2>
 			<div >
@@ -47,7 +45,7 @@
 
 		</div>
 	</section>
-	<section class="container banniere">
+	<section class="container banniere" >
 		<div class="ban">
 			<img th:src="@{images/food.jpg}" width="400" height="400" alt="banniere du site" />
 		</div>
