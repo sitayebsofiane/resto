@@ -2,6 +2,7 @@
 
 $(document).ready(function(){
 	var nomClient=$('#nom').text();
+	var panier=$('#commande').text();
     if(nomClient !=''){
     	$('#toggle1').hide();
     	$('#toggle2').hide();
@@ -10,5 +11,7 @@ $(document).ready(function(){
     	$('#toggle3').hide();
     	$('#toggle4').hide();
     }
+    if(panier =='')
+    	$('#commander').hide();
 });
 

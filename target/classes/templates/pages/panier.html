@@ -7,6 +7,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+<script  th:src="@{../javaScript/toggle.js}"></script>
 </head>
 <body>
 	<!--header-->
@@ -19,7 +20,7 @@
 			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits</a></li>
 			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
 			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
-			<li class="menu"><a th:href="@{/pages/commander}" class="blanc">commander</a></li>
+			<li class="menu" id="commander"><a th:href="@{/pages/commander}" class="blanc">commander</a></li>
 		</ul>
 	</nav>
 	<!--end header-->
@@ -32,7 +33,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="p:${listeProduit}">
-			<td th:text="${p.nom}">nom</td>
+			<td id="commande" th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
 			<td><a onclick="return confirm('êtes vous sûr de suprimer')"

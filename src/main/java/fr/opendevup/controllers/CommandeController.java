@@ -1,6 +1,7 @@
 package fr.opendevup.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fr.opendevup.dao.CommandeRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
+import fr.opendevup.entities.Commande;
 import fr.opendevup.entities.PanierProduit;
 import fr.opendevup.entities.Produit;
 
@@ -23,6 +26,8 @@ public class CommandeController {
 	private ProduitRepository produitRepo;
 	@Autowired
 	private PanierProduitRepository panierProduitRepo;
+	@Autowired
+	private CommandeRepository commandeRepo;
 	
 	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
 	public String  commande()
@@ -58,7 +63,21 @@ public class CommandeController {
 	}
 	@RequestMapping(value = "/pages/commander",method = RequestMethod.GET)
 	public String commander(Client client) {
-		//enrigistrer le panier qui corespend au client dans une table commande pour l'afficher a l'admin user
+		List<PanierProduit> paniers=  panierProduitRepo.findAll();
+		double prixTotal=0.0;
+		String produits="";
+		Date date=null;
+		for (PanierProduit panierProduit : paniers) {
+			if(panierProduit.getIdClient() ==client.getIdClient()) {
+				Produit p=produitRepo.getOne(panierProduit.getIdProduit());
+				produits+=p.getNom()+",";
+				prixTotal+=p.getPrix();
+				date=panierProduit.getDate();
+				panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
+			}
+		}
+		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(),
+				produits, client.getAdresse(), client.getTelephone()));
 		return "redirect:/";
 	}
 }
