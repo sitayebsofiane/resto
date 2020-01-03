@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>page de consultation de commande</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+</head>
+<body>
+
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">Commande</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID PRODUIT </th>
+							<th>NOM PRODUIT</th>
+							<th>DESCRIPTION PRODUIT</th>
+							<th>PRIX PRODUIT</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="l:${listeProduitClient}">
+ 							<td th:text="${l.idProduit}">idProduitt</td> 
+							<td th:text="${l.nomProduit}">nomProduit</td>
+							<td th:text="${l.descriptionProduit}">descriptionProduit</td>
+							<td th:text="${l.prixProduit}">prixProduit</td>
+							
+					</tr> 
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+
+</body>
+</html>

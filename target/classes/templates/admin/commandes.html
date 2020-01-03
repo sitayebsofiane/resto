@@ -28,7 +28,7 @@
 	<div  class="container"  >
 	<div>
 		<form th:action="@{commandes}" method=get>
-			<label>Mot Clé:</label>
+			<label>Chercher par nom du client:</label>
 			<input type="text" name="mc" th:value ="${mc}"/>
 			<button class="btn btn-primary">Chercher</button>
 		</form>
@@ -36,7 +36,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>IDCLIENT</th><th>NOM CLIENT</th><th>ADRESSE CLIENT</th><th>PRIX TOTAL</th><th>TELEPHONE</th><th>PRODUITS</th>
+				<th>IDCLIENT</th><th>NOM CLIENT</th><th>ADRESSE CLIENT</th><th>PRIX TOTAL</th><th>TEL</th><th>DATE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,7 +46,8 @@
 			<td th:text="${c.adresseClient}">adresse client</td>
 			<td th:text="${c.prixTotal}">prixTotal</td>
 			<td th:text="${c.telephoneClient}">telephone</td>
-<!-- 			<td th:text="${c.produit}">produits</td> -->
+			<td th:text="${c.date}">telephone</td>
+			<td ><a th:href="@{consulterCommande}">consulter commande</a></td>
 			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
 			 th:href="@{deleteCommande(idCommande=${c.idCommande},page=${pageCourante},size=${size},mc=${mc})}">
 			 Suprimer</a></td>

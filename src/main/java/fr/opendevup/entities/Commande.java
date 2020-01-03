@@ -19,24 +19,26 @@ public class Commande implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	
 	private double prixTotal;
 	
 	private int idClient;
+	
 	private String nomClient;
+	
 	private String adresseClient;
+	
 	private String telephoneClient;
-	private String produit;
 	
 	public Commande() {
 		super();
 	}
 	
-	public Commande(Date date, double prixTotal, int idClient,String nomClient,String produit,String adresseClient,String telephoneClient) {
+	public Commande(Date date, double prixTotal, int idClient,String nomClient,String adresseClient,String telephoneClient) {
 		this.date = date;
 		this.setPrixTotal(prixTotal);
 		this.idClient = idClient;
 		this.nomClient=nomClient;
-		this.produit=produit;
 		this.setAdresseClient(adresseClient);
 		this.setTelephoneClient(telephoneClient);
 	}
@@ -80,13 +82,7 @@ public class Commande implements Serializable {
 		this.nomClient = nomClient;
 	}
 
-	public String getNomProduit() {
-		return produit;
-	}
-
-	public void setNomProduit(String produit) {
-		this.produit = produit;
-	}
+	
 
 	public String getAdresseClient() {
 		return adresseClient;
@@ -108,7 +104,8 @@ public class Commande implements Serializable {
 	public String toString() {
 		return "Commande [idCommande=" + idCommande + ", date=" + date + ", prixTotal=" + prixTotal + ", idClient="
 				+ idClient + ", nomClient=" + nomClient + ", adresseClient=" + adresseClient + ", telephoneClient="
-				+ telephoneClient + ", produits=" + produit + "]";
+				+ telephoneClient + ", produits=" +"]";
 	}
+
 	
 }

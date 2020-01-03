@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.CommandeRepository;
+import fr.opendevup.dao.ConsulterCommandeRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
+import fr.opendevup.entities.ClientProduitCommande;
 import fr.opendevup.entities.Commande;
 import fr.opendevup.entities.PanierProduit;
 import fr.opendevup.entities.Produit;
@@ -31,6 +33,8 @@ public class CommandeController {
 	private PanierProduitRepository panierProduitRepo;
 	@Autowired
 	private CommandeRepository commandeRepo;
+	@Autowired
+	private ConsulterCommandeRepository consulterCommandeRepo;
 	
 	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
 	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
@@ -77,28 +81,47 @@ public class CommandeController {
 	}
 	@RequestMapping(value = "/pages/commander",method = RequestMethod.GET)
 	public String commander(Client client) {
+		//je recupere toute les ligne de la table panier dans une liste
 		List<PanierProduit> paniers=  panierProduitRepo.findAll();
 		double prixTotal=0.0;
-		String produits="";
 		Date date=null;
+		//je parcours la liste pour recupere les produit qui conserne le client enrigistré dans la session
 		for (PanierProduit panierProduit : paniers) {
 			if(panierProduit.getIdClient() ==client.getIdClient()) {
 				Produit p=produitRepo.getOne(panierProduit.getIdProduit());
-				produits+=p.getNom()+",";
 				prixTotal+=p.getPrix();
 				date=panierProduit.getDate();
+				consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
+						p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
 				panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
 			}
 		}
-		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(),
-				produits, client.getAdresse(), client.getTelephone()));
+		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(), client.getAdresse(),client.getTelephone()));
 		return "redirect:/";
 	}
 	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
-	public String deleteCommande(int idCommande,String mc,int page,int size) {
+	public String deleteCommande(int idCommande,String mc,int page,int size,Client client) {
+		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
+		/*ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
+		 * ensuite je suprime la commande dans la table commande
+		 */
+		for (ClientProduitCommande clientProduitCommande : produitPanier) 
+			if(client.getIdClient()==clientProduitCommande.getIdClient())
+				consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());
 		commandeRepo.deleteById(idCommande);
 		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
+	}
 	
+	@RequestMapping(value = "/admin/consulterCommande")
+	public String consulterCommande(Model model,Client client) {
+		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
+		List<ClientProduitCommande> listeProduitClient=  new ArrayList<ClientProduitCommande>();
+		for (ClientProduitCommande clientProduitCommande : produitPanier) {
+			if(client.getIdClient()==clientProduitCommande.getIdClient())
+				listeProduitClient.add(clientProduitCommande);
+		}
+		model.addAttribute("listeProduitClient", listeProduitClient);
+		return "/admin/consulterCommande";
 	}
 }
 
