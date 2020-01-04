@@ -100,24 +100,24 @@ public class CommandeController {
 		return "redirect:/";
 	}
 	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
-	public String deleteCommande(int idCommande,String mc,int page,int size,Client client) {
+	public String deleteCommande(int idCommande,String mc,int page,int size,int idClient) {
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
 		/*ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
 		 * ensuite je suprime la commande dans la table commande
 		 */
 		for (ClientProduitCommande clientProduitCommande : produitPanier) 
-			if(client.getIdClient()==clientProduitCommande.getIdClient())
+			if(idClient==clientProduitCommande.getIdClient())
 				consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());
 		commandeRepo.deleteById(idCommande);
 		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
 	}
 	
 	@RequestMapping(value = "/admin/consulterCommande")
-	public String consulterCommande(Model model,Client client) {
+	public String consulterCommande(Model model,int idClient) {
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
 		List<ClientProduitCommande> listeProduitClient=  new ArrayList<ClientProduitCommande>();
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
-			if(client.getIdClient()==clientProduitCommande.getIdClient())
+			if(idClient==clientProduitCommande.getIdClient())
 				listeProduitClient.add(clientProduitCommande);
 		}
 		model.addAttribute("listeProduitClient", listeProduitClient);
