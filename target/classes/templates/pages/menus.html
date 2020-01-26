@@ -37,12 +37,12 @@
      <section  class="container apropos">
         <div class="row" >
 
-          <article class="col-xs-4 col-sm-3 col-md-2 produit" th:each="p:${listeProduit}"> 
+          <article class="col-xs-4 col-sm-3 col-md-2 produit" th:each="p:${listeMenu}"> 
           	<ul>
 				<li> <h3 th:text="${p.nom}">nom</h3></li>
 				<li><p th:text="${p.description}">description</p></li>
 				<li><p th:text="${p.prix}">prix</p></li>
-				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit})}" style="font-size: small">ajouter au panier</a></h3></li>
+				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idMenu},type=${'menu'})}" style="font-size: small">ajouter au panier</a></h3></li>
 			</ul>
         </article>
       </div>
@@ -52,7 +52,7 @@
 			<ul class="nav nav-pills">
 				<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
 				<li th:each="p,status:${pages}" th:class="${pageCourante}==${status.index}?'nav-link active':''">
-					<a th:href="@{produits(page=${status.index},size=${size})}" th:text="${status.index}"> </a>
+					<a th:href="@{menus(page=${status.index},size=${size})}" th:text="${status.index}"> </a>
 				</li>
 
 			</ul>

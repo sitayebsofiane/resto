@@ -52,7 +52,7 @@ public class AccueilControllerProduits {
 	public String accueilMenus(Model model,@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="6")int size) {
 		Page<Menu> menus= menuRepo.findAll(PageRequest.of(page,size));
-		model.addAttribute("listeProduit",menus.getContent());
+		model.addAttribute("listeMenu",menus.getContent());
 		//creation d'un tableu de page
 		int [] pages= new int [menus.getTotalPages()];
 		model.addAttribute("pages",pages);

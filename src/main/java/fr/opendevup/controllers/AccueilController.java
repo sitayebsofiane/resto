@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.ClientRepository;
+import fr.opendevup.dao.MenuRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
@@ -23,6 +25,8 @@ public class AccueilController {
 	private ClientRepository clientRepo;
 	@Autowired
 	private ProduitRepository produitRepo;
+	@Autowired
+	private MenuRepository menuRepo;
 	@Autowired
 	private PanierProduitRepository panierProduitRepo;
 	
@@ -82,15 +86,19 @@ public class AccueilController {
 		
 	}
 	@RequestMapping(value = "/pages/panierProduit")
-	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ) {
+	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ,
+			@RequestParam(name="type", defaultValue="")String type) {
 		int idProduit=Integer.parseInt(idproduit);
-		if (produitRepo.existsById(idProduit) & client.getEmail()!=null) {
+		if ((produitRepo.existsById(idProduit) || menuRepo.existsById(idProduit))& client.getEmail()!=null) {
 			PanierProduit panier= new PanierProduit();
 			panier.setIdClient(client.getIdClient());
 			panier.setIdProduit(idProduit);
 			panierProduitRepo.save(panier);
 		}
-		return"redirect:/pages/produits?page="+page+"&size="+size;
+		if(type.equals("menu")) {
+		return "redirect:/pages/menus?page="+page+"&size="+size;
+		}
+		return "redirect:/pages/produits?page="+page+"&size="+size;
 	}
 	
 }
