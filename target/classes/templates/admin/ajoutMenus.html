@@ -10,27 +10,27 @@
 <body>
 	<div class="container">
 			<div class="panel panel-default">
-				<div class="panel-heading"> Saisie d'un produit</div>
+				<div class="panel-heading"> Saisie d'un Menu</div>
 				<div class="panel-body">
-					<form th:action="@{enregistrerProduit}" method="post">
+					<form th:action="@{enregistrerMenu}" method="post">
 					<div class="form-group">
 						<label class="control-label"> nom:</label>
-						<input class="form-control" type="text" name="nom" th:value="${produit.nom}" />
-						<span class="error" th:errors="${produit.nom}"></span>
+						<input class="form-control" type="text" name="nom" th:value="${menu.nom}" />
+						<span class="error" th:errors="${menu.nom}"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">description:</label>
-						<input class="form-control" type="text" name="description"  th:value="${produit.description}"  />
-						<span class="error" th:errors="${produit.description}"></span>
+						<input class="form-control" type="text" name="description"  th:value="${menu.description}"  />
+						<span class="error" th:errors="${menu.description}"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">prix:</label>
-						<input class="form-control" type="text" name="prix"  th:value="${produit.prix}" />
-						<span class="error" th:errors="${produit.prix}"></span>
+						<input class="form-control" type="text" name="prix"  th:value="${menu.prix}" />
+						<span class="error" th:errors="${menu.prix}"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">quantite:</label>
-						<input class="form-control" type="text" name="quantite"  th:value="${produit.quantite}" />
+						<input class="form-control" type="text" name="quantite"  th:value="${menu.quantite}" />
 						
 					</div>
 					<button type="submit" class="btn btn-primary">enregistrer</button>

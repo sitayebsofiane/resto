@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.opendevup.dao.MenuRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Menu;
 import fr.opendevup.entities.Produit;
@@ -20,6 +21,8 @@ import fr.opendevup.entities.Produit;
 public class AdminProduitsController {
 	@Autowired
 	private ProduitRepository produitRepo;
+	@Autowired
+	private MenuRepository menuRepo;
 		 
 	@RequestMapping(value = "/admin/consulterProduits",method = RequestMethod.GET)
 	public String consultProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
@@ -63,7 +66,7 @@ public class AdminProduitsController {
 		return "admin/modifierProduit";		
 	}
 	@RequestMapping(value = "/admin/enregistrerProduit",method = RequestMethod.POST)
-	public String enregistrer(Model model, @Valid Produit produit,BindingResult erreur) {
+	public String enregistrerProduit(Model model, @Valid Produit produit,BindingResult erreur) {
 		if (erreur.hasErrors()) 
 			return "admin/ajouterProduits";
 		else
@@ -71,7 +74,15 @@ public class AdminProduitsController {
 		return "admin/confirmationAjoutProduit" ;
 		
 	}
-	
+	@RequestMapping(value = "/admin/enregistrerMenu",method = RequestMethod.POST)
+	public String enregistrerMenu(Model model, @Valid Menu menu,BindingResult erreur) {
+		if (erreur.hasErrors()) 
+			return "/admin/ajoutMenus";
+		else
+		 menuRepo.save(menu);
+		return "admin/confirmationAjoutMenu" ;
+		
+	}
 	}
 		
 	
