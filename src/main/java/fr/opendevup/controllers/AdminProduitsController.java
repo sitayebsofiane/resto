@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.opendevup.dao.ProduitRepository;
+import fr.opendevup.entities.Menu;
 import fr.opendevup.entities.Produit;
 
 @Controller
@@ -43,10 +44,17 @@ public class AdminProduitsController {
 		return "redirect:/admin/consulterProduits?page="+page+"&size="+size+"&mc="+mc;
 	
 	}
+	
 	@RequestMapping(value = "/admin/ajouterProduits",method = RequestMethod.GET)
 	public String ajoutProduit(Model model) {
 		model.addAttribute("produit",new Produit());
 		return "admin/ajouterProduits";	
+	}
+	
+	@RequestMapping(value = "/admin/ajoutMenus",method = RequestMethod.GET)
+	public String ajoutMenu(Model model) {
+		model.addAttribute("menu",new Menu());
+		return "admin/ajoutMenus";	
 	}
 	@RequestMapping(value = "/admin/modifierProduit",method = RequestMethod.GET)
 	public String modifierProduit(Model model,int idProduit) {
