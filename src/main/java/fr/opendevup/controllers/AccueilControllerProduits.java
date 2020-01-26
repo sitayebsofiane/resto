@@ -5,12 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.ProduitRepository;
+import fr.opendevup.entities.Client;
 import fr.opendevup.entities.Produit;
 
 @Controller
@@ -18,6 +20,12 @@ import fr.opendevup.entities.Produit;
 public class AccueilControllerProduits {
 	@Autowired
 	private ProduitRepository produitRepo;
+	
+	
+	@ModelAttribute("client")
+	public Client client() {
+		return new Client();	
+	}
 	
 	
 	@RequestMapping(value = "pages/produits",method = RequestMethod.GET)
