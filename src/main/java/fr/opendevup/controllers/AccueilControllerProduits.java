@@ -22,7 +22,7 @@ public class AccueilControllerProduits {
 	
 	@RequestMapping(value = "pages/produits",method = RequestMethod.GET)
 	public String accueilProduits(Model model,@RequestParam(name="page", defaultValue="0")int page,
-			@RequestParam(name="size", defaultValue="10")int size) {
+			@RequestParam(name="size", defaultValue="6")int size) {
 		Page<Produit> produits= produitRepo.findAll(PageRequest.of(page,size));
 		model.addAttribute("listeProduit",produits.getContent());
 		//creation d'un tableu de page
@@ -34,8 +34,15 @@ public class AccueilControllerProduits {
 	}
 	
 	@RequestMapping(value = "pages/menus",method = RequestMethod.GET)
-	public String accueilMenus(Model model) {
-		//todo
+	public String accueilMenus(Model model,@RequestParam(name="page", defaultValue="0")int page,
+			@RequestParam(name="size", defaultValue="6")int size) {
+		Page<Produit> produits= produitRepo.findAll(PageRequest.of(page,size));
+		model.addAttribute("listeProduit",produits.getContent());
+		//creation d'un tableu de page
+		int [] pages= new int [produits.getTotalPages()];
+		model.addAttribute("pages",pages);
+		model.addAttribute("size",size);
+		model.addAttribute("pageCourante",page);
 		return "pages/menus";
 	
 	}
