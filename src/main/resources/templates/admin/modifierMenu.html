@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>page modifier le produits</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+</head>
+<body>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading"> Saisie d'un produit</div>
+				<div class="panel-body">
+					<form th:action="@{enregistrerMenu}" method="post">
+					<div class="form-group">
+						<label class="control-label"> id:</label>
+						<input class="form-control" type="text" name="idMenu" th:value="${menu.idMenu}" />
+						<span class="error" th:errors="${menu.idMenu}"></span>
+					</div>
+						<div class="form-group">
+						<label class="control-label"> nom:</label>
+						<input class="form-control" type="text" name="nom" th:value="${menu.nom}" />
+						<span class="error" th:errors="${menu.nom}"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">description:</label>
+						<input class="form-control" type="text" name="description"  th:value="${menu.description}"  />
+						<span class="error" th:errors="${menu.description}"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">prix:</label>
+						<input class="form-control" type="text" name="prix"  th:value="${menu.prix}" />
+						<span class="error" th:errors="${menu.prix}"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">quantite:</label>
+						<input class="form-control" type="text" name="quantite"  th:value="${menu.quantite}" />
+						
+					</div>
+					<button type="submit" class="btn btn-primary">enregistrer</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+</body>
+</html>

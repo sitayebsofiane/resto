@@ -89,6 +89,12 @@ public class AdminProduitsController {
 		model.addAttribute("produit",p);
 		return "admin/modifierProduit";		
 	}
+	@RequestMapping(value = "/admin/modifierMenu",method = RequestMethod.GET)
+	public String modifierMenu(Model model,int idMenu) {
+		Menu m= menuRepo.getOne(idMenu);
+		model.addAttribute("menu",m);
+		return "admin/modifierMenu";		
+	}
 	@RequestMapping(value = "/admin/enregistrerProduit",method = RequestMethod.POST)
 	public String enregistrerProduit(Model model, @Valid Produit produit,BindingResult erreur) {
 		if (erreur.hasErrors()) 
