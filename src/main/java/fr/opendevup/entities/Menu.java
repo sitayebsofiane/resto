@@ -88,7 +88,7 @@ public class Menu implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produit [idProduit=" + idMenu + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+		return "Menu [idMenu=" + idMenu + ", nom=" + nom + ", description=" + description + ", prix=" + prix
 				+ "€" + ", quantité=" + quantite + "]";
 	}
 

@@ -41,10 +41,34 @@ public class AdminProduitsController {
 				return "admin/consulterProduits";
 			
 			}
+	 
+	@RequestMapping(value = "admin/consulterMenus",method = RequestMethod.GET)
+	public String consultMenus(Model model,@RequestParam(name="page", defaultValue="0")int page,
+			@RequestParam(name="size", defaultValue="10")int size,
+			@RequestParam(name="mc",defaultValue = "")String mc) {
+			
+				Page<Menu> menus=  menuRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
+			
+				model.addAttribute("listeMenu",menus.getContent());
+				//creation d'un tableu de page
+				int [] pages= new int [menus.getTotalPages()];
+				model.addAttribute("pages",pages);
+				model.addAttribute("size",size);
+				model.addAttribute("pageCourante",page);
+				model.addAttribute("mc",mc);
+				return "admin/consulterMenus";
+			
+			}
 	@RequestMapping(value = "/admin/deleteProduits",method = RequestMethod.GET)
-	public String delete(int id,String mc,int page,int size) {
+	public String deleteProduit(int id,String mc,int page,int size) {
 		produitRepo.deleteById(id);
 		return "redirect:/admin/consulterProduits?page="+page+"&size="+size+"&mc="+mc;
+	
+	}
+	@RequestMapping(value = "/admin/deleteMenus",method = RequestMethod.GET)
+	public String deleteMenu(int id,String mc,int page,int size) {
+		menuRepo.deleteById(id);
+		return "redirect:/admin/consulterMenus?page="+page+"&size="+size+"&mc="+mc;
 	
 	}
 	
