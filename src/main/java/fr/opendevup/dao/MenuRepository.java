@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import fr.opendevup.entities.Produit;
+import fr.opendevup.entities.Menu;
 
-public interface MenuRepository extends JpaRepository<Produit, Integer>{
-	@Query("select p from Produit p where p.nom like :x ")
-	public Page<Produit> chercher(@Param("x")String mc,Pageable pageable);
+public interface MenuRepository extends JpaRepository<Menu, Integer>{
+	@Query("select m from Menu m where m.nom like :x ")
+	public Page<Menu> chercher(@Param("x")String mc,Pageable pageable);
 }
