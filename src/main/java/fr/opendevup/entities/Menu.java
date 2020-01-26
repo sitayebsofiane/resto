@@ -42,11 +42,11 @@ public class Menu implements Serializable {
 		this.setQuantite(quantite);
 	}
 
-	public int getIdProduit() {
+	public int getIdMenu() {
 		return idMenu;
 	}
 
-	public void setIdProduit(int id) {
+	public void setIdMenu(int id) {
 		this.idMenu = id;
 	}
 

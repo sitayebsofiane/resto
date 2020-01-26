@@ -18,8 +18,8 @@
 			<li><a th:href="@{consulterProduits}">Consulter les produits</a></li>
 			<li><a th:href="@{consulterMenus}">Consulter les menus</a></li>
 			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>
-			<li><a th:href="@{commandes}">commandes</a></li>
-			<li><a th:href="@{ajoutMenus}">ajouter menus</a></li>				
+			<li><a th:href="@{ajoutMenus}">ajouter menus</a></li>
+			<li><a th:href="@{commandes}">commandes</a></li>				
 			<li><a th:href="@{/login?logout}">se deconecter</a></li>
 		</ul>
 	</nav>
@@ -40,16 +40,16 @@
 		</thead>
 		<tbody>
 			<tr th:each="p:${listeMenu}">
-			<td th:text="${p}">idMenu</td>
+			<td th:text="${p.idMenu}">idMenu</td>
 			<td th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
 			<td th:text="${p.quantite}">quantité</td>
-<!-- 			<td><a th:href="@{modifierMenu(idMenu=${p.idMenu})}"> Modifier</a></td> -->
-<!-- 			<td><a onclick="return confirm('êtes vous sûr de suprimer')" -->
-<!-- 			 th:href="@{deleteMenu(id=${p.idMenu},page=${pageCourante},size=${size},mc=${mc})}"> -->
-<!-- 			 Suprimer</a></td> -->
-<!-- 			</tr> -->
+			<td><a th:href="@{modifierMenu(idMenu=${p.idMenu})}"> Modifier</a></td>
+			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
+			 th:href="@{deleteMenu(id=${p.idMenu},page=${pageCourante},size=${size},mc=${mc})}">
+			 Suprimer</a></td>
+			</tr>
 			
 		</tbody>
 	</table>
