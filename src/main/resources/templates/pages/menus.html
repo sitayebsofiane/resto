@@ -42,7 +42,7 @@
 				<li> <h3 th:text="${p.nom}">nom</h3></li>
 				<li><p th:text="${p.description}">description</p></li>
 				<li><p th:text="${p.prix}">prix</p></li>
-				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idMenu})}" style="font-size: small">ajouter au panier</a></h3></li>
+				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit},type=${'menu'})}" style="font-size: small">ajouter au panier</a></h3></li>
 			</ul>
         </article>
       </div>

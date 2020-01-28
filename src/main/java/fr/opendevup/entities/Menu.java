@@ -19,7 +19,7 @@ public class Menu implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idMenu;
+	private int idProduit;
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String nom;
@@ -38,17 +38,14 @@ public class Menu implements Serializable {
 		super();
 		
 	}
-	 
-	
-	public int getIdMenu() {
-		return idMenu;
+
+	public int getIdProduit() {
+		return idProduit;
 	}
 
-
-	public void setIdMenu(int idMenu) {
-		this.idMenu = idMenu;
+	public void setIdProduit(int idProduit) {
+		this.idProduit = idProduit;
 	}
-
 
 	public Menu(@NotNull @Size(min = 2, max = 30) String nom, @NotNull @Size(min = 2) String description, double prix,
 			int quantite) {
@@ -94,7 +91,7 @@ public class Menu implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Menu [idMenu=" + idMenu + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+		return "Menu [idProduit=" + idProduit + ", nom=" + nom + ", description=" + description + ", prix=" + prix
 				+ ", quantite=" + quantite + "]";
 	}
 

@@ -17,6 +17,7 @@ public class PanierProduit implements Serializable{
 	private int idPanierProduit;
 	private int idClient;
 	private int idProduit;
+	private String type;
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	private static final long serialVersionUID = 1L;
@@ -25,11 +26,20 @@ public class PanierProduit implements Serializable{
 		this.date=new Date(System.currentTimeMillis()); 
 		
 	}
-	public PanierProduit(int idClient, int idProduit,Date date) {
+	
+	@Override
+	public String toString() {
+		return "PanierProduit [idPanierProduit=" + idPanierProduit + ", idClient=" + idClient + ", idProduit="
+				+ idProduit + ", type=" + type + ", date=" + date + "]";
+	}
+
+	public PanierProduit(int idClient, int idProduit, String type, Date date) {
 		this.idClient = idClient;
 		this.idProduit = idProduit;
-		this.date=date;
+		this.type = type;
+		this.date = date;
 	}
+
 	public int getIdPanierProduit() {
 		return idPanierProduit;
 	}
@@ -53,6 +63,12 @@ public class PanierProduit implements Serializable{
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 

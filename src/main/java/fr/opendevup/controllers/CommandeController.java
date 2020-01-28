@@ -19,6 +19,7 @@ import fr.opendevup.dao.ConsulterCommandeRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
+import fr.opendevup.entities.Menu;
 import fr.opendevup.entities.ClientProduitCommande;
 import fr.opendevup.entities.Commande;
 import fr.opendevup.entities.PanierProduit;
@@ -57,7 +58,9 @@ public class CommandeController {
 	@RequestMapping(value = "/pages/panier")
 	public String consulterPanier(Model model,Client client) {
 		List<PanierProduit> paniers=  panierProduitRepo.findAll();
-		List<Produit> produits= new ArrayList<Produit>();
+		Menu m= new Menu("nom", "description", 0, 0);
+		List produits= new ArrayList();
+			//produits.add(m);
 		 for (PanierProduit panierProduit : paniers) {
 			 if(panierProduit.getIdClient()==client.getIdClient()) {
 					 produits.add(produitRepo.getOne((panierProduit.getIdProduit())));

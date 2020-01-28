@@ -92,6 +92,7 @@ public class AccueilController {
 			PanierProduit panier= new PanierProduit();
 			panier.setIdClient(client.getIdClient());
 			panier.setIdProduit(idProduit);
+			panier.setType((type.equals("menu"))? "menu":"produit");
 			panierProduitRepo.save(panier);
 		}
 		if(type.equals("menu")) {
