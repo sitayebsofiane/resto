@@ -14,16 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fr.opendevup.dao.CommandeRepository;
-import fr.opendevup.dao.ConsulterCommandeRepository;
-import fr.opendevup.dao.PanierProduitRepository;
-import fr.opendevup.dao.ProduitRepository;
-import fr.opendevup.entities.Client;
-import fr.opendevup.entities.Menu;
-import fr.opendevup.entities.ClientProduitCommande;
-import fr.opendevup.entities.Commande;
-import fr.opendevup.entities.PanierProduit;
-import fr.opendevup.entities.Produit;
+import fr.opendevup.dao.*;
+import fr.opendevup.entities.*;
 
 @Controller
 @SessionAttributes({"client"})
@@ -36,7 +28,8 @@ public class CommandeController {
 	private CommandeRepository commandeRepo;
 	@Autowired
 	private ConsulterCommandeRepository consulterCommandeRepo;
-	
+	@Autowired
+	private MenuRepository menuRepo;
 	
 	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
 	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
@@ -58,15 +51,24 @@ public class CommandeController {
 	@RequestMapping(value = "/pages/panier")
 	public String consulterPanier(Model model,Client client) {
 		List<PanierProduit> paniers=  panierProduitRepo.findAll();
-		Menu m= new Menu("nom", "description", 0, 0);
-		List produits= new ArrayList();
-			//produits.add(m);
+		List<Produit> produits= new ArrayList<Produit>();
+		List<Menu> menus= new ArrayList<Menu>();
+		List<Object> liste =new ArrayList<Object>();
 		 for (PanierProduit panierProduit : paniers) {
 			 if(panierProduit.getIdClient()==client.getIdClient()) {
-					 produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
+				 	if(panierProduit.getType().equals("produit"))
+				 		produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
+				 	else
+				 		menus.add(menuRepo.getOne((panierProduit.getIdProduit())));
 				 }
 			 }
-			model.addAttribute("listeProduit", produits);
+		 	for ( Produit p : produits) {
+				liste.add(p);
+			}
+		 	for ( Menu m : menus) {
+				liste.add(m);
+			}
+			model.addAttribute("liste", liste);
 			
 		return"/pages/panier";
 	}

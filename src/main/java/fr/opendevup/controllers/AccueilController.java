@@ -88,7 +88,7 @@ public class AccueilController {
 	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ,
 			@RequestParam(name="type", defaultValue="")String type) {
 		int idProduit=Integer.parseInt(idproduit);
-		if ((produitRepo.existsById(idProduit) || menuRepo.existsById(idProduit))& client.getEmail()!=null) {
+		if ((produitRepo.existsById(idProduit) || menuRepo.existsById(idProduit)) & client.getEmail()!=null) {
 			PanierProduit panier= new PanierProduit();
 			panier.setIdClient(client.getIdClient());
 			panier.setIdProduit(idProduit);
