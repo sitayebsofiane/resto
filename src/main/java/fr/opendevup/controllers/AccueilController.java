@@ -82,8 +82,7 @@ public class AccueilController {
 	public String deconnection(Model model) {
 		model.addAttribute("client",new Client());
 		
-		return "redirect:/";
-		
+		return "redirect:/";	
 	}
 	@RequestMapping(value = "/pages/panierProduit")
 	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ,

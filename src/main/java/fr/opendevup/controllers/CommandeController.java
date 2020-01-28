@@ -36,6 +36,7 @@ public class CommandeController {
 	@Autowired
 	private ConsulterCommandeRepository consulterCommandeRepo;
 	
+	
 	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
 	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 			@RequestParam(name="size",defaultValue = "10")int size,
@@ -54,17 +55,16 @@ public class CommandeController {
 		return "/admin/commandes";
 	}
 	@RequestMapping(value = "/pages/panier")
-	public String consulterPanier(Model model,Client client ) {
+	public String consulterPanier(Model model,Client client) {
 		List<PanierProduit> paniers=  panierProduitRepo.findAll();
 		List<Produit> produits= new ArrayList<Produit>();
 		 for (PanierProduit panierProduit : paniers) {
 			 if(panierProduit.getIdClient()==client.getIdClient()) {
-				 produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
+					 produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
+				 }
 			 }
 			model.addAttribute("listeProduit", produits);
-		}
-		
-		
+			
 		return"/pages/panier";
 	}
 	
