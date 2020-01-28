@@ -40,14 +40,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="p:${listeMenu}">
-			<td th:text="${p.idMenu}">idMenu</td>
+			<td th:text="${p.idProduit}">idMenu</td>
 			<td th:text="${p.nom}">nom</td>
 			<td th:text="${p.description}">description</td>
 			<td th:text="${p.prix}">prix</td>
 			<td th:text="${p.quantite}">quantité</td>
-			<td><a th:href="@{modifierMenu(idMenu=${p.idMenu})}"> Modifier</a></td>
+			<td><a th:href="@{modifierMenu(idProduit=${p.idProduit})}"> Modifier</a></td>
 			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
-			 th:href="@{deleteMenu(id=${p.idMenu},page=${pageCourante},size=${size},mc=${mc})}">
+			 th:href="@{deleteMenus(id=${p.idProduit},page=${pageCourante},size=${size},mc=${mc})}">
 			 Suprimer</a></td>
 			</tr>
 			

@@ -90,8 +90,8 @@ public class AdminProduitsController {
 		return "admin/modifierProduit";		
 	}
 	@RequestMapping(value = "/admin/modifierMenu",method = RequestMethod.GET)
-	public String modifierMenu(Model model,int idMenu) {
-		Menu m= menuRepo.getOne(idMenu);
+	public String modifierMenu(Model model,int idProduit) {
+		Menu m= menuRepo.getOne(idProduit);
 		model.addAttribute("menu",m);
 		return "admin/modifierMenu";		
 	}
