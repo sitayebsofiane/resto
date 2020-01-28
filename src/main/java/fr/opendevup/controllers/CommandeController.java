@@ -93,12 +93,22 @@ public class CommandeController {
 		//je parcours la liste pour recupere les produit qui conserne le client enrigistré dans la session
 		for (PanierProduit panierProduit : paniers) {
 			if(panierProduit.getIdClient() ==client.getIdClient()) {
-				Produit p=produitRepo.getOne(panierProduit.getIdProduit());
-				prixTotal+=p.getPrix();
-				date=panierProduit.getDate();
-				consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
-						p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
-				panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
+				//je verifier le type du produit pour le chercher dans sa table
+				if(panierProduit.getType().equals("produit")) {
+						Produit p=produitRepo.getOne(panierProduit.getIdProduit());
+						prixTotal+=p.getPrix();
+						date=panierProduit.getDate();
+						consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
+								p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
+						panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
+				}else {
+					Menu p=menuRepo.getOne(panierProduit.getIdProduit());
+					prixTotal+=p.getPrix();
+					date=panierProduit.getDate();
+					consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
+							p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
+					panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
+				}
 			}
 		}
 		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(), client.getAdresse(),client.getTelephone()));
