@@ -105,7 +105,7 @@ public class Commande implements Serializable {
 		this.telephoneClient = telephoneClient;
 	}
 
-	public int isStatut() {
+	public int getStatut() {
 		return statut;
 	}
 

@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import fr.opendevup.entities.Commande;
 
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
-	@Query("select c from Commande c where c.nomClient like :x")
+	@Query("select c from Commande c where c.nomClient like :x and c.statut = 0")
 	public Page<Commande> chercher(@Param("x")String mc,Pageable pageable);
 }

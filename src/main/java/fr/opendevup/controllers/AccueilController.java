@@ -73,7 +73,6 @@ public class AccueilController {
 				model.addAttribute("client",client);
 				
 				return "redirect:/";
-				
 				}
 		}
 		return"redirect:/pages/seConnecter";

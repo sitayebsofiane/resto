@@ -50,9 +50,9 @@
 			<td th:text="${c.telephoneClient}">telephone</td>
 			<td th:text="${c.date}">telephone</td>
 			<td ><a th:href="@{consulterCommande(idClient=${c.idClient})}">consulter commande</a></td>
-			<td><a onclick="return confirm('êtes vous sûr de suprimer')"
+			<td><a onclick="return confirm('êtes vous sûr que la commande est traité')"
 			 th:href="@{deleteCommande(idCommande=${c.idCommande},page=${pageCourante},size=${size},mc=${mc},idClient=${c.idClient})}">
-			 Suprimer</a></td>
+			 Traité</a></td>
 			</tr>
 			
 		</tbody>
@@ -66,10 +66,8 @@
 					th:href="@{commandes(page=${status.index},size=${size},mc=${mc})}"
 					th:text="${status.index}"> </a>
 				</li>
-
 			</ul>
 		</div>
 	</div>
-	
 </body>
 </html>

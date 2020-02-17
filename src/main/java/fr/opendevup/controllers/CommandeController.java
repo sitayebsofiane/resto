@@ -36,18 +36,14 @@ public class CommandeController {
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
-
-		Page<Commande> pageCommandes= commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
-		//modifier la liste des commande a afficher si la commande est deja traité
-		// 
+		// dans pageCommandes il ya que les commande qui ont le statut a 0
+		Page<Commande> pageCommandes = commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
 		model.addAttribute("listeCommande",pageCommandes.getContent());
 		int[] pages= new int[pageCommandes.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size",size);
 		model.addAttribute("pageCourante",page);
 		model.addAttribute("mc",mc);
-	
-		
 		return "/admin/commandes";
 	}
 	@RequestMapping(value = "/pages/panier")
@@ -121,7 +117,7 @@ public class CommandeController {
 					prixTotal += p.getPrix();
 					//je recupere la date du panier
 					date = panierProduit.getDate();
-					//je enrigistre dans la table des commandes de produit du client 
+					//je enrigistre le produit dans la table des commandes de produit du client et je le suprime du panier
 					consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
 							p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
 					panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
@@ -129,7 +125,7 @@ public class CommandeController {
 			}
 		}
 		//a la fin j'enregistre dans la table les commande le prix total ainsi les informations du client et le statut a 0
-		//pour dire que la commande n'est pas encore vue par l'admin
+		//pour dire que la commande n'est pas encore vue par l'admin et je redirige vers l'acueill
 		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(),
 				client.getNom(), client.getAdresse(),client.getTelephone(),0));
 		return "redirect:/";
@@ -137,11 +133,12 @@ public class CommandeController {
 	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
 	public String deleteCommande(int idCommande,String mc,int page,int size,int idClient) {
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
-		/*ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
+		/*
+		 * ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
 		 * ensuite je suprime la commande dans la table commande
 		 */
 		for (ClientProduitCommande clientProduitCommande : produitPanier) 
-			if(idClient==clientProduitCommande.getIdClient())
+			if(idClient == clientProduitCommande.getIdClient())
 				consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());
 		commandeRepo.deleteById(idCommande);
 		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
@@ -149,10 +146,10 @@ public class CommandeController {
 	
 	@RequestMapping(value = "/admin/consulterCommande")
 	public String consulterCommande(Model model,int idClient) {
-		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
-		List<ClientProduitCommande> listeProduitClient=  new ArrayList<ClientProduitCommande>();
+		List<ClientProduitCommande> produitPanier = consulterCommandeRepo.findAll();
+		List<ClientProduitCommande> listeProduitClient = new ArrayList<ClientProduitCommande>();
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
-			if(idClient==clientProduitCommande.getIdClient())
+			if(idClient == clientProduitCommande.getIdClient())
 				listeProduitClient.add(clientProduitCommande);
 		}
 		model.addAttribute("listeProduitClient", listeProduitClient);
