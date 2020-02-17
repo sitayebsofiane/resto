@@ -36,7 +36,7 @@ public class CommandeController {
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
-		// dans pageCommandes il ya que les commande qui ont le statut a 0
+		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
 		Page<Commande> pageCommandes = commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
 		model.addAttribute("listeCommande",pageCommandes.getContent());
 		int[] pages= new int[pageCommandes.getTotalPages()];
@@ -130,8 +130,8 @@ public class CommandeController {
 				client.getNom(), client.getAdresse(),client.getTelephone(),0));
 		return "redirect:/";
 	}
-	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
-	public String deleteCommande(int idCommande,String mc,int page,int size,int idClient) {
+	@RequestMapping(value = "/admin/traiterCommande",method = RequestMethod.GET)
+	public String traiterCommande(int idCommande,String mc,int page,int size,int idClient) {
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
 		/*
 		 * ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
