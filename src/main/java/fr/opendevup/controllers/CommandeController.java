@@ -107,9 +107,9 @@ public class CommandeController {
 						prixTotal += p.getPrix();
 						//je recupere la date du panier
 						date=panierProduit.getDate();
-						//je enrigistre dans la table des commandes de produit du client 
+						//je enrigistre dans la table des commandes de produit du client avec le statut 0
 						consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
-								p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
+								p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix(),0));
 						panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
 				}else {
 					Menu p=menuRepo.getOne(panierProduit.getIdProduit());
@@ -117,9 +117,9 @@ public class CommandeController {
 					prixTotal += p.getPrix();
 					//je recupere la date du panier
 					date = panierProduit.getDate();
-					//je enrigistre le produit dans la table des commandes de produit du client et je le suprime du panier
+					//je enrigistre le produit dans la table des commandes de produit du client et je le suprime du panier avec statut 0
 					consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
-							p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix()));
+							p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix(),0));
 					panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
 				}
 			}
@@ -132,15 +132,17 @@ public class CommandeController {
 	}
 	@RequestMapping(value = "/admin/traiterCommande",method = RequestMethod.GET)
 	public String traiterCommande(int idCommande,String mc,int page,int size,int idClient) {
+		//je selectione tout les produits du panier
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
 		/*
-		 * ici quand l'admin suprime la commande suprime les produit de la commnde dans la table consulte commande ensuite la commande 
-		 * ensuite je suprime la commande dans la table commande
+		 * apres le traitement de la commande je mets le statut a 1
 		 */
 		for (ClientProduitCommande clientProduitCommande : produitPanier) 
 			if(idClient == clientProduitCommande.getIdClient())
-				consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());
-		commandeRepo.deleteById(idCommande);
+				//consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());
+				consulterCommandeRepo.changerStatut(idClient);
+		//commandeRepo.deleteById(idCommande);
+			commandeRepo.changerStatut(idClient);
 		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
 	}
 	

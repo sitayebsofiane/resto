@@ -15,7 +15,7 @@ public class ClientProduitCommande implements Serializable {
 	private int idClientProduitCommande;
 	private int idClient;
 	private int idProduit;
-	
+	private int statut;
 	private String nomProduit;
 	
 	private String descriptionProduit;
@@ -28,7 +28,8 @@ public class ClientProduitCommande implements Serializable {
 	}
 
 	public ClientProduitCommande(int idClient, int idProduit, String nomProduit, String descriptionProduit,
-			double prixProduit) {
+			double prixProduit,int statut) {
+		this.statut = statut;
 		this.idClient = idClient;
 		this.idProduit = idProduit;
 		this.nomProduit = nomProduit;
@@ -84,11 +85,19 @@ public class ClientProduitCommande implements Serializable {
 		this.idClientProduitCommande = idClientProduitCommande;
 	}
 
+	public int getStatut() {
+		return statut;
+	}
+
+	public void setStatut(int statut) {
+		this.statut = statut;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientProduitCommande [idClientProduitCommande=" + idClientProduitCommande + ", idClient=" + idClient
-				+ ", idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", descriptionProduit="
-				+ descriptionProduit + ", prixProduit=" + prixProduit + "]";
+				+ ", idProduit=" + idProduit + ", statut=" + statut + ", nomProduit=" + nomProduit
+				+ ", descriptionProduit=" + descriptionProduit + ", prixProduit=" + prixProduit + "]";
 	}
 	
 	

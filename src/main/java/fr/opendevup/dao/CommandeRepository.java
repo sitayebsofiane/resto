@@ -12,4 +12,7 @@ import fr.opendevup.entities.Commande;
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
 	@Query("select c from Commande c where c.nomClient like :x and c.statut = 0")
 	public Page<Commande> chercher(@Param("x")String mc,Pageable pageable);
+
+	@Query("update Commande c set  c.statut = 1 where c.idClient = :x ")
+	public void changerStatut(@Param("x")int idClient);
 }
