@@ -22,7 +22,7 @@ public class Commande implements Serializable {
 	private Date date;
 	
 	//statut de la commande si elle traité par l'admin est true si non est a false
-	private boolean statut;
+	private int statut;
 	
 	private double prixTotal;
 	
@@ -38,7 +38,7 @@ public class Commande implements Serializable {
 		super();
 	}
 	
-	public Commande(Date date, double prixTotal, int idClient,String nomClient,String adresseClient,String telephoneClient,boolean statut) {
+	public Commande(Date date, double prixTotal, int idClient,String nomClient,String adresseClient,String telephoneClient,int statut) {
 		this.setDate(date);
 		this.setPrixTotal(prixTotal);
 		this.setIdClient(idClient);
@@ -105,11 +105,11 @@ public class Commande implements Serializable {
 		this.telephoneClient = telephoneClient;
 	}
 
-	public boolean isStatut() {
+	public int isStatut() {
 		return statut;
 	}
 
-	public void setStatut(boolean statut) {
+	public void setStatut(int statut) {
 		this.statut = statut;
 	}
 

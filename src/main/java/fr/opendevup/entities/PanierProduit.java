@@ -23,14 +23,8 @@ public class PanierProduit implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public PanierProduit() {
 		super();
-		this.date=new Date(System.currentTimeMillis()); 
-		
-	}
-	
-	@Override
-	public String toString() {
-		return "PanierProduit [idPanierProduit=" + idPanierProduit + ", idClient=" + idClient + ", idProduit="
-				+ idProduit + ", type=" + type + ", date=" + date + "]";
+		//je met la date du jour au moment de la selection du produit
+		this.setDate(new Date(System.currentTimeMillis())); 
 	}
 
 	public PanierProduit(int idClient, int idProduit, String type, Date date) {
@@ -69,6 +63,12 @@ public class PanierProduit implements Serializable{
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "PanierProduit [idPanierProduit=" + idPanierProduit + ", idClient=" + idClient + ", idProduit="
+				+ idProduit + ", type=" + type + ", date=" + date + "]";
 	}
 	
 
