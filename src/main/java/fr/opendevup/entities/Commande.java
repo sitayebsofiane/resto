@@ -13,12 +13,16 @@ import javax.persistence.TemporalType;
 public class Commande implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id 
 	@GeneratedValue
 	private int idCommande;
 	
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	
+	//statut de la commande si elle traité par l'admin est true si non est a false
+	private boolean statut;
 	
 	private double prixTotal;
 	
@@ -34,13 +38,14 @@ public class Commande implements Serializable {
 		super();
 	}
 	
-	public Commande(Date date, double prixTotal, int idClient,String nomClient,String adresseClient,String telephoneClient) {
-		this.date = date;
+	public Commande(Date date, double prixTotal, int idClient,String nomClient,String adresseClient,String telephoneClient,boolean statut) {
+		this.setDate(date);
 		this.setPrixTotal(prixTotal);
-		this.idClient = idClient;
-		this.nomClient=nomClient;
+		this.setIdClient(idClient);
+		this.setNomClient(nomClient);
 		this.setAdresseClient(adresseClient);
 		this.setTelephoneClient(telephoneClient);
+		this.setStatut(statut);
 	}
 	
 	public int getIdCommande() {
@@ -100,11 +105,19 @@ public class Commande implements Serializable {
 		this.telephoneClient = telephoneClient;
 	}
 
+	public boolean isStatut() {
+		return statut;
+	}
+
+	public void setStatut(boolean statut) {
+		this.statut = statut;
+	}
+
 	@Override
 	public String toString() {
-		return "Commande [idCommande=" + idCommande + ", date=" + date + ", prixTotal=" + prixTotal + ", idClient="
-				+ idClient + ", nomClient=" + nomClient + ", adresseClient=" + adresseClient + ", telephoneClient="
-				+ telephoneClient + ", produits=" +"]";
+		return "Commande [date=" + date + ", statut=" + statut + ", prixTotal=" + prixTotal + ", idClient=" + idClient
+				+ ", nomClient=" + nomClient + ", adresseClient=" + adresseClient + ", telephoneClient="
+				+ telephoneClient + "]";
 	}
 
 	

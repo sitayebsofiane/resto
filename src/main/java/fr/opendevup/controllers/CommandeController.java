@@ -38,6 +38,8 @@ public class CommandeController {
 	{
 
 		Page<Commande> pageCommandes= commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
+		//modifier la liste des commande a afficher si la commande est deja traité
+		// 
 		model.addAttribute("listeCommande",pageCommandes.getContent());
 		int[] pages= new int[pageCommandes.getTotalPages()];
 		model.addAttribute("pages",pages);
@@ -111,7 +113,8 @@ public class CommandeController {
 				}
 			}
 		}
-		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(), client.getNom(), client.getAdresse(),client.getTelephone()));
+		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(),
+				client.getNom(), client.getAdresse(),client.getTelephone(),false));
 		return "redirect:/";
 	}
 	@RequestMapping(value = "/admin/deleteCommande",method = RequestMethod.GET)
