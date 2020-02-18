@@ -37,7 +37,7 @@ public class CommandeController {
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
 		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
-		Page<Commande> pageCommandes = commandeRepo.chercher("%"+mc+"%", PageRequest.of(page,size));
+		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
 		model.addAttribute("listeCommande",pageCommandes.getContent());
 		int[] pages= new int[pageCommandes.getTotalPages()];
 		model.addAttribute("pages",pages);
@@ -182,15 +182,32 @@ public class CommandeController {
 	
 	@RequestMapping(value = "/admin/consulterCommande")
 	public String consulterCommande(Model model,int idClient,int idCommande) {
+		//je parcours toutes la liste des produit commander par le client 
 		List<ClientProduitCommande> produitPanier = consulterCommandeRepo.findAll();
 		List<ClientProduitCommande> listeProduitClient = new ArrayList<ClientProduitCommande>();
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
+			//si le statut est ==0 c'est a dire non traiter je l'enrigistre dans une liste pour l'afficher dans la vue conslter Commande
 			if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()
 					&& clientProduitCommande.getStatut() == 0)
 				listeProduitClient.add(clientProduitCommande);
 		}
 		model.addAttribute("listeProduitClient", listeProduitClient);
 		return "/admin/consulterCommande";
+	}
+	@RequestMapping(value="/admin/commandesTraité",method = RequestMethod.GET)
+	public String  commandeTraite(Model model,@RequestParam(name="page",defaultValue = "0")int page,
+			@RequestParam(name="size",defaultValue = "10")int size,
+			@RequestParam(name="mc",defaultValue = "")String mc)
+	{
+		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
+		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
+		model.addAttribute("listeCommande",pageCommandes.getContent());
+		int[] pages= new int[pageCommandes.getTotalPages()];
+		model.addAttribute("pages",pages);
+		model.addAttribute("size",size);
+		model.addAttribute("pageCourante",page);
+		model.addAttribute("mc",mc);
+		return "/admin/commandesTraité";
 	}
 }
 

@@ -11,7 +11,10 @@ import fr.opendevup.entities.Commande;
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
 	@Query("select c from Commande c where c.nomClient like :x and c.statut = 0")
-	public Page<Commande> chercher(@Param("x")String mc,Pageable pageable);
+	public Page<Commande> chercherCommandeNonTraiter(@Param("x")String mc,Pageable pageable);
+	
+	@Query("select c from Commande c where c.nomClient like :x and c.statut = 1")
+	public Page<Commande> chercherCommandeTraiter(@Param("x")String mc,Pageable pageable);
 	
 	
 }
