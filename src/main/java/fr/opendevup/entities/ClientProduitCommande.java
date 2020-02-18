@@ -15,11 +15,12 @@ public class ClientProduitCommande implements Serializable {
 	private int idClientProduitCommande;
 	private int idClient;
 	private int idProduit;
+	private int idCommande;
 	private int statut;
 	private String nomProduit;
 	
 	private String descriptionProduit;
-	
+	private String type;
 	private double prixProduit;
 
 	public ClientProduitCommande() {
@@ -27,11 +28,13 @@ public class ClientProduitCommande implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClientProduitCommande(int idClient, int idProduit, String nomProduit, String descriptionProduit,
-			double prixProduit,int statut) {
+	public ClientProduitCommande(int idClient, int idProduit,int idCommnde, String nomProduit, String descriptionProduit,
+			double prixProduit,String type,int statut) {
+		this.setType(type);
 		this.statut = statut;
 		this.idClient = idClient;
 		this.idProduit = idProduit;
+		this.idCommande = idCommnde;
 		this.nomProduit = nomProduit;
 		this.descriptionProduit = descriptionProduit;
 		this.prixProduit = prixProduit;
@@ -93,11 +96,28 @@ public class ClientProduitCommande implements Serializable {
 		this.statut = statut;
 	}
 
+	public int getIdCommande() {
+		return idCommande;
+	}
+
+	public void setIdCommande(int idCommande) {
+		this.idCommande = idCommande;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientProduitCommande [idClientProduitCommande=" + idClientProduitCommande + ", idClient=" + idClient
-				+ ", idProduit=" + idProduit + ", statut=" + statut + ", nomProduit=" + nomProduit
-				+ ", descriptionProduit=" + descriptionProduit + ", prixProduit=" + prixProduit + "]";
+				+ ", idProduit=" + idProduit + ", idCommande=" + idCommande + ", statut=" + statut + ", nomProduit="
+				+ nomProduit + ", descriptionProduit=" + descriptionProduit + ", type=" + type + ", prixProduit="
+				+ prixProduit + "]";
 	}
 	
 	

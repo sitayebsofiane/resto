@@ -93,6 +93,14 @@ public class CommandeController {
 	}
 	@RequestMapping(value = "/pages/commander",method = RequestMethod.GET)
 	public String commander(Client client) {
+		Commande commande = new Commande(null, 0.0, client.getIdClient(),
+				client.getNom(), client.getAdresse(),client.getTelephone(),0);
+		commandeRepo.save(commande);
+		//je recherche la commande avec son id dans la base
+		for (Commande el : commandeRepo.findAll()) {
+			if (el.getDate() ==null)
+				commande = el;
+		}
 		//je recupere toute les ligne de la table panier dans une liste
 		List<PanierProduit> paniers=  panierProduitRepo.findAll();
 		double prixTotal=0.0;
@@ -109,25 +117,26 @@ public class CommandeController {
 						date=panierProduit.getDate();
 						//je enrigistre dans la table des commandes de produit du client avec le statut 0
 						consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
-								p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix(),0));
+								p.getIdProduit(), commande.getIdCommande(), p.getNom(), p.getDescription(), p.getPrix(),"produit", 0));
 						panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
 				}else {
-					Menu p=menuRepo.getOne(panierProduit.getIdProduit());
+					Menu m=menuRepo.getOne(panierProduit.getIdProduit());
 					//je calcule le prix total
-					prixTotal += p.getPrix();
+					prixTotal += m.getPrix();
 					//je recupere la date du panier
 					date = panierProduit.getDate();
 					//je enrigistre le produit dans la table des commandes de produit du client et je le suprime du panier avec statut 0
 					consulterCommandeRepo.save(new ClientProduitCommande(client.getIdClient(), 
-							p.getIdProduit(), p.getNom(), p.getDescription(), p.getPrix(),0));
+							m.getIdProduit(), commande.getIdCommande(), m.getNom(), m.getDescription(), m.getPrix(),"menu",0));
 					panierProduitRepo.deleteById(panierProduit.getIdPanierProduit());
 				}
 			}
 		}
 		//a la fin j'enregistre dans la table les commande le prix total ainsi les informations du client et le statut a 0
 		//pour dire que la commande n'est pas encore vue par l'admin et je redirige vers l'acueill
-		commandeRepo.save(new Commande(date, prixTotal, client.getIdClient(),
-				client.getNom(), client.getAdresse(),client.getTelephone(),0));
+		commande.setPrixTotal(prixTotal);
+		commande.setDate(date);
+		commandeRepo.save(commande);
 		return "redirect:/";
 	}
 	
@@ -140,31 +149,44 @@ public class CommandeController {
 		// apres le traitement de la commande je mets le statut a 1
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
 			idClientProduitCommande = clientProduitCommande.getIdClientProduitCommande();
-			if(idClient == clientProduitCommande.getIdClient()) {
-				//je creer un nouveau produit dans la table Client ProduitCommande avec les même caratiristique 
+			if(idClient == clientProduitCommande.getIdClient() && clientProduitCommande.getType().equals("produit")
+					&& idCommande == clientProduitCommande.getIdCommande()) {
+				//je creer un nouveau produit dans la table Client ProduitCommande avec les même caracteristique 
 				Produit produit = produitRepo.getOne(clientProduitCommande.getIdProduit());
 				//je suprime le produit dans la table ClientProduitCommande
 				consulterCommandeRepo.deleteById(idClientProduitCommande);
 				//j'enrigistre ce produit dans la table avec le statut a 1
-				consulterCommandeRepo.save(new ClientProduitCommande(idClient, produit.getIdProduit(), produit.getNom(), 
-						produit.getDescription(), produit.getPrix(), 1));
+				consulterCommandeRepo.save(new ClientProduitCommande(idClient, produit.getIdProduit(), idCommande, produit.getNom(), 
+						produit.getDescription(), produit.getPrix(),"produit", 1));
+				}else if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()) {
+					//je creer un nouveau menu dans la table ClientProduitCommande avec les même caracteristique 
+					Menu menu = menuRepo.getOne(clientProduitCommande.getIdProduit());
+					//je suprime le produit dans la table ClientProduitCommande
+					consulterCommandeRepo.deleteById(idClientProduitCommande);
+					//j'enrigistre ce menu dans la table  ClientProduitCommande avec le statut a 1
+					consulterCommandeRepo.save(new ClientProduitCommande(idClient, menu.getIdProduit(), idCommande, menu.getNom(), 
+							menu.getDescription(), menu.getPrix(),"menu", 1));
 				}
 			}
 			//je creer une nouvelle commande dans la table Commande avec les même caratiristique 
 			Commande commande = commandeRepo.getOne(idCommande);
+			//esuite je suprime la commande qui est dans la base 
 			commandeRepo.deleteById(idCommande);
-			commandeRepo.save(new Commande(commande.getDate(),commande.getPrixTotal(), idClient,
-					commande.getNomClient(), commande.getAdresseClient(), commande.getTelephoneClient(), 1));
+			//je change le statut de la commande
+			commande.setStatut(1);
+			//et je la enrigistre avec le nouveau statut
+			commandeRepo.save(commande);
 			
 		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
 	}
 	
 	@RequestMapping(value = "/admin/consulterCommande")
-	public String consulterCommande(Model model,int idClient) {
+	public String consulterCommande(Model model,int idClient,int idCommande) {
 		List<ClientProduitCommande> produitPanier = consulterCommandeRepo.findAll();
 		List<ClientProduitCommande> listeProduitClient = new ArrayList<ClientProduitCommande>();
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
-			if(idClient == clientProduitCommande.getIdClient())
+			if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()
+					&& clientProduitCommande.getStatut() == 0)
 				listeProduitClient.add(clientProduitCommande);
 		}
 		model.addAttribute("listeProduitClient", listeProduitClient);

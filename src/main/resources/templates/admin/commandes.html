@@ -38,18 +38,19 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>IDCLIENT</th><th>NOM CLIENT</th><th>ADRESSE CLIENT</th><th>PRIX TOTAL</th><th>TEL</th><th>DATE</th>
+				<th>IDCOMMANDE</th><th>IDCLIENT</th><th>NOM CLIENT</th><th>ADRESSE CLIENT</th><th>PRIX TOTAL</th><th>TEL</th><th>DATE</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="c:${listeCommande}">
+			<td th:text="${c.idCommande}">idCommande</td>
 			<td th:text="${c.idClient}">idClient</td>
 			<td th:text="${c.nomClient}">nomClient</td>
 			<td th:text="${c.adresseClient}">adresse client</td>
 			<td th:text="${c.prixTotal}">prixTotal</td>
 			<td th:text="${c.telephoneClient}">telephone</td>
 			<td th:text="${c.date}">telephone</td>
-			<td ><a th:href="@{consulterCommande(idClient=${c.idClient})}">consulter commande</a></td>
+			<td ><a th:href="@{consulterCommande(idClient=${c.idClient},idCommande=${c.idCommande})}">consulter commande</a></td>
 			<td><a onclick="return confirm('êtes vous sûr que la commande est traité')"
 			 th:href="@{traiterCommande(idCommande=${c.idCommande},page=${pageCourante},size=${size},mc=${mc},idClient=${c.idClient})}">
 			 Traité</a></td>
