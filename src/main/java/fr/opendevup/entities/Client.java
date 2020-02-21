@@ -18,7 +18,7 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idClient;
 	@NotNull
-	@Size(min = 2, max = 30)
+	@Size(min = 2, max = 20)
 	private String nom;
 	@NotNull
 	@Size(min = 2, max = 30)

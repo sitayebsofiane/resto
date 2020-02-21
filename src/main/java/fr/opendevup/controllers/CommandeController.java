@@ -139,7 +139,15 @@ public class CommandeController {
 		commandeRepo.save(commande);
 		return "redirect:/";
 	}
-	
+	/**
+	 * 
+	 * @param idCommande
+	 * @param mc
+	 * @param page
+	 * @param size
+	 * @param idClient
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/traiterCommande",method = RequestMethod.GET)
 	public String traiterCommande(int idCommande,String mc,int page,int size,int idClient) {
 		//je declare une variable pour enrigistré idClientProduitCommande

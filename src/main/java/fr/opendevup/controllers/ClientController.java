@@ -61,7 +61,13 @@ public class ClientController
 		if (erreur.hasErrors()) 
 			return "admin/ajouterClients";
 		else
-		 clientRepo.save(client);
+			try {
+				clientRepo.save(client);
+				}catch (Exception e) {
+					// to do --->je revoi a une page d'erreur
+					e.getStackTrace();
+				}
+		
 		return "admin/confirmationAjoutClient";
 	}
 	@RequestMapping(value="admin/deleteClients",method=RequestMethod.GET)

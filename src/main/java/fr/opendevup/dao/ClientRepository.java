@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 import fr.opendevup.entities.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Integer> {
-	@Query("select c from Client c where c.nom like :x")
+	
+		@Query("select c from Client c where c.nom like :x")
 		public Page<Client> chercher(@Param("x")String mc,Pageable pageable);
 	
 	
