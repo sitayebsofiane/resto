@@ -64,8 +64,7 @@ public class ClientController
 			try {
 				clientRepo.save(client);
 				}catch (Exception e) {
-					// to do --->je revoi a une page d'erreur
-					e.getStackTrace();
+					return "/admin/erreur";
 				}
 		
 		return "admin/confirmationAjoutClient";
