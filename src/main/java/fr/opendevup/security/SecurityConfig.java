@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     	//utilisateur depuis le code java
         auth.inMemoryAuthentication()
-                .withUser("kamel").password(passwordEncoder().encode("123")).roles("USER")
+                .withUser("user").password(passwordEncoder().encode("user")).roles("USER")
                 .and()
-                .withUser("bigboss").password(passwordEncoder().encode("1234" )).roles("ADMIN","USER");
+                .withUser("admin").password(passwordEncoder().encode("admin" )).roles("ADMIN","USER");
         //utilisateur depuis la base de donnee
 //
 //        auth.jdbcAuthentication().dataSource(dataSource)
