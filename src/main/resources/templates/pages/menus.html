@@ -26,9 +26,7 @@
 	<!--end header-->
     <!-- banniere -->
     <section class="container-fluid banniere">
-      <div class="ban">
-        <img src="../static/css/resto.jpg" alt="banniere du site"/>
-      </div>
+     
       <div class="inner_banner">
         <h1>Bienvenue <span id="nom" th:text="${client.nom}"></span> a Fast Food Chic </h1>
       </div>
@@ -60,8 +58,8 @@
 		</div>
 	</section>
       <!--end a propos-->
-   <!--pied-->
-	
+  <!--pied-->
+
 	<footer >
 		<div class="container-fluid noire">
 			<div class="pull-right">
@@ -73,14 +71,14 @@
 					</nav>
 				</nav>
 			</div>
-				<a href="#"><i class="fa fa-facebook-official fa-2x">facebook</i></a>
-				<a href="#"><i class="fa fa-pinterest-p fa-2x">pinterest</i></a> <a
-					href="#"><i class="fa fa-twitter fa-2x">twitter</i></a> <a href="#"><i
-					class="fa fa-flickr fa-2x">flickr</i></a> <a href="#"><i
-					class="fa fa-linkedin fa-2x">linkedin</i></a>
-		
+			<div class="row">
+				<a href="#" class="col-md-1"><i class="fab fa-facebook fa-2x"></i></a>
+				<a href="#" class="col-md-1"><i class="fab fa-pinterest fa-2x"></i></a> 
+				<a href="#"><i class="fab fa-twitter fa-2x"></i></a> 
+			</div>
 		</div>
 	</footer>
 	<!-- end pied-->
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </body>
 </html>
