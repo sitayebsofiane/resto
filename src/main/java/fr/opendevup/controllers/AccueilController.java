@@ -1,5 +1,6 @@
 package fr.opendevup.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,7 +20,9 @@ import fr.opendevup.dao.MenuRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
+import fr.opendevup.entities.Menu;
 import fr.opendevup.entities.PanierProduit;
+import fr.opendevup.entities.Produit;
 
 /**
  * @author sitayeb sofiane
@@ -158,5 +161,60 @@ public class AccueilController {
 		}
 		return "redirect:/pages/produits?page="+page+"&size="+size;
 	}
-	
+	/**
+	 * 
+	 * @param model pour stocké la liste des produit ou menu commandé par le client 
+	 * @param client c'est le client enrigistré de la session
+	 * @return je le revoi vers la pages panier ou il ya tout les produit et ou menu selectioné par le client
+	 */
+	@RequestMapping(value = "/pages/panier")
+	public String consulterPanier(Model model,Client client) {
+		//je parcour la liste produit et menu dans le panier
+		List<PanierProduit> paniers=  panierProduitRepo.findAll();
+		//je creer une liste de produits vide
+		List<Produit> produits= new ArrayList<Produit>();
+		//je creer une liste de menu vide
+		List<Menu> menus= new ArrayList<Menu>();
+		//je creer une liste qui prend les deux type produit et menu
+		List<Object> liste =new ArrayList<Object>();
+		//je parcour la liste des produit/menu qui est les paniers et je remplie ma liste avec des produits et des menus
+		 for (PanierProduit panierProduit : paniers) {
+			 if(panierProduit.getIdClient()==client.getIdClient()) {
+				 	if(panierProduit.getType().equals("produit"))
+				 		produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
+				 	else
+				 		menus.add(menuRepo.getOne((panierProduit.getIdProduit())));
+				 }
+			 }
+		 	for (Produit p : produits) {
+				liste.add(p);
+			}
+		 	for (Menu m : menus) {
+				liste.add(m);
+			}
+		 	//je met la liste dans le model 
+			model.addAttribute("liste", liste);
+			
+		return"/pages/panier";
+	}
+	/**
+	 * 
+	 * @param id du produit retourné par la methode get lors de la selection du client du produit a suprimé
+	 * @param client je recupere le client enrigistré dans la section qui est connecter
+	 * @return je suprime le produit et je le revoi vers la meme page ou il était qui la page du panier
+	 */
+	@RequestMapping(value = "/pages/deleteProduitDuPanier",method = RequestMethod.GET)
+	public String deleteProduitDuPanier(int id,Client client) {
+		//je selectione tout les paniers
+		List<PanierProduit> paniers=  panierProduitRepo.findAll();
+		//je parcour la liste des produit dans le panier et si l'id correspond un id d'un produit panier et id client corespond
+		//au client et je le suprime 
+		for (PanierProduit panierProduit : paniers) {
+			if(id==panierProduit.getIdProduit() && panierProduit.getIdClient()==client.getIdClient()) {
+				panierProduitRepo.delete(panierProduit);
+				break;
+			}
+		}
+		return "redirect:/pages/panier";
+	}
 }

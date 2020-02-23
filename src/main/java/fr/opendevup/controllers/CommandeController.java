@@ -41,21 +41,32 @@ public class CommandeController {
 	private ConsulterCommandeRepository consulterCommandeRepo;
 	@Autowired
 	private MenuRepository menuRepo;
-	
+	/**
+	 * 
+	 * @param model pour stocké les paramettre de la page a afiicher
+	 * @param page le numero de la page par defaut il est a 0
+	 * @param size le nombre d'element par page par defaut il est a 10
+	 * @param mc mot cle pour la recherche par defaut il est a chaine vide
+	 * @return si tout va bien je retourn la page a afiché avec les commande non traité si non je retourne la page d'erreur
+	 */
 	@RequestMapping(value="/admin/commandesNonTraiter",method = RequestMethod.GET)
 	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
-		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
-		Page<Commande> pageCommandes = commandeRepo.chercherCommandeNonTraiter("%"+mc+"%", PageRequest.of(page,size));
-		model.addAttribute("listeCommande",pageCommandes.getContent());
-		int[] pages= new int[pageCommandes.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size",size);
-		model.addAttribute("pageCourante",page);
-		model.addAttribute("mc",mc);
-		return "/admin/commandesNonTraiter";
+		try {
+			// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
+			Page<Commande> pageCommandes = commandeRepo.chercherCommandeNonTraiter("%"+mc+"%", PageRequest.of(page,size));
+			model.addAttribute("listeCommande",pageCommandes.getContent());
+			int[] pages= new int[pageCommandes.getTotalPages()];
+			model.addAttribute("pages",pages);
+			model.addAttribute("size",size);
+			model.addAttribute("pageCourante",page);
+			model.addAttribute("mc",mc);
+			return "/admin/commandesNonTraiter";
+		}catch (Exception e) {
+			return "/admin/erreur";
+		}
 	}
 	
 	/**
@@ -64,69 +75,32 @@ public class CommandeController {
 	 * @param page numero de page par defaut 0
 	 * @param size nombre d'element a affiché dans la page par defaut 10
 	 * @param mc mot cle pour la recherche par nom du client par defaut chaine vide
-	 * @return je revoi vers la page des commande traité 
+	 * @return je revoi vers la page des commande traité  ou la page d'erreur si il ya erreur
 	 */
 	@RequestMapping(value="/admin/commandesTraiter",method = RequestMethod.GET)
 	public String  commandeTraite(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
-		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
-		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
-		model.addAttribute("listeCommande",pageCommandes.getContent());
-		int[] pages= new int[pageCommandes.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size",size);
-		model.addAttribute("pageCourante",page);
-		model.addAttribute("mc",mc);
-		return "/admin/commandesTraiter";
-	}
-	
-	@RequestMapping(value = "/pages/panier")
-	public String consulterPanier(Model model,Client client) {
-		//je parcour la liste produit et menu dans le panier
-		List<PanierProduit> paniers=  panierProduitRepo.findAll();
-		//je creer une liste de produits vide
-		List<Produit> produits= new ArrayList<Produit>();
-		//je creer une liste de menu vide
-		List<Menu> menus= new ArrayList<Menu>();
-		//je creer une liste qui prend les deux type produit et menu
-		List<Object> liste =new ArrayList<Object>();
-		//je parcour la liste des produit/menu qui est les paniers et je remplie ma liste avec des produits et des menus
-		 for (PanierProduit panierProduit : paniers) {
-			 if(panierProduit.getIdClient()==client.getIdClient()) {
-				 	if(panierProduit.getType().equals("produit"))
-				 		produits.add(produitRepo.getOne((panierProduit.getIdProduit())));
-				 	else
-				 		menus.add(menuRepo.getOne((panierProduit.getIdProduit())));
-				 }
-			 }
-		 	for (Produit p : produits) {
-				liste.add(p);
-			}
-		 	for (Menu m : menus) {
-				liste.add(m);
-			}
-		 	//je met la liste dans le model 
-			model.addAttribute("liste", liste);
-			
-		return"/pages/panier";
-	}
-	
-	@RequestMapping(value = "/pages/deleteProduitDuPanier",method = RequestMethod.GET)
-	public String deleteProduitDuPanier(int id,Client client) {
-		//je selectione tout les paniers
-		List<PanierProduit> paniers=  panierProduitRepo.findAll();
-		//je parcour la liste des produit dans le panier et si l'id correspond un id d'un produit panier et id client corespond
-		//au client et je le suprime 
-		for (PanierProduit panierProduit : paniers) {
-			if(id==panierProduit.getIdProduit() && panierProduit.getIdClient()==client.getIdClient()) {
-				panierProduitRepo.delete(panierProduit);
-				break;
-			}
+		try {
+			// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
+			Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
+			model.addAttribute("listeCommande",pageCommandes.getContent());
+			int[] pages= new int[pageCommandes.getTotalPages()];
+			model.addAttribute("pages",pages);
+			model.addAttribute("size",size);
+			model.addAttribute("pageCourante",page);
+			model.addAttribute("mc",mc);
+			return "/admin/commandesTraiter";
+		}catch (Exception e) {
+		return "/admin/erreur";
 		}
-		return "redirect:/pages/panier";
 	}
+	/**
+	 * 
+	 * @param client je recupere le client de secssion pour lui faire l'action commander
+	 * @return je lui enrigistre la commande et je le revoi vers la page d'accueil
+	 */
 	@RequestMapping(value = "/pages/commander",method = RequestMethod.GET)
 	public String commander(Client client) {
 		Commande commande = new Commande(null, 0.0, client.getIdClient(),
@@ -177,12 +151,12 @@ public class CommandeController {
 	}
 	/**
 	 * 
-	 * @param idCommande
-	 * @param mc
-	 * @param page
-	 * @param size
-	 * @param idClient
-	 * @return
+	 * @param idCommande je recupere l'id de la commande a traité
+	 * @param mc mot cle (nom du client qui correspond a la commande) envoyé par les para par defaut est chaine vide envoyé par la requtte get
+	 * @param page numero de la page  envoyé par la requtte get
+	 * @param size le nombre d'element de la page envoyé par la requtte get
+	 * @param idClient id du client envoyé par la requette get 
+	 * @return je change le statut de la commande a 1 et je le renvoi a la meme page qui est la page commandesNonTraiter
 	 */
 	@RequestMapping(value = "/admin/traiterCommande",method = RequestMethod.GET)
 	public String traiterCommande(int idCommande,String mc,int page,int size,int idClient) {
@@ -206,7 +180,13 @@ public class CommandeController {
 			
 		return "redirect:/admin/commandesNonTraiter?page="+page+"&size="+size+"&mc="+mc;
 	}
-	
+	/**
+	 * 
+	 * @param model pour stoké la liste des produit de la commande
+	 * @param idClient id du client envoyé par la requette get 
+	 * @param idCommande id de la commande envoyé par la requette get 
+	 * @return je le retourne vers la page consulterCommandeNonTraiter ou pourra voir les produit ou menu non trité de la commande
+	 */
 	@RequestMapping(value = "/admin/consulterCommandeNonTraiter")
 	public String consulterCommandeNonTraiter(Model model,int idClient,int idCommande) {
 		//je selectione toutes la liste des produit commander par le client 
@@ -222,7 +202,13 @@ public class CommandeController {
 		model.addAttribute("listeProduitClient", listeProduitClientNonTraiter);
 		return "/admin/consulterCommandeNonTraiter";
 	}
-	
+	/**
+	 * 
+	 *@param model pour stoké la liste des produit de la commande
+	 * @param idClient id du client envoyé par la requette get 
+	 * @param idCommande id de la commande envoyé par la requette get 
+	 * @return je le retourne vers la page consulterCommandeNonTraiter ou pourra voir les produit ou menu trité de la commande
+	 */
 	@RequestMapping(value = "/admin/consulterCommandeTraiter")
 	public String consulterCommandeTraiter(Model model,int idClient,int idCommande) {
 		//je selectione toutes la liste des produit commander par le client 
