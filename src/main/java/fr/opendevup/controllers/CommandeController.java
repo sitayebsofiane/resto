@@ -57,6 +57,31 @@ public class CommandeController {
 		model.addAttribute("mc",mc);
 		return "/admin/commandesNonTraiter";
 	}
+	
+	/**
+	 * 
+	 * @param model pour enrigistré les paramtre de la page a affiché 
+	 * @param page numero de page par defaut 0
+	 * @param size nombre d'element a affiché dans la page par defaut 10
+	 * @param mc mot cle pour la recherche par nom du client par defaut chaine vide
+	 * @return je revoi vers la page des commande traité 
+	 */
+	@RequestMapping(value="/admin/commandesTraiter",method = RequestMethod.GET)
+	public String  commandeTraite(Model model,@RequestParam(name="page",defaultValue = "0")int page,
+			@RequestParam(name="size",defaultValue = "10")int size,
+			@RequestParam(name="mc",defaultValue = "")String mc)
+	{
+		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
+		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
+		model.addAttribute("listeCommande",pageCommandes.getContent());
+		int[] pages= new int[pageCommandes.getTotalPages()];
+		model.addAttribute("pages",pages);
+		model.addAttribute("size",size);
+		model.addAttribute("pageCourante",page);
+		model.addAttribute("mc",mc);
+		return "/admin/commandesTraiter";
+	}
+	
 	@RequestMapping(value = "/pages/panier")
 	public String consulterPanier(Model model,Client client) {
 		//je parcour la liste produit et menu dans le panier
@@ -161,36 +186,19 @@ public class CommandeController {
 	 */
 	@RequestMapping(value = "/admin/traiterCommande",method = RequestMethod.GET)
 	public String traiterCommande(int idCommande,String mc,int page,int size,int idClient) {
-		//je declare une variable pour enrigistré idClientProduitCommande
-		int  idClientProduitCommande = 0;
-		//je selectione tout les produits du panier
+		
+		//je selectione tout les produits du panier commandé
 		List<ClientProduitCommande> produitPanier=  consulterCommandeRepo.findAll();
-		// apres le traitement de la commande je mets le statut a 1
+		// je parcours la liste apres le traitement de la commande je mets le statut a 1 de tout les produits de la commande
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
-			idClientProduitCommande = clientProduitCommande.getIdClientProduitCommande();
-			if(idClient == clientProduitCommande.getIdClient() && clientProduitCommande.getType().equals("produit")
-					&& idCommande == clientProduitCommande.getIdCommande()) {
-				//je creer un nouveau produit dans la table Client ProduitCommande avec les même caracteristique 
-				Produit produit = produitRepo.getOne(clientProduitCommande.getIdProduit());
-				//je suprime le produit dans la table ClientProduitCommande
-				consulterCommandeRepo.deleteById(idClientProduitCommande);
-				//j'enrigistre ce produit dans la table avec le statut a 1
-				consulterCommandeRepo.save(new ClientProduitCommande(idClient, produit.getIdProduit(), idCommande, produit.getNom(), 
-						produit.getDescription(), produit.getPrix(),"produit", 1));
-				}else if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()) {
-					//je creer un nouveau menu dans la table ClientProduitCommande avec les même caracteristique 
-					Menu menu = menuRepo.getOne(clientProduitCommande.getIdProduit());
-					//je suprime le produit dans la table ClientProduitCommande
-					consulterCommandeRepo.deleteById(idClientProduitCommande);
-					//j'enrigistre ce menu dans la table  ClientProduitCommande avec le statut a 1
-					consulterCommandeRepo.save(new ClientProduitCommande(idClient, menu.getIdProduit(), idCommande, menu.getNom(), 
-							menu.getDescription(), menu.getPrix(),"menu", 1));
+			if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()) {
+				ClientProduitCommande element = consulterCommandeRepo.getOne(clientProduitCommande.getIdClientProduitCommande());
+				element.setStatut(1);
+				consulterCommandeRepo.save(element);
 				}
 			}
-			//je creer une nouvelle commande dans la table Commande avec les même caratiristique 
+			//je selectione la commande dans la table Commande avec les même caratiristique 
 			Commande commande = commandeRepo.getOne(idCommande);
-			//esuite je suprime la commande qui est dans la base 
-			commandeRepo.deleteById(idCommande);
 			//je change le statut de la commande
 			commande.setStatut(1);
 			//et je la enrigistre avec le nouveau statut
@@ -199,43 +207,38 @@ public class CommandeController {
 		return "redirect:/admin/commandesNonTraiter?page="+page+"&size="+size+"&mc="+mc;
 	}
 	
-	@RequestMapping(value = "/admin/consulterCommande")
-	public String consulterCommande(Model model,int idClient,int idCommande) {
-		//je parcours toutes la liste des produit commander par le client 
+	@RequestMapping(value = "/admin/consulterCommandeNonTraiter")
+	public String consulterCommandeNonTraiter(Model model,int idClient,int idCommande) {
+		//je selectione toutes la liste des produit commander par le client 
 		List<ClientProduitCommande> produitPanier = consulterCommandeRepo.findAll();
-		List<ClientProduitCommande> listeProduitClient = new ArrayList<ClientProduitCommande>();
+		List<ClientProduitCommande> listeProduitClientNonTraiter = new ArrayList<ClientProduitCommande>();
+		//je parcours les commandes du client
 		for (ClientProduitCommande clientProduitCommande : produitPanier) {
 			//si le statut est ==0 c'est a dire non traiter je l'enrigistre dans une liste pour l'afficher dans la vue conslter Commande
 			if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()
 					&& clientProduitCommande.getStatut() == 0)
-				listeProduitClient.add(clientProduitCommande);
+				listeProduitClientNonTraiter.add(clientProduitCommande);
 		}
-		model.addAttribute("listeProduitClient", listeProduitClient);
-		return "/admin/consulterCommande";
+		model.addAttribute("listeProduitClient", listeProduitClientNonTraiter);
+		return "/admin/consulterCommandeNonTraiter";
 	}
-	/**
-	 * 
-	 * @param model pour enrigistré les paramtre de la page a affiché 
-	 * @param page numero de page par defaut 0
-	 * @param size nombre d'element a affiché dans la page par defaut 10
-	 * @param mc mot cle pour la recherche par nom du client par defaut chaine vide
-	 * @return je revoi vers la page des commande traité 
-	 */
-	@RequestMapping(value="/admin/commandesTraiter",method = RequestMethod.GET)
-	public String  commandeTraite(Model model,@RequestParam(name="page",defaultValue = "0")int page,
-			@RequestParam(name="size",defaultValue = "10")int size,
-			@RequestParam(name="mc",defaultValue = "")String mc)
-	{
-		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
-		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
-		model.addAttribute("listeCommande",pageCommandes.getContent());
-		int[] pages= new int[pageCommandes.getTotalPages()];
-		model.addAttribute("pages",pages);
-		model.addAttribute("size",size);
-		model.addAttribute("pageCourante",page);
-		model.addAttribute("mc",mc);
-		return "/admin/commandesTraiter";
+	
+	@RequestMapping(value = "/admin/consulterCommandeTraiter")
+	public String consulterCommandeTraiter(Model model,int idClient,int idCommande) {
+		//je selectione toutes la liste des produit commander par le client 
+		List<ClientProduitCommande> produitPaniercommande = consulterCommandeRepo.findAll();
+		List<ClientProduitCommande> listeProduitClientTraiter = new ArrayList<ClientProduitCommande>();
+		//je parcours les commandes du client
+		for (ClientProduitCommande clientProduitCommande : produitPaniercommande) {
+			//si le statut est == 1 c'est a dire non traiter je l'enrigistre dans une liste pour l'afficher dans la vue conslter Commande
+			if(idClient == clientProduitCommande.getIdClient() && idCommande == clientProduitCommande.getIdCommande()
+					&& clientProduitCommande.getStatut() == 1)
+				listeProduitClientTraiter.add(clientProduitCommande);
+		}
+		model.addAttribute("listeProduitClient", listeProduitClientTraiter);
+		return "/admin/consulterCommandeTraiter";
 	}
+	
 	/**
 	 * 
 	 * @param idCommande envoyé par la method get lors de selection de l'admin du la commande a suprimé
@@ -245,9 +248,15 @@ public class CommandeController {
 	 * @return je suprime la commande si tout va bien je le renvoi vers la même page sinon vers une page d'erreur
 	 */
 	@RequestMapping(value="/admin/deleteCommande",method = RequestMethod.GET)
-	public String  deleteCommande(int idCommande,String mc,int page,int size)
+	public String  deleteCommande(int idClient,int idCommande,String mc,int page,int size)
 	{
+		List<ClientProduitCommande> produitPaniercommande = consulterCommandeRepo.findAll();
 		try {
+			//je supprime egalement les produit de la commande que je vais de suprimé
+			for (ClientProduitCommande clientProduitCommande : produitPaniercommande) {
+				if(clientProduitCommande.getIdClient() == idClient)
+					consulterCommandeRepo.deleteById(clientProduitCommande.getIdClientProduitCommande());;
+			}
 			commandeRepo.deleteById(idCommande);
 			return "redirect:/admin/commandesTraiter?page="+page+"&size="+size+"&mc="+mc;
 			}catch (Exception e) {

@@ -20,7 +20,7 @@
 			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>
 			<li><a th:href="@{consulterMenus}">Consulter les menus</a></li>
 			<li><a th:href="@{ajoutMenus}">ajouter menus</a></li>
-			<li><a th:href="@{commandesNonTraiter}">commandes</a></li>
+			<li><a th:href="@{commandesNonTraiter}">commandes non traité</a></li>
 			<li><a th:href="@{commandesTraiter}">commandes traité</a></li>				
 			<li><a th:href="@{/login?logout}">se deconecter</a></li>
 		</ul>
@@ -53,7 +53,6 @@
 					<td th:text="${c.email}">email</td>
 					<td th:text="${c.adresse}">adresse</td>
 					<td th:text="${c.telephone}">telephone</td>
-					<td><a th:href="@{modifierClient(idClient=${c.idClient})}"> Modifier</a></td>
 					<td><a onclick="return confirm('êtes vous sûr de suprimer')"
 						th:href="@{deleteClients(id=${c.idClient},page=${pageCourante},size=${size},mc=${mc})}">Suprimer</a></td>
 				</tr>

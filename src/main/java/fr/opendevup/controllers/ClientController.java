@@ -61,18 +61,7 @@ public class ClientController
 		model.addAttribute("client",new Client());
 		return "admin/ajouterClients";	
 	}
-	/**
-	 * 
-	 * @param model pour enrigistré  l'object client apres la modifiacation 
-	 * @param idClient recureperation via la method get l'id client a modifier
-	 * @return je retourne vers la page modifierClient pour donné la main l'admin de le modifier via le formulaire de la pade
-	 */
-	@RequestMapping(value = "/admin/modifierClient",method = RequestMethod.GET)
-	public String modifierClient(Model model,int idClient) {
-		Client p= clientRepo.getOne(idClient);
-		model.addAttribute("client",p);
-		return "admin/modifierClient";		
-	}
+	
 	/**
 	 * 
 	 * @param client je recupere le client qui est envoyé via la methode post par la page modifier ou ajout client
