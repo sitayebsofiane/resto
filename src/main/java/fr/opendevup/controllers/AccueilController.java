@@ -133,20 +133,24 @@ public class AccueilController {
 	 * @param idproduit je la recupere par la methode get
 	 * @param client je la recupere via la variable de session
 	 * @param type je la recupere par la methode get
-	 * @return
+	 * @return la page ou client se situe si l'enrigistrement du panier et bien effectuer sinon vers une page d'erreur
 	 */
 	@RequestMapping(value = "/pages/panierProduit")
-	public String ajouterAuPanier(Model model,int page,int size,String idproduit,Client client ,
+	public String ajouterAuPanier(int page,int size,String idproduit,Client client ,
 			@RequestParam(name="type", defaultValue="")String type) {
 		int idProduit=Integer.parseInt(idproduit);
 		// je verifier si le produit/menu existe dans la base et que le client est bien conneté via son mail
-		if ((produitRepo.existsById(idProduit) || menuRepo.existsById(idProduit)) & client.getEmail()!=null) {
-			// j'enrigistre un nouveau panier pour le client
+		if ((produitRepo.existsById(idProduit) || menuRepo.existsById(idProduit)) && client.getEmail()!=null) {
+			// j'enrigistre un nouveau panier avec un produit pour le client
 			PanierProduit panier= new PanierProduit();
 			panier.setIdClient(client.getIdClient());
 			panier.setIdProduit(idProduit);
 			panier.setType((type.equals("menu"))? "menu":"produit");
-			panierProduitRepo.save(panier);
+			try {
+				panierProduitRepo.save(panier);
+			}catch (Exception e) {
+				return "/admin/erreur";
+			}
 		}
 		//ensuite je redirige vers la page ou il était le client
 		if(type.equals("menu")) {
