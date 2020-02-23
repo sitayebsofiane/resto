@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>panier</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{../css/style.css}"/>
+<script  th:src="@{../javaScript/toggle.js}"></script>
+</head>
+<body>
+	<!--header-->
+	<nav>
+		<ul>
+			<li><a th:href="@{/}" class="logo ">Fast Food Chic</a></li>
+			<li><a th:href="@{/pages/produits}">Consulter nos produits a la carte</a></li>
+			<li><a th:href="@{/pages/menus}" >Consulter nos menus</a></li>
+			<li class="menu"  id="toggle4"><a th:href="@{/pages/panier}" >consulter mon panier</a></li>
+		</ul>
+	</nav>
+	<!--end header-->
+<div  class="container"  >
+	<table class="table">
+		<thead>
+			<tr>
+				<th>NOM</th><th>DESCRIPTION</th><th>PRIX</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p:${liste}">
+			<td id="commande" th:text="${p.nomProduit}">nom</td>
+			<td th:text="${p.descriptionProduit}">description</td>
+			<td th:text="${p.prixProduit}">prix</td>
+			</tr>
+			
+		</tbody>
+	</table>
+		<div>
+			<ul class="nav nav-pills">
+				<!-- status affiche des information sur un element du tableu ex {index = 0, count = 1, size = 5, current = 0} -->
+				<li th:each="p,status:${pages}"
+					th:class="${pageCourante}==${status.index}?'nav-link active':''">
+					<a
+					th:href="@{consulterProduits(page=${status.index},size=${size},mc=${mc})}"
+					th:text="${status.index}"> </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</body>
+</html>

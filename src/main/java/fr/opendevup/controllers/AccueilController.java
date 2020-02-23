@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.ClientRepository;
+import fr.opendevup.dao.ConsulterCommandeRepository;
 import fr.opendevup.dao.MenuRepository;
 import fr.opendevup.dao.PanierProduitRepository;
 import fr.opendevup.dao.ProduitRepository;
 import fr.opendevup.entities.Client;
+import fr.opendevup.entities.ClientProduitCommande;
 import fr.opendevup.entities.Menu;
 import fr.opendevup.entities.PanierProduit;
 import fr.opendevup.entities.Produit;
@@ -46,6 +48,8 @@ public class AccueilController {
 	private MenuRepository menuRepo;
 	@Autowired
 	private PanierProduitRepository panierProduitRepo;
+	@Autowired
+	private ConsulterCommandeRepository consulterCommandeRepo;
 	
 	/**
 	 * 
@@ -216,5 +220,20 @@ public class AccueilController {
 			}
 		}
 		return "redirect:/pages/panier";
+	}
+	@RequestMapping(value = "/pages/commandes",method = RequestMethod.GET)
+	public String commandes(Model model,Client client) {
+		//je selectione tout les paniers
+		List<ClientProduitCommande> listeProduitCommander=  consulterCommandeRepo.findAll();
+		List<ClientProduitCommande> liste =  new ArrayList<ClientProduitCommande>();
+		//je parcour la liste des produit dans le panier et si l'id correspond un id d'un produit panier et id client corespond
+		//au client et je le suprime 
+		for (ClientProduitCommande clientProduitCommande: listeProduitCommander) {
+			if(clientProduitCommande.getIdClient() == client.getIdClient()) {
+				liste.add(clientProduitCommande);
+			}
+		}
+		model.addAttribute("liste", liste);
+		return "/pages/commandes";
 	}
 }
