@@ -14,13 +14,14 @@
 		<ul>
 			
 			<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" class="logo">Fast food chic </a></li>
+		
 			<li><a th:href="@{clients}">Consulter les clients</a></li>
 			<li><a th:href="@{consulterProduits}">Consulter les produits</a></li>
 			<li><a th:href="@{consulterMenus}">Consulter les menus</a></li>
 			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>
 			<li><a th:href="@{ajoutMenus}">ajouter menus</a></li>
-			<li><a th:href="@{commandes}">commandes</a></li>
-			<li><a th:href="@{commandesTraité}">commandes traité</a></li>				
+			<li><a th:href="@{commandesNonTraiter}">commandes</a></li>
+			<li><a th:href="@{commandesTraiter}">commandes traité</a></li>							
 			<li><a th:href="@{/login?logout}">se deconecter</a></li>
 		</ul>
 		

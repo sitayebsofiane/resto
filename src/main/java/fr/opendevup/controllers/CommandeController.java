@@ -16,7 +16,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.opendevup.dao.*;
 import fr.opendevup.entities.*;
-
+/**
+ * @author sitayeb sofiane
+ * controller qui gere:
+ * 1)la page d'affichage des commande non traiter par l'admin
+ * 2)la page d'affichage des commande traiter par l'admin
+ * 3)la page panier pour le client
+ * 4)methode qui suprime un produit du panier avant la commande par le client
+ * 5)la methode commander par le client 
+ * 6)la methode traitement commande par l'admin qui change le statut de la commande de 0 a 1
+ * 7)la page consulter la commande par l'admin pour voir les produit q'elle contient
+ * 8)suprimer une commande deja traité
+ */
 @Controller
 @SessionAttributes({"client"})
 public class CommandeController {
@@ -31,20 +42,20 @@ public class CommandeController {
 	@Autowired
 	private MenuRepository menuRepo;
 	
-	@RequestMapping(value="/admin/commandes",method = RequestMethod.GET)
+	@RequestMapping(value="/admin/commandesNonTraiter",method = RequestMethod.GET)
 	public String  commande(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
 	{
 		// dans pageCommandes il ya que les commande qui ont le statut a 0 qui vont etre ajouter a listeCommande
-		Page<Commande> pageCommandes = commandeRepo.chercherCommandeTraiter("%"+mc+"%", PageRequest.of(page,size));
+		Page<Commande> pageCommandes = commandeRepo.chercherCommandeNonTraiter("%"+mc+"%", PageRequest.of(page,size));
 		model.addAttribute("listeCommande",pageCommandes.getContent());
 		int[] pages= new int[pageCommandes.getTotalPages()];
 		model.addAttribute("pages",pages);
 		model.addAttribute("size",size);
 		model.addAttribute("pageCourante",page);
 		model.addAttribute("mc",mc);
-		return "/admin/commandes";
+		return "/admin/commandesNonTraiter";
 	}
 	@RequestMapping(value = "/pages/panier")
 	public String consulterPanier(Model model,Client client) {
@@ -185,7 +196,7 @@ public class CommandeController {
 			//et je la enrigistre avec le nouveau statut
 			commandeRepo.save(commande);
 			
-		return "redirect:/admin/commandes?page="+page+"&size="+size+"&mc="+mc;
+		return "redirect:/admin/commandesNonTraiter?page="+page+"&size="+size+"&mc="+mc;
 	}
 	
 	@RequestMapping(value = "/admin/consulterCommande")
@@ -202,7 +213,15 @@ public class CommandeController {
 		model.addAttribute("listeProduitClient", listeProduitClient);
 		return "/admin/consulterCommande";
 	}
-	@RequestMapping(value="/admin/commandesTraité",method = RequestMethod.GET)
+	/**
+	 * 
+	 * @param model pour enrigistré les paramtre de la page a affiché 
+	 * @param page numero de page par defaut 0
+	 * @param size nombre d'element a affiché dans la page par defaut 10
+	 * @param mc mot cle pour la recherche par nom du client par defaut chaine vide
+	 * @return je revoi vers la page des commande traité 
+	 */
+	@RequestMapping(value="/admin/commandesTraiter",method = RequestMethod.GET)
 	public String  commandeTraite(Model model,@RequestParam(name="page",defaultValue = "0")int page,
 			@RequestParam(name="size",defaultValue = "10")int size,
 			@RequestParam(name="mc",defaultValue = "")String mc)
@@ -215,7 +234,25 @@ public class CommandeController {
 		model.addAttribute("size",size);
 		model.addAttribute("pageCourante",page);
 		model.addAttribute("mc",mc);
-		return "/admin/commandesTraité";
+		return "/admin/commandesTraiter";
+	}
+	/**
+	 * 
+	 * @param idCommande envoyé par la method get lors de selection de l'admin du la commande a suprimé
+	 * @param mc  envoyé par la method get lors de selection de l'admin du la commande a suprimé
+	 * @param page  envoyé par la method get lors de selection de l'admin du la commande a suprimé
+	 * @param size  envoyé par la method get lors de selection de l'admin du la commande a suprimé
+	 * @return je suprime la commande si tout va bien je le renvoi vers la même page sinon vers une page d'erreur
+	 */
+	@RequestMapping(value="/admin/deleteCommande",method = RequestMethod.GET)
+	public String  deleteCommande(int idCommande,String mc,int page,int size)
+	{
+		try {
+			commandeRepo.deleteById(idCommande);
+			return "redirect:/admin/commandesTraiter?page="+page+"&size="+size+"&mc="+mc;
+			}catch (Exception e) {
+				return "/admin/erreur";
+			}
 	}
 }
 
