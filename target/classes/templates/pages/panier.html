@@ -12,14 +12,11 @@
 <body>
 	<!--header-->
 	<nav>
-		<div class="toggle">
-			<i class="fas fa-bars menu"></i>
-		</div>
 		<ul>
 			<li><a th:href="@{/}" class="logo blanc">Fast Food Chic</a></li>
 			<li><a th:href="@{/pages/produits}" class="blanc">Consulter nos produits a la carte</a></li>
 			<li><a th:href="@{/pages/menus}" class="blanc">Consulter nos menus</a></li>
-			<li class="menu"><a th:href="@{/pages/seDeconnecter}" class="blanc">se deconnecter</a></li>
+			<li class="menu"  id="toggle4"><a th:href="@{/pages/panier}" class="blanc">consulter mon panier</a></li>
 			<li class="menu" id="commander"><a th:href="@{/pages/commander}" class="blanc">commander</a></li>
 		</ul>
 	</nav>
@@ -55,5 +52,6 @@
 			</ul>
 		</div>
 	</div>
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </body>
 </html>

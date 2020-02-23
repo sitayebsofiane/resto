@@ -10,20 +10,22 @@
 </head>
 <body>
 	<!-- header -->
-	<nav>
+	<div class="container-fluid">
+	<nav class="row">
 		<ul>
-			<li>bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" class="logo">Fast food chic </a></li>
-			
-			<li><a th:href="@{clients}">Consulter les clients</a></li>
-			<li><a th:href="@{consulterProduits}">Consulter les produits</a></li>
-			<li><a th:href="@{consulterMenus}">Consulter les menus</a></li>
-			<li><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>
-			<li><a th:href="@{ajoutMenus}">ajouter menus</a></li>
-			<li><a th:href="@{commandesNonTraiter}">commandes non traité</a></li>
-			<li><a th:href="@{commandesTraiter}">commandes traité</a></li>				
-			<li><a th:href="@{/login?logout}">se deconecter</a></li>
+			<li class="col-md-2 logo cadre">bonjour <span  th:inline="text">[[${#httpServletRequest.remoteUser}]] </span><a th:href="@{/}" >Fast food chic </a></li>
+			<li class="col-md-1 cadre"><a th:href="@{clients}">Consulter les clients</a></li>
+			<li class="col-md-1 cadre"><a th:href="@{consulterProduits}">Consulter les produits</a></li>	
+			<li class="col-md-1 cadre"><a th:href="@{ajouterProduits}">Ajouter un  produit</a></li>
+			<li class="col-md-1 cadre"><a th:href="@{consulterMenus}">Consulter les menus</a></li>
+			<li class="col-md-1 cadre"><a th:href="@{ajoutMenus}">ajouter menus</a></li>
+			<li class="col-md-1 cadre"><a th:href="@{commandesNonTraiter}">commandes non traité</a></li>
+			<li class="col-md-1 cadre"><a th:href="@{commandesTraiter}">commandes traité</a></li>				
+			<li class="col-md-1 cadre"><a th:href="@{/login?logout}"><i class="fas fa-door-open">se deconnecter</i></a></li>
 		</ul>
 	</nav>
+	</div>
+	<script th:src="@{css/script.js}"></script>
 	<!--end header-->
 <div  class="container"  >
 	<div>
@@ -67,6 +69,6 @@
 			</ul>
 		</div>
 	</div>
-
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </body>
 </html>
