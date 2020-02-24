@@ -19,6 +19,7 @@
 						<tr>
 							<th>ID PRODUIT </th>
 							<th>NOM PRODUIT/MENU</th>
+							<th>TYPE PRODUIT</th>
 							<th>DESCRIPTION PRODUIT</th>
 							<th>PRIX PRODUIT</th>
 							
@@ -28,6 +29,7 @@
 						<tr th:each="l:${listeProduitClient}">
  							<td th:text="${l.idProduit}">idProduitt</td> 
 							<td th:text="${l.nomProduit}">nomProduit</td>
+							<td th:text="${l.type}">nomProduit</td>
 							<td th:text="${l.descriptionProduit}">descriptionProduit</td>
 							<td th:text="${l.prixProduit}">prixProduit</td>
 							
