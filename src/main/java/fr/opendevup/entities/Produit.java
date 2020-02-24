@@ -25,6 +25,9 @@ public class Produit implements Serializable {
 	@Size(min = 2)
 	private String description;
 	
+	//lien vers la photo
+		private String photo;
+	
 	private double prix;
 
 	private int quantite;
@@ -33,14 +36,17 @@ public class Produit implements Serializable {
 		super();
 	}
 
-	public Produit(String nom, String description, double prix, int quantite) {
-		this.setNom(nom);
-		;
-		this.setDescription(description);
-		;
-		this.setPrix(prix);
-		this.setQuantite(quantite);
+
+	public Produit(@NotNull @Size(min = 2, max = 30) String nom, @NotNull @Size(min = 2) String description,
+			String photo, double prix, int quantite) {
+		this.nom = nom;
+		this.description = description;
+		this.photo = photo;
+		this.prix = prix;
+		this.quantite = quantite;
 	}
+
+
 
 	public int getIdProduit() {
 		return idProduit;
@@ -85,6 +91,18 @@ public class Produit implements Serializable {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
 
 	@Override
 	public String toString() {

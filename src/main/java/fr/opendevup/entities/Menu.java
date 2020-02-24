@@ -26,6 +26,9 @@ public class Menu implements Serializable {
 	@Size(min = 2)
 	private String description;
 	
+	//lien vers la photo
+	private String photo;
+	
 	private double prix;
 
 	private int quantite;
@@ -44,15 +47,15 @@ public class Menu implements Serializable {
 	public void setIdProduit(int idProduit) {
 		this.idProduit = idProduit;
 	}
-
-	public Menu(@NotNull @Size(min = 2, max = 30) String nom, @NotNull @Size(min = 2) String description, double prix,
-			int quantite) {
+	
+	public Menu(@NotNull @Size(min = 2, max = 30) String nom, @NotNull @Size(min = 2) String description, String photo,
+			double prix, int quantite) {
 		this.nom = nom;
 		this.description = description;
+		this.photo = photo;
 		this.prix = prix;
 		this.quantite = quantite;
 	}
-
 
 	public String getNom() {
 		return nom;
@@ -86,6 +89,14 @@ public class Menu implements Serializable {
 		this.quantite = quantite;
 	}
 
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	@Override
 	public String toString() {

@@ -40,6 +40,7 @@
           	<ul>
 				<li> <h3 th:text="${p.nom}">nom</h3></li>
 				<li><p th:text="${p.description}">description</p></li>
+				<li><img th:src="${p.photo}" th:alt="${p.photo}+' ajouter un lien!'"></li>
 				<li><p th:text="${p.prix}">prix</p></li>
 				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit})}" style="font-size: small">ajouter au panier</a></h3></li>
 			</ul>
