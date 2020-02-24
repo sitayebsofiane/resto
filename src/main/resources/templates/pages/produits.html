@@ -36,14 +36,20 @@
      <section  class="container apropos">
         <div class="row" >
 
-          <article class="col-xs-4 col-sm-3 col-md-2 produit" th:each="p:${listeProduit}"> 
-          	<ul>
-				<li> <h3 th:text="${p.nom}">nom</h3></li>
-				<li><p th:text="${p.description}">description</p></li>
-				<li><img th:src="${p.photo}" th:alt="pic"></li>
-				<li><p th:text="${p.prix+' €'}">prix</p></li>
-				<li><h3> <a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit})}" >ajouter au panier</a></h3></li>
-			</ul>
+          <article class="col-xs-1 col-sm-1 col-md-4 " th:each="p:${listeProduit}"> 
+	       <table>
+		        <tr>
+		            <th><h3 th:text="${p.nom}">nom</h3></th>
+		            <th><img  th:src="${p.photo}" th:alt="pic"></th>
+		        </tr>
+		        <tr>
+		            <td colspan="2" th:text="${p.description}">description</td> 
+		        </tr>
+		        <tr>
+		            <td  th:text="${p.prix+' €'}">prix</td>
+		            <td><a th:href="@{panierProduit(page=${pageCourante},size=${size},idproduit=${p.idProduit})}" >ajouter au panier</a></td>
+		        </tr>
+	     </table>
         </article>
       </div>
       </section>

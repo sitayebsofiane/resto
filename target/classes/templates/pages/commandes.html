@@ -24,13 +24,14 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>NOM</th><th>DESCRIPTION</th><th>PRIX</th>
+				<th>NOM</th><th>DESCRIPTION</th><th>TYPE DE LA COMMANDE</th><th>PRIX</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="p:${liste}">
 			<td id="commande" th:text="${p.nomProduit}">nom</td>
 			<td th:text="${p.descriptionProduit}">description</td>
+			<td th:text="${p.type}">type</td>
 			<td th:text="${p.prixProduit}">prix</td>
 			</tr>
 			
