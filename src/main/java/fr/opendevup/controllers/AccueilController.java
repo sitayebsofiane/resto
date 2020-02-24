@@ -63,6 +63,16 @@ public class AccueilController {
 	}
 	/**
 	 * 
+	 * @return la page d'admin
+	 */
+	@GetMapping(value="/admin")
+	public String  accueilAdmin()
+	{
+		
+		return "/admin/clients";
+	}
+	/**
+	 * 
 	 * @return la page de login de l'admin
 	 */
 	@GetMapping(value="/login")
