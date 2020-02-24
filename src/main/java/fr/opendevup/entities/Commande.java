@@ -18,7 +18,7 @@ public class Commande implements Serializable {
 	@GeneratedValue
 	private int idCommande;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
 	//statut de la commande si elle traité par l'admin est true si non est a false
