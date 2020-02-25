@@ -119,6 +119,7 @@ public class AccueilController {
 	 */
 	@RequestMapping(value = "pages/authClient",method = RequestMethod.POST)
 	public String connection(Model model,String email,String motDePasse) {
+		try {
 		String pass = "";
 		for (int i = 0; i < motDePasse.length(); i++) {
 			pass += motDePasse.charAt(i)+email.charAt(i) ;
@@ -132,7 +133,10 @@ public class AccueilController {
 				return "redirect:/";
 				}
 		}
-		return"redirect:/pages/seConnecter";
+			return"redirect:/pages/seConnecter";
+		}catch (Exception e) {
+			return "admin/erreur";
+		}
 	}
 	
 	/**
