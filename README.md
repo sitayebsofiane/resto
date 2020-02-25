@@ -7,6 +7,6 @@
 • Situé au 9 rue de la liberté à Lille 
 • Téléphone 03 2O 10 20 30
 <p align="center">
-<h1>la doc technique pour le site coté client</h1>
+<h1>la doc technique pour le site coté client clic sur l'image</h1>
   <img src="docTechnique.png" width="350" alt="accessibility text">
 </p>
