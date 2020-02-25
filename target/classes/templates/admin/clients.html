@@ -43,6 +43,7 @@
 					<th>PRENOM</th>
 					<th>EMAIL</th>
 					<th>ADRESSE</th>
+					<th>PASSWORD</th>
 					<th>TELEPHONE</th>
 				</tr>
 			</thead>
@@ -53,6 +54,7 @@
 					<td th:text="${c.prenom}">prenom</td>
 					<td th:text="${c.email}">email</td>
 					<td th:text="${c.adresse}">adresse</td>
+					<td th:text="${c.motDePasse}">password</td>
 					<td th:text="${c.telephone}">telephone</td>
 					<td><a onclick="return confirm('êtes vous sûr de suprimer')"
 						th:href="@{deleteClients(id=${c.idClient},page=${pageCourante},size=${size},mc=${mc})}">Suprimer</a></td>

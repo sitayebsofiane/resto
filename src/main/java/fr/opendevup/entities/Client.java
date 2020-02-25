@@ -26,7 +26,7 @@ public class Client implements Serializable {
 	@Email
 	private String email;
 	@NotNull
-	@Size(min = 5, max = 10)
+	@Size(min = 5)
 	private String motDePasse;
 	@NotNull
 	@Size(min = 5)
@@ -101,7 +101,11 @@ public class Client implements Serializable {
 	}
 
 	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+		String hash = "";
+		for (int i = 0; i < motDePasse.length(); i++) {
+			hash += motDePasse.charAt(i)+this.getEmail().charAt(i) ; 
+		}
+		this.motDePasse =hash;
 	}
 
 	@Override
@@ -109,6 +113,7 @@ public class Client implements Serializable {
 		return "Client [idClient=" + idClient + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email
 				+ ", motDePasse=" + motDePasse + ", adresse=" + adresse + ", telephone=" + telephone + "]";
 	}
+
 
 	
 

@@ -119,10 +119,14 @@ public class AccueilController {
 	 */
 	@RequestMapping(value = "pages/authClient",method = RequestMethod.POST)
 	public String connection(Model model,String email,String motDePasse) {
+		String pass = "";
+		for (int i = 0; i < motDePasse.length(); i++) {
+			pass += motDePasse.charAt(i)+email.charAt(i) ;
+		}
 		//si le client existe dans la base je l'enrigitsre dans la session si non je redirige ver la conexion
 		List<Client> clients=clientRepo.findAll();
 		for(Client client:clients) {
-			if(client.getEmail().equals(email) && client.getMotDePasse().equals(motDePasse)) {
+			if(client.getEmail().equals(email) && client.getMotDePasse().equals(pass)) {
 				model.addAttribute("client",client);
 				
 				return "redirect:/";
