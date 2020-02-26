@@ -14,3 +14,7 @@
 <h1>la doc technique pour le site coté admin clic sur l'image</h1>
   <img src="docTechniqueAdmin.png" width="350" alt="accessibility text">
 </p>
+<p align="center">
+<h1>le diagram de classe sur l'image</h1>
+  <img src="Diagrammedeclasses.png" width="350" alt="accessibility text">
+</p>
