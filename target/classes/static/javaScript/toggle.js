@@ -10,6 +10,8 @@ $(document).ready(function(){
     else{
     	$('#toggle3').hide();
     	$('#toggle4').hide();
+    	$('.panierProduit').hide();
+    	$('.panierMenu').hide();
     }
     if(panier =='')
     	$('#commander').hide();
